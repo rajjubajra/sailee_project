@@ -41,4 +41,112 @@
     .countdown .lbl{font-size:12px;color:var(--muted);margin-top:6px}
 
     .email-form{display:flex;gap:10px;margin-top:22px}
-    .email-form input[type=email]{flex:1;padding:12px 14px;border-radius:10px;
+    .email-form input[type=email]{flex:1;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:white;outline:none}
+    .email-form button{padding:12px 16px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent),#3b82f6);font-weight:700;color:white;cursor:pointer}
+
+    .right{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:12px;border:1px solid var(--glass);min-height:200px}
+    .right h3{margin:0 0 10px 0}
+    .features{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+    .feature{display:flex;gap:12px;align-items:flex-start}
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);margin-top:6px;flex-shrink:0}
+
+    .footer{margin-top:18px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;align-items:center}
+    .social{display:flex;gap:10px}
+    .social a{opacity:0.9;text-decoration:none;color:var(--muted);font-weight:600}
+
+    /* small animations */
+    .logo{display:inline-flex;align-items:center;gap:10px}
+    .logo .mark{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#2563eb);display:flex;align-items:center;justify-content:center;font-weight:800;box-shadow:0 6px 18px rgba(124,58,237,0.18)}
+
+  </style>
+</head>
+<body>
+  <div class="card" role="main">
+    <div class="left">
+      <div class="logo">
+        <div class="mark">CS</div>
+        <div>
+          <div class="tag">COMING SOON</div>
+          <h1>We're building something awesome.</h1>
+        </div>
+      </div>
+
+      <p class="lead">Thanks for your patience — we're cooking up a new experience. Join our list and we'll let you know the moment we launch.</p>
+
+      <div class="countdown" aria-hidden="false">
+        <div class="item"><div class="num" id="days">00</div><div class="lbl">Days</div></div>
+        <div class="item"><div class="num" id="hours">00</div><div class="lbl">Hours</div></div>
+        <div class="item"><div class="num" id="mins">00</div><div class="lbl">Minutes</div></div>
+        <div class="item"><div class="num" id="secs">00</div><div class="lbl">Seconds</div></div>
+      </div>
+
+      <form class="email-form" id="notifyForm" onsubmit="return handleForm(event)">
+        <input type="email" id="email" placeholder="Your email address" required autocomplete="email" />
+        <button type="submit">Notify Me</button>
+      </form>
+
+      <div class="footer">
+        <div>Prefer not to wait? <a href="#" id="mailtoLink" style="color:#fff;text-decoration:underline">Contact us</a></div>
+        <div class="social">
+          <a href="#" aria-label="Twitter">Twitter</a>
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="LinkedIn">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+
+    <aside class="right" aria-label="More info">
+      <h3>What to expect</h3>
+      <div class="features">
+        <div class="feature"><div class="dot"></div><div><strong>Polished UI</strong><div style="color:var(--muted);font-size:13px">Beautiful, responsive design</div></div></div>
+        <div class="feature"><div class="dot"></div><div><strong>Fast performance</strong><div style="color:var(--muted);font-size:13px">Optimised for modern devices</div></div></div>
+        <div class="feature"><div class="dot"></div><div><strong>Early access</strong><div style="color:var(--muted);font-size:13px">Beta invites for subscribers</div></div></div>
+      </div>
+
+      <p style="color:var(--muted);margin-top:14px;font-size:13px">Want a custom message or to change the launch date? Edit the <code>LAUNCH_DATE</code> value in the script at the bottom of this file.</p>
+    </aside>
+  </div>
+
+  <script>
+    // Default launch date: 30 days from now. You can change it to a specific date (e.g. new Date('2026-01-01T00:00:00'))
+    const LAUNCH_DATE = (() => { const d = new Date(); d.setDate(d.getDate() + 30); d.setHours(0,0,0,0); return d; })();
+
+    function pad(n){return String(n).padStart(2,'0')}
+
+    function updateCountdown(){
+      const now = new Date();
+      const diff = LAUNCH_DATE - now;
+      if(diff <= 0){document.getElementById('days').textContent='00';document.getElementById('hours').textContent='00';document.getElementById('mins').textContent='00';document.getElementById('secs').textContent='00';clearInterval(timer);return}
+      const s = Math.floor(diff/1000);
+      const days = Math.floor(s/86400);
+      const hours = Math.floor((s%86400)/3600);
+      const mins = Math.floor((s%3600)/60);
+      const secs = s%60;
+      document.getElementById('days').textContent = pad(days);
+      document.getElementById('hours').textContent = pad(hours);
+      document.getElementById('mins').textContent = pad(mins);
+      document.getElementById('secs').textContent = pad(secs);
+    }
+
+    const timer = setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    function handleForm(e){
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      if(!email) return false;
+      // Simple client-side success flow. Replace with your API endpoint or mailing provider integration.
+      alert('Thanks! We\'ll notify ' + email + ' when we launch.\n
+      (This demo uses a front-end placeholder — replace with your backend endpoint)');
+      document.getElementById('notifyForm').reset();
+      return false;
+    }
+
+    // mailto fallback for contact link
+    document.getElementById('mailtoLink').addEventListener('click', function(e){
+      e.preventDefault();
+      window.location.href = 'mailto:hello@example.com?subject=Coming%20Soon%20Enquiry';
+    });
+  </script>
+</body>
+</html>
