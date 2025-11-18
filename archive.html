@@ -55,6 +55,7 @@
 
     .divider-120 { height: 120px; }
     .divider-60 { height: 60px; }
+    .divider-10 { height: 10px; }
 
     .title-main {
       font-size: 26px;
@@ -64,7 +65,7 @@
 
     .thin-line {
       width: 100%;
-      height: 1px;
+      height: 0.5px;
       background: #000;
     }
 
@@ -90,7 +91,7 @@
     /* ---------------------- FOOTER ---------------------- */
     footer {
       padding: 40px;
-      background: # #efebd7;;
+      background: #efebd7;
       text-transform: uppercase;
     }
 
@@ -146,13 +147,11 @@
   </div>
 
   <div class="col menu">
-  <a href="index.html">I. collections</a>
-  <a href="archive.html">II. archive</a>
-  <a href="about.html">III. about</a>
-  <a href="contact.html">VI. contact</a>
-</div>
-
- 
+    <a href="index.html">I. collections</a>
+    <a href="archive.html">II. archive</a>
+    <a href="about.html">III. about</a>
+    <a href="contact.html">VI. contact</a>
+  </div>
 
   <div class="col">
     <img src="ofs..png">
@@ -178,13 +177,13 @@
 <!-- Section -->
 <style>
   .image-row-2 {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    padding: 0 40px; /* optional: matches your site spacing */
+    padding: 0 40px;
   }
 
   .image-block {
-    flex: 1; /* makes all blocks stretch evenly */
     display: flex;
     flex-direction: column;
     text-transform: uppercase;
@@ -196,7 +195,7 @@
     height: auto;
     cursor: pointer;
     margin-top: 10px;
-    object-fit: cover; /* keeps clean cropping if images differ */
+    object-fit: cover;
   }
 </style>
 
@@ -223,7 +222,7 @@
 <!-- 60px divider -->
 <div class="divider-60"></div>
   
-<!-- 1px line -->
+<!-- Thinner line -->
 <div class="thin-line"></div>
 
 
