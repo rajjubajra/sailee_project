@@ -3,15 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minimal Header</title>
+  <title>ofsaeily</title>
 
-  <!-- Font: Source Serif Pro -->
+  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400&display=swap" rel="stylesheet">
 
   <style>
+    * {
+      font-family: 'Source+Serif+Pro', serif !important; /* force all elements */
+    }
+
     body {
       margin: 0;
-      font-family: 'Source Serif Pro', serif;
       font-size: 12px;
       font-weight: 400;
       background: #efebd7;
@@ -24,13 +27,15 @@
       justify-content: space-between;
       padding: 20px 40px;
       background: #efebd7;
+      text-transform: uppercase;
+      font-size: 12px;
     }
 
     .col {
       display: flex;
       flex-direction: column;
       line-height: 1.25;
-      text-transform: uppercase;
+      font-size: 12px;
     }
 
     .email {
@@ -41,59 +46,86 @@
     .menu a {
       text-decoration: none;
       color: inherit;
-      margin-bottom: 1px;
+      margin-bottom: 2px;
     }
+    .menu a:hover { opacity: 0.6; }
 
-    .menu a:hover {
-      opacity: 0.6;
-    }
+    img { width: 100%; height: auto; }
 
-    img {
-      height: 40px;
-      width: auto;
-    }
-
-    .divider-120 { height: 120px; }
     .divider-60 { height: 60px; }
+    .divider-30 { height: 30px; }
 
-    .title-main {
+    .page-title {
       font-size: 26px;
       text-transform: uppercase;
-      padding-left: 40px;
-    }
-
-    .thin-line {
-      width: 100%;
-      height: 1px;
-      background: #000;
-    }
-
-    .section {
       padding-left: 40px;
       padding-right: 40px;
     }
 
-    .title-small {
+    .row-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 0 40px;
+    }
+    
+     .row-2 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 0 40px;
+    }
+
+    .row-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 0 40px;
+    }
+
+    .painting-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .painting-title {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .button-row button {
+      padding: 6px 12px;
+      background: transparent;
+      border: 1px solid #000;
+      cursor: pointer;
       font-size: 12px;
       text-transform: uppercase;
-      margin-bottom: 20px;
     }
 
-    .click-image {
-      width: 300px;
-      height: auto;
-      cursor: pointer;
+    .button-row button:hover { opacity: 0.6; }
+
+    .text-block {
+      padding: 0 40px;
+      font-size: 12px;
+      line-height: 1.5;
+      max-width: 800px;
     }
 
-    /* ---------------------- FOOTER ---------------------- */
     footer {
       padding: 40px;
-      background: # #efebd7;;
+      background: #efebd7;
       text-transform: uppercase;
+      font-size: 12px;
     }
 
     .newsletter-title {
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       font-size: 12px;
     }
 
@@ -107,9 +139,8 @@
       padding: 6px 10px;
       border: 1px solid #000;
       background: transparent;
-      font-family: 'Source Serif Pro', serif;
-      font-size: 12px;
       width: 220px;
+      font-size: 12px;
     }
 
     .newsletter button {
@@ -117,47 +148,24 @@
       border: 1px solid #000;
       background: transparent;
       cursor: pointer;
-      font-family: 'Source Serif Pro', serif;
-      font-size: 12px;
-      text-transform: uppercase;
-    }
-
-    .newsletter button:hover {
-      opacity: 0.6;
-    }
-
-    .footer-copy {
-      opacity: 0.7;
-    }
-
-    .image-row-3 {
-      display: flex;
-      gap: 20px;
-      padding: 0 40px; /* optional: matches your site spacing */
-    }
-
-    .image-block {
-      flex: 1; /* makes all blocks stretch evenly */
-      display: flex;
-      flex-direction: column;
       text-transform: uppercase;
       font-size: 12px;
     }
 
-    .image-block img {
+    .footer-copy { opacity: 0.7; }
+
+    iframe {
       width: 100%;
-      height: auto;
-      cursor: pointer;
-      margin-top: 10px;
-      object-fit: cover; /* keeps clean cropping if images differ */
+      height: 450px;
+      border: none;
     }
   </style>
-
 </head>
+
 <body>
 
+<!-- HEADER -->
 <header>
-
   <div class="col">ofsaeily</div>
 
   <div class="col">
@@ -166,62 +174,111 @@
   </div>
 
   <div class="col menu">
-  <a href="collections.html">I. collections</a>
-  <a href="archive.html">II. archive</a>
-  <a href="about.html">III. about</a>
-  <a href="contact.html">VI. contact</a>
-</div>
+    <a href="#">I. collections</a>
+    <a href="#">II. archive</a>
+    <a href="#">III. about</a>
+    <a href="#">VI. contact</a>
+  </div>
 
   <div class="col">
-    <img src="https://images.unsplash.com/photo-1611262588024-d12430b98920?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Logo">
+    <img src="ofs.jpg" style="width:40px; height:40px; object-fit: cover;">
   </div>
-
 </header>
 
-<!-- 120px divider -->
-<div class="divider-120"></div>
-
-<!-- Title: I. COLLECTIONS -->
-<div class="title-main">I. COLLECTIONS</div>
-
-<!-- 60px divider -->
 <div class="divider-60"></div>
 
-<!-- 1px line -->
-<div class="thin-line"></div>
+<div class="page-title">birdsong for the confined</div>
 
-<!-- 60px divider -->
 <div class="divider-60"></div>
 
-<!-- Section -->
-<div class="image-row-3">
+<div style="padding: 0 40px;">
+  <img src="fruits.jpg" alt="Charcoal drawing">
+</div>
 
-  <div class="image-block">
-    <div class="title">Morning Chorus</div>
-    <a href="#"><img src="https://images.unsplash.com/photo-1554049264-8ff0bee7eacd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzl8fGFlc3RoZXRpY3xlbnwwfHwwfHx8MA%3D%3D" alt="Image 1"></a>
+<div class="divider-60"></div>
+
+<div class="row-2">
+  <img src="butterfly.jpg" alt="Abstract art">
+  <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2068&q=80" alt="Contemporary art">
+   <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2068&q=80" alt="Contemporary art">
+</div>
+
+<div class="divider-30"></div>
+
+<div class="row-2">
+  <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2068&q=80" alt="Abstract art">
+  <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2068&q=80" alt="Contemporary art">
+</div>
+
+<div class="divider-60"></div>
+
+<div class="text-block">
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae lacus augue. 
+    Praesent id dignissim dolor. Aenean non dui vel orci facilisis placerat.
+  </p>
+
+  <p>
+    Sed varius, ipsum sed tincidunt finibus, turpis lorem dapibus nisl, vitae cursus nisi felis ac leo. 
+    Nulla facilisi. Curabitur porta augue id dolor consequat, vitae accumsan lorem fermentum.
+  </p>
+</div>
+
+<div class="divider-60"></div>
+
+<div class="row-3">
+
+  <div class="painting-card">
+    <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2058&q=80" alt="Morning Chorus">
+    <div class="painting-title">Morning Chorus</div>
+    <div class="button-row">
+      <button>enquire to purchase</button>
+    </div>
   </div>
 
-  <div class="image-block">
-    <div class="title">Caged Melody</div>
-    <a href="#"><img src="https://plus.unsplash.com/premium_photo-1721926057308-2aa7ce470776?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YWVzdGhldGljfGVufDB8fDB8fHww0" alt="Image 2"></a>
+  <div class="painting-card">
+    <img src="https://images.unsplash.com/photo-1574169208507-84376144848b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2079&q=80" alt="Caged Melody">
+    <div class="painting-title">Caged Melody</div>
+    <div class="button-row">
+      <button>enquire to purchase</button>
+    </div>
   </div>
 
-  <div class="image-block">
-    <div class="title">Flight of Thought</div>
-    <a href="#"><img src="https://images.unsplash.com/photo-1617972882867-3707f274c115?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Image 3"></a>
+  <div class="painting-card">
+    <img src="https://images.unsplash.com/photo-1578301978018-3005759f48f7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" alt="Flight of Thought">
+    <div class="painting-title">Flight of Thought</div>
+    <div class="button-row">
+      <button>enquire to purchase</button>
+    </div>
+  </div>
+  
+  <div class="painting-card">
+    <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2058&q=80" alt="Morning Chorus">
+    <div class="painting-title">Morning Chorus</div>
+    <div class="button-row">
+      <button>enquire to purchase</button>
+    </div>
   </div>
 
 </div>
 
-<!-- 60px divider -->
+<div class="divider-30"></div>
 <div class="divider-60"></div>
 
-<!-- NEW 1px line -->
-<div class="thin-line"></div>
+<div style="padding: 0 40px;">
+  <iframe src="https://www.youtube.com/embed/6pxRHBw-k8M" allowfullscreen></iframe>
+</div>
+<!-- 60px divider -->
+<div style="height: 60px;"></div>
+
+
+<!-- 1px thin line above footer -->
+<div style="width:100%; height:1px; background:#000;"></div>
+
 
 <!-- ---------------------- FOOTER ---------------------- -->
-<footer>
 
+<footer>
   <div class="newsletter-title">newsletter</div>
 
   <div class="newsletter">
@@ -230,7 +287,6 @@
   </div>
 
   <div class="footer-copy">© 2025 by ofsaeily</div>
-
 </footer>
 
 </body>
