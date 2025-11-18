@@ -193,6 +193,14 @@
 <!-- 60px divider -->
 <div class="divider-60"></div>
 
+<div class="image-block">
+    <div class="title">stillnes</div>
+    <a href="#"><img src="h<div class="image-block">
+    <div class="title">Morning Chorus</div>
+    <a href="#"><img src="https://images.unsplash.com/photo-1554049264-8ff0bee7eacd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzl8fGFlc3RoZXRpY3xlbnwwfHwwfHx8MA%3D%3D" alt="Image 1"></a>
+  </div>" alt="Image 1"></a>
+  </div>
+
 <!-- Section -->
 <div class="image-row-3">
 
