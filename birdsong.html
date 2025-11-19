@@ -50,7 +50,15 @@
     }
     .menu a:hover { opacity: 0.6; }
 
-    img { width: 100%; height: auto; }
+    img { 
+      width: 100%; 
+      height: auto; 
+    }
+
+    /* Add border to all images except those in header */
+    img:not(header img) {
+      border: 1px solid #000;
+    }
 
     .divider-60 { height: 60px; }
     .divider-30 { height: 30px; }
