@@ -3,33 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minimal Header</title>
+  <title>ofsaeily</title>
 
-  <!-- Font: Source Serif Pro -->
+  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400&display=swap" rel="stylesheet">
 
   <style>
+    * {
+      font-family: 'Source Serif Pro', serif !important;
+    }
+
     body {
       margin: 0;
-      font-family: 'Source Serif Pro', serif;
       font-size: 12px;
       font-weight: 400;
       background: #efebd7;
       color: #000;
-      position: relative;
-    }
-
-    /* Add grain overlay */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 1;
     }
 
     header {
@@ -38,15 +27,15 @@
       justify-content: space-between;
       padding: 20px 40px;
       background: #efebd7;
-      position: relative;
-      z-index: 2;
+      text-transform: uppercase;
+      font-size: 12px;
     }
 
     .col {
       display: flex;
       flex-direction: column;
       line-height: 1.25;
-      text-transform: uppercase;
+      font-size: 12px;
     }
 
     .email {
@@ -57,77 +46,80 @@
     .menu a {
       text-decoration: none;
       color: inherit;
-      margin-bottom: 1px;
+      margin-bottom: 2px;
     }
+    .menu a:hover { opacity: 0.6; }
 
-    .menu a:hover {
-      opacity: 0.6;
-    }
+    img { width: 100%; height: auto; }
 
-    img {
-      height: 40px;
-      width: auto;
-    }
-
-    /* Add border to all images except those in header */
-    img:not(header img) {
-      border: 1px solid #000;
-    }
-
-    .divider-120 { height: 120px; }
     .divider-60 { height: 60px; }
-    .divider-10 { height: 10px; }
+    .divider-30 { height: 30px; }
 
-    .title-main {
+    .page-title {
       font-size: 26px;
       text-transform: uppercase;
       padding-left: 40px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .thin-line {
-      width: 100%;
-      height: 1px;
-      background: #000;
-      position: relative;
-      z-index: 2;
-    }
-
-    .section {
-      padding-left: 40px;
       padding-right: 40px;
-      position: relative;
-      z-index: 2;
     }
 
-    .title-small {
-      font-size: 12px;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      position: relative;
-      z-index: 2;
+    .row-2 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 0 40px;
+    }
+    
+    .row-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding: 0 40px;
     }
 
-    .click-image {
-      width: 300px;
-      height: auto;
-      cursor: pointer;
+    .painting-card {
       display: flex;
       flex-direction: column;
     }
 
-    /* ---------------------- FOOTER ---------------------- */
+    .painting-title {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .button-row button {
+      padding: 6px 12px;
+      background: transparent;
+      border: 1px solid #000;
+      cursor: pointer;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .button-row button:hover { opacity: 0.6; }
+
+    .text-block {
+      padding: 0 40px;
+      font-size: 12px;
+      line-height: 1.5;
+      max-width: 800px;
+    }
+
     footer {
       padding: 40px;
       background: #efebd7;
       text-transform: uppercase;
-      position: relative;
-      z-index: 2;
+      font-size: 12px;
     }
 
     .newsletter-title {
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       font-size: 12px;
     }
 
@@ -141,9 +133,8 @@
       padding: 6px 10px;
       border: 1px solid #000;
       background: transparent;
-      font-family: 'Source Serif Pro', serif;
-      font-size: 12px;
       width: 220px;
+      font-size: 12px;
     }
 
     .newsletter button {
@@ -151,51 +142,24 @@
       border: 1px solid #000;
       background: transparent;
       cursor: pointer;
-      font-family: 'Source Serif Pro', serif;
-      font-size: 12px;
-      text-transform: uppercase;
-    }
-
-    .newsletter button:hover {
-      opacity: 0.6;
-    }
-
-    .footer-copy {
-      opacity: 0.7;
-    }
-
-    .image-row-2 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      padding: 0 40px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .image-block {
-      display: flex;
-      flex-direction: column;
       text-transform: uppercase;
       font-size: 12px;
-      position: relative;
-      z-index: 2;
     }
 
-    .image-block img {
+    .footer-copy { opacity: 0.7; }
+
+    iframe {
       width: 100%;
-      height: auto;
-      cursor: pointer;
-      margin-top: 10px;
-      object-fit: cover;
+      height: 450px;
+      border: none;
     }
   </style>
-
 </head>
+
 <body>
 
+<!-- HEADER -->
 <header>
-
   <div class="col">ofsaeily</div>
 
   <div class="col">
@@ -203,66 +167,108 @@
     <span class="email">ofsaeily@gmail.com</span>
   </div>
 
-  <div class="col menu">
-    <a href="index.html">I. collections</a>
-    <a href="archive.html">II. archive</a>
-    <a href="about.html">III. about</a>
-    <a href="contact.html">VI. contact</a>
-  </div>
+ <div class="col menu">
+  <a href="index.html">I. collections</a>
+  <a href="archive.html">II. archive</a>
+  <a href="about.html">III. about</a>
+  <a href="contact.html">VI. contact</a>
+</div>
 
   <div class="col">
-    <img src="ofs..png" alt="Logo">
+    <img src="ofs..png" style="width:40px; height:40px; object-fit: cover;">
   </div>
-
 </header>
 
-<!-- 120px divider -->
-<div class="divider-120"></div>
-
-<!-- Title: I. COLLECTIONS -->
-<div class="title-main">I. COLLECTIONS</div>
-
-<!-- 60px divider -->
 <div class="divider-60"></div>
 
-<!-- Thinner line (already 1px) -->
-<div class="thin-line"></div>
+<div class="page-title">birdsong for the confined</div>
 
-<!-- 60px divider -->
 <div class="divider-60"></div>
 
-<!-- Section -->
-<div class="image-row-2">
+<div style="padding: 0 40px;">
+  <img src="1.jpg" alt="Charcoal drawing">
+</div>
 
-  <div class="image-block">
-    <div class="title">Birdsong for the confined</div>
-    <a href="birdsong.html"><img src="1.jpg" alt="Image 1"></a>
+<div class="divider-60"></div>
+
+<div class="row-2">
+  <img src="1.jpg" alt="Abstract art">
+  <img src="1.jpg" alt="Contemporary art">
+</div>
+
+<div class="divider-30"></div>
+
+<div class="row-2">
+  <img src="1.jpg" alt="Abstract art">
+  <img src="1.jpg" alt="Contemporary art">
+</div>
+
+<div class="divider-60"></div>
+
+<div class="text-block">
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae lacus augue. 
+    Praesent id dignissim dolor. Aenean non dui vel orci facilisis placerat.
+  </p>
+
+  <p>
+    Sed varius, ipsum sed tincidunt finibus, turpis lorem dapibus nisl, vitae cursus nisi felis ac leo. 
+    Nulla facilisi. Curabitur porta augue id dolor consequat, vitae accumsan lorem fermentum.
+  </p>
+</div>
+
+<div class="divider-60"></div>
+
+<!-- Fixed painting cards in 3 columns -->
+<div class="row-2">
+  <div class="painting-card">
+    <img src="1.jpg" alt="Morning Chorus">
+    <div class="painting-title">Morning Chorus</div>
+    <div class="text">
+    <p>20*30 inches<br>acrylic on canvas</p>
+    </div>
+    <div class="button-row">
+      <button onclick="window.location.href='mailto:ofsaeily@gmail.com?subject=Enquiry about Morning Chorus'">enquire</button>
+    </div>
   </div>
 
-  <div class="image-block">
-    <div class="title">Birdsong for the confined</div>
-    <a href="birdsong.html"><img src="1.jpg" alt="Image 1"></a>
+  <div class="painting-card">
+    <img src="1.jpg" alt="Caged Melody">
+    <div class="painting-title">Caged Melody</div>
+    <div class="text">
+    <p>24*36 inches<br>oil on canvas</p>
+    </div>
+    <div class="button-row">
+      <button onclick="window.location.href='mailto:ofsaeily@gmail.com?subject=Enquiry about Caged Melody'">enquire</button>
+    </div>
   </div>
 
-  <div class="image-block">
-    <div class="title">Birdsong for the confined</div>
-    <a href="birdsong.html"><img src="1.jpg" alt="Image 1"></a>
+  <div class="painting-card">
+    <img src="1.jpg" alt="Flight of Thought">
+    <div class="painting-title">Flight of Thought</div>
+    <div class="text">
+    <p>18*24 inches<br>mixed media</p>
+    </div>
+    <div class="button-row">
+      <button onclick="window.location.href='mailto:ofsaeily@gmail.com?subject=Enquiry about Flight of Thought'">enquire</button>
+    </div>
   </div>
+</div>
 
+<div class="divider-60"></div>
+
+<div style="padding: 0 40px;">
+  <iframe src="https://www.youtube.com/embed/6pxRHBw-k8M" allowfullscreen></iframe>
 </div>
 
 <!-- 60px divider -->
 <div class="divider-60"></div>
 
-<!-- Thinner line (already 1px) -->
-<div class="thin-line"></div>
+<!-- 1px thin line above footer -->
+<div style="width:100%; height:1px; background:#000;"></div>
 
-<!-- 60px divider -->
-<div class="divider-10"></div>
-
-<!-- ---------------------- FOOTER ---------------------- -->
+<!-- FOOTER -->
 <footer>
-
   <div class="newsletter-title">newsletter</div>
 
   <div class="newsletter">
@@ -271,8 +277,9 @@
   </div>
 
   <div class="footer-copy">© 2025 by ofsaeily</div>
-
 </footer>
 
 </body>
 </html>
+
+add 1px border to all images except logo without changing anything else
