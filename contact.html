@@ -16,6 +16,20 @@
       font-weight: 400;
       background: #efebd7;
       color: #000;
+      position: relative;
+    }
+
+    /* Grain overlay for body */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
     }
 
     header {
@@ -24,6 +38,21 @@
       justify-content: space-between;
       padding: 20px 40px;
       background: #efebd7;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Grain overlay for header */
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: -1;
     }
 
     .col {
@@ -60,23 +89,31 @@
       font-size: 26px;
       text-transform: uppercase;
       padding-left: 40px;
+      position: relative;
+      z-index: 2;
     }
 
     .thin-line {
       width: 100%;
       height: 1px;
       background: #000;
+      position: relative;
+      z-index: 2;
     }
 
     .section {
       padding-left: 40px;
       padding-right: 40px;
+      position: relative;
+      z-index: 2;
     }
 
     .title-small {
       font-size: 12px;
       text-transform: uppercase;
       margin-bottom: 20px;
+      position: relative;
+      z-index: 2;
     }
 
     .click-image {
@@ -88,8 +125,23 @@
     /* ---------------------- FOOTER ---------------------- */
     footer {
       padding: 40px;
-      background: # #efebd7;;
+      background: #efebd7;
       text-transform: uppercase;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Grain overlay for footer */
+    footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: -1;
     }
 
     .newsletter-title {
@@ -128,6 +180,64 @@
 
     .footer-copy {
       opacity: 0.7;
+    }
+
+    .contact-wrapper {
+      padding: 0 40px;
+      font-family: 'Source Serif Pro', serif;
+      color: #000;
+      font-size: 12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .contact-title {
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .contact-text {
+      max-width: 600px;
+      line-height: 1.4;
+      margin-bottom: 30px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 420px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 8px 10px;
+      border: 1px solid #000;
+      background: transparent;
+      font-family: 'Source Serif Pro', serif;
+      font-size: 12px;
+      color: #000;
+      width: 100%;
+    }
+
+    .contact-form textarea {
+      height: 120px;
+      resize: vertical;
+    }
+
+    .contact-form button {
+      padding: 8px 10px;
+      background: transparent;
+      border: 1px solid #000;
+      cursor: pointer;
+      font-family: 'Source Serif Pro', serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #000;
+    }
+
+    .contact-form button:hover {
+      opacity: 0.6;
     }
   </style>
 
@@ -176,64 +286,6 @@
 
 <!-- ---------------------- TEXT PARAGRAPH + CONTACT FORM ---------------------- -->
 
-<style>
-  .contact-wrapper {
-    padding: 0 40px;
-    font-family: 'Source Serif Pro', serif;
-    color: #000;
-    font-size: 12px;
-  }
-
-  .contact-title {
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-
-  .contact-text {
-    max-width: 600px;
-    line-height: 1.4;
-    margin-bottom: 30px;
-  }
-
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    max-width: 420px;
-  }
-
-  .contact-form input,
-  .contact-form textarea {
-    padding: 8px 10px;
-    border: 1px solid #000;
-    background: transparent;
-    font-family: 'Source Serif Pro', serif;
-    font-size: 12px;
-    color: #000;
-    width: 100%;
-  }
-
-  .contact-form textarea {
-    height: 120px;
-    resize: vertical;
-  }
-
-  .contact-form button {
-    padding: 8px 10px;
-    background: transparent;
-    border: 1px solid #000;
-    cursor: pointer;
-    font-family: 'Source Serif Pro', serif;
-    font-size: 12px;
-    text-transform: uppercase;
-    color: #000;
-  }
-
-  .contact-form button:hover {
-    opacity: 0.6;
-  }
-</style>
-
 <div class="contact-wrapper">
 
   <div class="contact-title">get in touch</div>
@@ -248,9 +300,7 @@
 
 
 <!-- 60px divider -->
-<div style="height: 60px;"></div
-
-
+<div style="height: 60px;"></div>
 
 <!-- 1px line -->
 <div class="thin-line"></div>
