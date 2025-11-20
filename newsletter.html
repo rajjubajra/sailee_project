@@ -1,1 +1,272 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ofsaeily</title>
+
+  <!-- Font: Source Serif Pro -->
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Source Serif Pro', serif;
+      font-size: 12px;
+      font-weight: 400;
+      background: #efebd7;
+      color: #000;
+      position: relative;
+    }
+
+    /* Grain overlay for body */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 20px 40px;
+      background: #efebd7;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Grain overlay for header */
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .col {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+
+    .email {
+      text-transform: none;
+      opacity: 0.7;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: inherit;
+      margin-bottom: 1px;
+    }
+
+    .menu a:hover {
+      opacity: 0.6;
+    }
+
+    img {
+      height: 40px;
+      width: auto;
+    }
+
+    /* Add border to all images except those in header */
+    img:not(header img) {
+      border: 1px solid #000;
+    }
+
+    .divider-120 { height: 120px; }
+    .divider-60 { height: 60px; }
+    .divider-10 { height: 10px; }
+
+    .title-main {
+      font-size: 26px;
+      text-transform: uppercase;
+      padding-left: 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .thin-line {
+      width: 100%;
+      height: 1px;
+      background: #000;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section {
+      padding-left: 40px;
+      padding-right: 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .title-small {
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .click-image {
+      width: 300px;
+      height: auto;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---------------------- FOOTER ---------------------- */
+    footer {
+      padding: 40px;
+      background: #efebd7;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Grain overlay for footer */
+    footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .newsletter-title {
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+
+    .newsletter {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .newsletter input {
+      padding: 6px 10px;
+      border: 1px solid #000;
+      background: transparent;
+      font-family: 'Source Serif Pro', serif;
+      font-size: 12px;
+      width: 220px;
+    }
+
+    .newsletter button {
+      padding: 6px 14px;
+      border: 1px solid #000;
+      background: transparent;
+      cursor: pointer;
+      font-family: 'Source Serif Pro', serif;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .newsletter button:hover {
+      opacity: 0.6;
+    }
+
+    .footer-copy {
+      opacity: 0.7;
+    }
+
+    .image-row-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding: 0 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .image-block {
+      display: flex;
+      flex-direction: column;
+      text-transform: uppercase;
+      font-size: 12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .image-block img {
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+      margin-top: 10px;
+      object-fit: cover;
+    }
+  </style>
+
+</head>
+<body>
+
+<header>
+
+  <div class="col">ofsaeily</div>
+
+  <div class="col">
+    enquiries
+    <span class="email">ofsaeily@gmail.com</span>
+  </div>
+
+  <div class="col menu">
+    <a href="index.html">I. collections</a>
+    <a href="archive.html">II. archive</a>
+    <a href="about.html">III. about</a>
+    <a href="contact.html">VI. contact</a>
+     <a href="https://www.instagram.com/ofsaeily?igsh=NW85aWFia2l2eWcy" target="_blank">V. social</a>
+  </div>
+
+  <div class="col">
+    <img src="ofs..png" alt="Logo">
+  </div>
+
+</header>
+
+<!-- PAGE CONTENES -->
+
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSepBVo_bIxxVUL0coUKUvp_n6ZszYoddUDrT0LepYtpjp4LUQ/viewform?embedded=true" width="640" height="548" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+
+
+
+<!-- PAGE CONTENTS CLOSED -->  
+
+<!-- ---------------------- FOOTER ---------------------- -->
+<footer>
+
+  <div class="newsletter-title">newsletter</div>
+
+  
+  <div class="newsletter">
+    <input type="email" placeholder="enter your email">
+    <button>subscribe</button>
+  </div>
+
+  <div class="footer-copy">© 2025 by ofsaeily</div>
+
+</footer>
+
+</body>
+</html>
