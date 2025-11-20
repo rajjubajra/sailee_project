@@ -176,33 +176,62 @@
       z-index: -1;
     }
 
-    .newsletter-title {
-      margin-bottom: 8px;
-      font-size: 12px;
-    }
-
-    .newsletter {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .newsletter input {
-      padding: 6px 10px;
-      border: 1px solid #000;
-      background: transparent;
-      width: 220px;
-      font-size: 12px;
-    }
-
-    .newsletter button {
-      padding: 6px 14px;
-      border: 1px solid #000;
-      background: transparent;
-      cursor: pointer;
-      text-transform: uppercase;
-      font-size: 12px;
-    }
+     <title>Custom Mailchimp Form</title>
+    <style>
+        .newsletter-form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .submit-btn {
+            background: transparent;
+            color: #000;
+            padding: 10px 30px;
+            border: 1px solid #000;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background: #000;
+            color: #fff;
+        }
+        
+        .message {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
 
     .footer-copy { opacity: 0.7; }
 
@@ -331,12 +360,58 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="newsletter-title">newsletter</div>
+<div class="newsletter-form">
+        <h3>Newsletter Signup</h3>
+        <form id="mailchimp-form">
+            <div class="form-group">
+                <input type="email" class="form-input" id="email" name="email" 
+                       placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-input" id="fname" name="fname" 
+                       placeholder="First name (optional)">
+            </div>
+            <button type="submit" class="submit-btn">Subscribe</button>
+        </form>
+        <div id="form-message" class="message"></div>
+    </div>
 
-  <div class="newsletter">
-    <input type="email" placeholder="enter your email">
-    <button>subscribe</button>
-  </div>
+    <script>
+        document.getElementById('mailchimp-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const fname = document.getElementById('fname').value;
+            const messageDiv = document.getElementById('form-message');
+            
+            // Your Mailchimp form action URL
+            const url = 'https://yourusername.usXX.list-manage.com/subscribe/post?u=XXXXXXXXXXXXXX&amp;id=XXXXXXXXXX';
+            
+            // Create form data
+            const formData = new FormData();
+            formData.append('EMAIL', email);
+            formData.append('FNAME', fname);
+            
+            // Submit to Mailchimp using JSONP
+            submitToMailchimp(email, fname);
+        });
+        
+        function submitToMailchimp(email, fname) {
+            // This is a simplified version - you'll need to handle CORS properly
+            const messageDiv = document.getElementById('form-message');
+            
+            // For GitHub Pages, you might need to use a serverless function
+            // or redirect to the Mailchimp form directly
+            window.open(`https://yourusername.usXX.list-manage.com/subscribe/post?u=XXXXXXXXXXXXXX&amp;id=XXXXXXXXXX&EMAIL=${encodeURIComponent(email)}&FNAME=${encodeURIComponent(fname)}`, '_blank');
+            
+            messageDiv.textContent = 'Redirecting to subscription page...';
+            messageDiv.className = 'message success';
+            messageDiv.style.display = 'block';
+            
+            // Clear form
+            document.getElementById('mailchimp-form').reset();
+        }
+    </script>
 
   <div class="footer-copy">© 2025 by ofsaeily</div>
 </footer>
