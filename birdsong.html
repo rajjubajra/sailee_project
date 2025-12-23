@@ -35,21 +35,15 @@
       z-index: 1;
     }
 
-    /* NEW: Header as 4-column grid for both desktop and mobile */
+    /* NEW: Header as 4 EQUAL columns for both desktop and mobile */
     header {
-      display: grid;
-      grid-template-columns: 1fr 1fr 2fr 1fr;
+    display: flex;
       align-items: flex-start;
+      justify-content: space-between;
       padding: 20px 40px;
-      background: #ffffff;
-      text-transform: uppercase;
-      font-size: 12px;
+      background: #efebd7;
       position: relative;
       z-index: 2;
-      line-height: 1.4;
-      /* CHANGED: Increased gap between column 2 and 3 */
-      column-gap: 40px;
-      row-gap: 10px;
     }
 
     /* Grain overlay for header */
@@ -65,39 +59,45 @@
       z-index: -1;
     }
 
-    /* All header columns */
+    /* All header columns - EQUAL width */
     .brand, .contact, .nav-links, .logo {
       display: flex;
       flex-direction: column;
       line-height: 1.4;
       font-size: 12px;
       text-transform: uppercase;
+      width: 100%;
     }
 
-    /* Brand column */
+    /* Brand column - left aligned */
     .brand {
-      /* Left aligned */
+      /* Left aligned by default */
     }
 
     /* Contact column - centered */
     .contact {
       text-align: center;
+      align-items: center;
     }
 
-    /* Navigation links column - left aligned for menu items */
+    /* Navigation links column - left aligned */
     .nav-links {
-      /* Left aligned */
+      /* Left aligned by default */
     }
 
     /* Logo column - right aligned */
     .logo {
       align-items: flex-end;
+      text-align: right;
     }
 
     .email {
       text-transform: none;
       opacity: 0.7;
       margin-top: 2px;
+      text-align: center;
+      width: 100%;
+      word-break: break-word;
     }
 
     .nav-links a {
@@ -267,7 +267,7 @@
       padding: 0 40px;
     }
 
-    /* NEW: Responsive design for mobile - KEEP 4 COLUMNS */
+    /* NEW: Responsive design for mobile - KEEP 4 EQUAL COLUMNS */
     @media (max-width: 768px) {
       .row-3 {
         grid-template-columns: 1fr;
@@ -280,12 +280,11 @@
         padding: 0 20px;
       }
       
-      /* Header stays as 4 columns on mobile */
+      /* Header stays as 4 EQUAL columns on mobile */
       header {
-        grid-template-columns: 1fr 1fr 2fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr; /* EQUAL columns */
         padding: 20px;
-        /* CHANGED: Increased gap between column 2 and 3 on mobile too */
-        column-gap: 20px;
+        column-gap: 15px;
         row-gap: 10px;
       }
       
@@ -294,10 +293,15 @@
         font-size: 11px;
       }
       
-      /* Make email break nicely on mobile */
-      .email {
-        word-break: break-all;
+      /* Adjust nav links to fit better */
+      .nav-links a {
         font-size: 10px;
+        margin-bottom: 1px;
+      }
+      
+      /* Make email smaller */
+      .email {
+        font-size: 9px;
       }
       
       /* Make logo smaller on mobile */
@@ -325,20 +329,54 @@
       }
     }
     
-    /* For very small screens, adjust grid */
+    /* For very small screens, adjust grid but keep equal columns */
     @media (max-width: 480px) {
       header {
-        grid-template-columns: 1fr 1fr 1.5fr 1fr;
-        /* CHANGED: Adjusted gap for very small screens */
-        column-gap: 15px;
+        grid-template-columns: 1fr 1fr 1fr 1fr; /* STILL EQUAL columns */
+        column-gap: 10px;
+        padding: 15px;
       }
       
       .brand, .contact, .nav-links, .logo {
         font-size: 10px;
       }
       
-      .email {
+      .nav-links a {
         font-size: 9px;
+      }
+      
+      .email {
+        font-size: 8px;
+      }
+      
+      .logo img {
+        width: 25px;
+        height: 25px;
+      }
+    }
+    
+    /* For extremely small screens, adjust further */
+    @media (max-width: 360px) {
+      header {
+        column-gap: 8px;
+        padding: 10px;
+      }
+      
+      .brand, .contact, .nav-links, .logo {
+        font-size: 9px;
+      }
+      
+      .nav-links a {
+        font-size: 8px;
+      }
+      
+      .email {
+        font-size: 7px;
+      }
+      
+      .logo img {
+        width: 20px;
+        height: 20px;
       }
     }
   </style>
@@ -346,7 +384,7 @@
 
 <body>
 
-<!-- HEADER - 4 columns spread across page -->
+<!-- HEADER - 4 EQUAL columns spread across page -->
 <header>
   <div class="brand">ofsaeily</div>
   
@@ -401,6 +439,7 @@
   <img src="bird 1.jpg" alt="Birdsong-for-the-confined">      
   <img src="bird 2.jpg" alt="Birdsong-for-the-confined">
   <!-- Added empty div for third column if needed, or add third image -->
+  <div></div>
 </div>
 <div class="image-title-container">
   <div class="image-title">Birdsong (Triptych) no. 1 / Birdsong (Triptych) no. 2</div>
