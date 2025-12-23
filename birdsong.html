@@ -35,14 +35,19 @@
       z-index: 1;
     }
 
-     header {
-      display: flex;
+    /* NEW: Header as 4-column grid for both desktop and mobile */
+    header {
+      display: grid;
+      grid-template-columns: 1fr 1fr 2fr 1fr;
       align-items: flex-start;
-      justify-content: space-between;
       padding: 20px 40px;
-      background: #efebd7;
+      background: #ffffff;
+      text-transform: uppercase;
+      font-size: 12px;
       position: relative;
       z-index: 2;
+      line-height: 1.4;
+      gap: 20px;
     }
 
     /* Grain overlay for header */
@@ -58,24 +63,49 @@
       z-index: -1;
     }
 
-    .col {
+    /* All header columns */
+    .brand, .contact, .nav-links, .logo {
       display: flex;
       flex-direction: column;
-      line-height: 1.25;
+      line-height: 1.4;
       font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    /* Brand column */
+    .brand {
+      /* Left aligned */
+    }
+
+    /* Contact column - centered */
+    .contact {
+      text-align: center;
+    }
+
+    /* Navigation links column - left aligned for menu items */
+    .nav-links {
+      /* Left aligned */
+    }
+
+    /* Logo column - right aligned */
+    .logo {
+      align-items: flex-end;
     }
 
     .email {
       text-transform: none;
       opacity: 0.7;
+      margin-top: 2px;
     }
 
-    .menu a {
+    .nav-links a {
       text-decoration: none;
       color: inherit;
       margin-bottom: 2px;
+      display: block;
     }
-    .menu a:hover { opacity: 0.6; }
+
+    .nav-links a:hover { opacity: 0.6; }
 
     img { 
       width: 100%; 
@@ -235,7 +265,7 @@
       padding: 0 40px;
     }
 
-    /* NEW: Responsive design for mobile - FIXED HEADER */
+    /* NEW: Responsive design for mobile - KEEP 4 COLUMNS */
     @media (max-width: 768px) {
       .row-3 {
         grid-template-columns: 1fr;
@@ -248,15 +278,28 @@
         padding: 0 20px;
       }
       
-      /* FIXED: Header stays as 4 columns even on mobile */
+      /* Header stays as 4 columns on mobile */
       header {
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 2fr 1fr;
         padding: 20px;
         gap: 10px;
       }
       
-      .col {
-        width: 100%;
+      /* Reduce font size slightly on mobile for better fit */
+      .brand, .contact, .nav-links, .logo {
+        font-size: 11px;
+      }
+      
+      /* Make email break nicely on mobile */
+      .email {
+        word-break: break-all;
+        font-size: 10px;
+      }
+      
+      /* Make logo smaller on mobile */
+      .logo img {
+        width: 30px;
+        height: 30px;
       }
       
       .page-title,
@@ -277,29 +320,45 @@
         padding: 0 20px;
       }
     }
+    
+    /* For very small screens, adjust grid */
+    @media (max-width: 480px) {
+      header {
+        grid-template-columns: 1fr 1fr 1.5fr 1fr;
+        gap: 8px;
+      }
+      
+      .brand, .contact, .nav-links, .logo {
+        font-size: 10px;
+      }
+      
+      .email {
+        font-size: 9px;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
+<!-- HEADER - 4 columns spread across page -->
 <header>
-  <div class="col">ofsaeily</div>
-
-  <div class="col">
+  <div class="brand">ofsaeily</div>
+  
+  <div class="contact">
     enquiries
     <span class="email">ofsaeily@gmail.com</span>
   </div>
-
-  <div class="col menu">
-    <a href="index.html">I. collections</a>
-    <a href="archive.html">II. archive</a>
-    <a href="about.html">III. about</a>
-    <a href="contact.html">VI. contact</a>
-     <a href="https://linktr.ee/ofsaeily" target="_blank">V. my links</a>
+  
+  <div class="nav-links">
+    <a href="index.html">collections</a>
+    <a href="archive.html">archive</a>
+    <a href="about.html">about</a>
+    <a href="contact.html">contact</a>
+    <a href="https://linktr.ee/ofsaeily" target="_blank">my links</a>
   </div>
-
-  <div class="col">
+  
+  <div class="logo">
     <img src="o.png" style="width:40px; height:40px; object-fit: cover;">
   </div>
 </header>
