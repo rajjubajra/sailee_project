@@ -35,10 +35,10 @@
       z-index: 1;
     }
 
-    /* NEW: Header as 4 EQUAL columns for both desktop and mobile */
+    /* HEADER - Same for PC and mobile */
     header {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr; /* EQUAL columns */
+      display: flex;
+      justify-content: space-between;
       align-items: flex-start;
       padding: 20px 40px;
       background: #efebd7;
@@ -47,8 +47,8 @@
       position: relative;
       z-index: 2;
       line-height: 1.4;
-      column-gap: 20px;
-      row-gap: 10px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     /* Grain overlay for header */
@@ -64,36 +64,43 @@
       z-index: -1;
     }
 
-    /* All header columns - EQUAL width */
+    /* All header columns - same for PC and mobile */
     .brand, .contact, .nav-links, .logo {
       display: flex;
       flex-direction: column;
       line-height: 1.4;
-      font-size: 13px;
+      font-size: 12px;
       text-transform: uppercase;
-      width: 100%;
+      flex: 1;
+      min-width: 0;
     }
 
-    /* Brand column - left aligned */
+    /* Brand column */
     .brand {
-      /* Left aligned by default */
+      justify-content: flex-start;
+      text-align: left;
     }
 
-    /* Contact column - centered */
+    /* Contact column */
     .contact {
       text-align: center;
       align-items: center;
+      justify-content: flex-start;
+      margin-right: 60px;
     }
 
-    /* Navigation links column - left aligned */
+    /* Navigation links column */
     .nav-links {
-      /* Left aligned by default */
+      justify-content: flex-start;
+      text-align: left;
+      margin-left: 60px;
     }
 
-    /* Logo column - right aligned */
+    /* Logo column */
     .logo {
       align-items: flex-end;
       text-align: right;
+      justify-content: flex-start;
     }
 
     .email {
@@ -110,6 +117,7 @@
       color: inherit;
       margin-bottom: 2px;
       display: block;
+      white-space: nowrap;
     }
 
     .nav-links a:hover { opacity: 0.6; }
@@ -272,7 +280,9 @@
       padding: 0 40px;
     }
 
-    /* NEW: Responsive design for mobile - KEEP 4 EQUAL COLUMNS */
+    /* REMOVED ALL MEDIA QUERIES FOR HEADER - Same on all screens */
+    
+    /* Only keep media queries for non-header elements */
     @media (max-width: 768px) {
       .row-3 {
         grid-template-columns: 1fr;
@@ -283,36 +293,6 @@
         grid-template-columns: 1fr;
         gap: 30px;
         padding: 0 20px;
-      }
-      
-      /* Header stays as 4 EQUAL columns on mobile */
-      header {
-        grid-template-columns: 1fr 1fr 1fr 1fr; /* EQUAL columns */
-        padding: 20px;
-        column-gap: 15px;
-        row-gap: 10px;
-      }
-      
-      /* Reduce font size slightly on mobile for better fit */
-      .brand, .contact, .nav-links, .logo {
-        font-size: 11px;
-      }
-      
-      /* Adjust nav links to fit better */
-      .nav-links a {
-        font-size: 10px;
-        margin-bottom: 1px;
-      }
-      
-      /* Make email smaller */
-      .email {
-        font-size: 9px;
-      }
-      
-      /* Make logo smaller on mobile */
-      .logo img {
-        width: 30px;
-        height: 30px;
       }
       
       .page-title,
@@ -334,62 +314,21 @@
       }
     }
     
-    /* For very small screens, adjust grid but keep equal columns */
+    /* For very small screens, adjust non-header elements only */
     @media (max-width: 480px) {
-      header {
-        grid-template-columns: 1fr 1fr 1fr 1fr; /* STILL EQUAL columns */
-        column-gap: 10px;
-        padding: 15px;
-      }
-      
-      .brand, .contact, .nav-links, .logo {
-        font-size: 10px;
-      }
-      
-      .nav-links a {
-        font-size: 9px;
-      }
-      
-      .email {
-        font-size: 8px;
-      }
-      
-      .logo img {
-        width: 25px;
-        height: 25px;
-      }
+      /* Only adjust page content, not header */
     }
     
-    /* For extremely small screens, adjust further */
+    /* For extremely small screens, adjust non-header elements only */
     @media (max-width: 360px) {
-      header {
-        column-gap: 8px;
-        padding: 10px;
-      }
-      
-      .brand, .contact, .nav-links, .logo {
-        font-size: 9px;
-      }
-      
-      .nav-links a {
-        font-size: 8px;
-      }
-      
-      .email {
-        font-size: 7px;
-      }
-      
-      .logo img {
-        width: 20px;
-        height: 20px;
-      }
+      /* Only adjust page content, not header */
     }
   </style>
 </head>
 
 <body>
 
-<!-- HEADER - 4 EQUAL columns spread across page -->
+<!-- HEADER - Same for PC and mobile -->
 <header>
   <div class="brand">ofsaeily</div>
   
@@ -443,7 +382,7 @@
 <div class="row-3">
   <img src="bird 1.jpg" alt="Birdsong-for-the-confined">      
   <img src="bird 2.jpg" alt="Birdsong-for-the-confined">
-  <!-- Added empty div for third column if needed, or add third image -->
+  <!-- Removed empty div -->
 </div>
 <div class="image-title-container">
   <div class="image-title">Birdsong (Triptych) no. 1 / Birdsong (Triptych) no. 2</div>
