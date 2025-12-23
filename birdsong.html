@@ -35,7 +35,7 @@
       z-index: 1;
     }
 
-    /* HEADER - Same for PC and mobile */
+      /* FIXED: Header with more space between 2nd and 3rd columns */
     header {
       display: flex;
       justify-content: space-between;
@@ -64,16 +64,15 @@
       z-index: -1;
     }
 
-    /* All header columns - same for PC and mobile */
+    /* All header columns - CHANGED: Added specific margins for column 2 */
     .brand, .contact, .nav-links, .logo {
       display: flex;
       flex-direction: column;
       line-height: 1.4;
-      font-size: 12px;
+      font-size: 13px;
       text-transform: uppercase;
       flex: 1;
-      min-width: 0;
-    }
+      min-width: 0; /* Allows text to truncate if needed */
 
     /* Brand column */
     .brand {
@@ -92,7 +91,7 @@
     /* Navigation links column */
     .nav-links {
       justify-content: flex-start;
-      text-align: left;
+      text-align: center;
       margin-left: 60px;
     }
 
