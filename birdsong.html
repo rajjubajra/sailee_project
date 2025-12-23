@@ -17,7 +17,7 @@
       margin: 0;
       font-size: 12px;
       font-weight: 400;
-      background: #ffffff;
+      background: #efebd7;
       color: #000;
       position: relative;
     }
@@ -40,7 +40,7 @@
       align-items: flex-start;
       justify-content: space-between;
       padding: 20px 40px;
-      background: #ffffff;
+      background: #efebd7;
       text-transform: uppercase;
       font-size: 12px;
       position: relative;
@@ -151,7 +151,7 @@
     .button-row button:hover { opacity: 0.6; }
 
     .text-block {
-      padding: 0 40px;
+      padding: 0;
       font-size: 12px;
       line-height: 1.5;
       max-width: 800px;
@@ -161,7 +161,7 @@
 
     footer {
       padding: 40px;
-      background: #ffffff;
+      background: #efebd7;
       text-transform: uppercase;
       font-size: 12px;
       position: relative;
@@ -219,7 +219,7 @@
       z-index: 2;
     }
 
-    /* NEW: Consistent image title styling */
+    /* NEW: Consistent image title styling - FIXED SPACING */
     .image-title-container {
       padding: 0 40px;
       margin-top: 20px;
@@ -229,8 +229,12 @@
     .image-title {
       font-size: 12px;
       line-height: 1.5;
-      /* ADDED: Italic font style */
       font-style: italic;
+    }
+
+    /* NEW: Main exhibition image container with consistent spacing */
+    .main-exhibition-image {
+      padding: 0 40px;
     }
 
     /* NEW: Responsive design for mobile */
@@ -260,18 +264,14 @@
       .page-title,
       .text-block,
       .image-title-container,
-      .row-3 {
+      .row-3,
+      .main-exhibition-image {
         padding-left: 20px;
         padding-right: 20px;
       }
       
       footer {
         padding: 20px;
-      }
-      
-      /* Main exhibition image container */
-      div[style*="padding: 0 40px"] {
-        padding: 0 20px !important;
       }
     }
   </style>
@@ -307,8 +307,8 @@
 
 <div class="divider-60"></div>
 
-<!-- Main exhibition image -->
-<div style="padding: 0 40px;">
+<!-- Main exhibition image - FIXED: Using consistent class -->
+<div class="main-exhibition-image">
   <img src="Picsart_25-12-19_20-32-55-278.jpg" alt="birdsongfortheconfined">
 </div>
 <div class="image-title-container">
@@ -347,26 +347,24 @@
     <img src="bi8.jpg" alt="birdsongfortheconfined">
   </div>
   <div class="text-block">
- 
-<div class="text-block">
-  <p>
-    A year ago, I learned of the term "escapism" and realized how much it applied to my everyday life. The epiphany led to a five-part poem and later, a series of photographs, videos, poems, and paintings collectively titled "Birdsong for the Confined," birthed from a phase of drowsy eyes and daydreaming, when my way of living became a cage, and I became the "confined." 
-  </p>
-  <p>
-    In my predicament, I discovered that escapism had become a routine and a means of regaining a sense of normalcy. I drifted in and out of the present, losing myself for hours in reveries and then drowning in guilt over it, only to relapse into the same pattern subsequently. This became a maladaptive problem I couldn't seem to get rid of.
-  </p>
-  <p>
-    Yet, over the course of a month, though, I had begun writing fervently and regularly in my notebook. It allowed me to anchor and express myself and provided me with a sense of creative freedom. I had a vision—I thought a lot, ran over it repeatedly, lived it, and wanted to capture it. 
-  </p>
-  <p>
-    At a certain point, I yearned for something more concrete and visual in addition to my writings. I had a few ideas for my paintings, a vision so vivid it seared its presence onto my head day and night. For two months, I experimented with my paintings and ceramics, learned my way around the materials, and occasionally took a series of photographs and videos that would eventually complete the collection.
-  </p>
-  <p>
-    In this exhibition, paintings, ceramics and poetry all come together to initiate a dialogue on the confinement of self, conflict, and the transcending nature of art.
-  </p>
-</div>
+    <p>
+      A year ago, I learned of the term "escapism" and realized how much it applied to my everyday life. The epiphany led to a five-part poem and later, a series of photographs, videos, poems, and paintings collectively titled "Birdsong for the Confined," birthed from a phase of drowsy eyes and daydreaming, when my way of living became a cage, and I became the "confined." 
+    </p>
+    <p>
+      In my predicament, I discovered that escapism had become a routine and a means of regaining a sense of normalcy. I drifted in and out of the present, losing myself for hours in reveries and then drowning in guilt over it, only to relapse into the same pattern subsequently. This became a maladaptive problem I couldn't seem to get rid of.
+    </p>
+    <p>
+      Yet, over the course of a month, though, I had begun writing fervently and regularly in my notebook. It allowed me to anchor and express myself and provided me with a sense of creative freedom. I had a vision—I thought a lot, ran over it repeatedly, lived it, and wanted to capture it. 
+    </p>
+    <p>
+      At a certain point, I yearned for something more concrete and visual in addition to my writings. I had a few ideas for my paintings, a vision so vivid it seared its presence onto my head day and night. For two months, I experimented with my paintings and ceramics, learned my way around the materials, and occasionally took a series of photographs and videos that would eventually complete the collection.
+    </p>
+    <p>
+      In this exhibition, paintings, ceramics and poetry all come together to initiate a dialogue on the confinement of self, conflict, and the transcending nature of art.
+    </p>
   </div>
 </div>
+<!-- Note: No title for the bi8.jpg image in two-column layout -->
     
 <div class="divider-60"></div>
 
@@ -382,8 +380,6 @@
     
 <div class="divider-60"></div>
 
-
-<div class="divider-60"></div>
 <div class="divider-60"></div>
 <div class="divider-60"></div>
 <div class="divider-60"></div>
