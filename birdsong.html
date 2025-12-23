@@ -35,7 +35,7 @@
       z-index: 1;
     }
 
-    
+    /* EXACT HEADER FROM EXAMPLE 1 */
     header {
       display: flex;
       align-items: flex-start;
@@ -59,30 +59,29 @@
       z-index: -1;
     }
 
-      .col {
+    .col {
       display: flex;
       flex-direction: column;
       line-height: 1.25;
       text-transform: uppercase;
+    }
 
     .email {
       text-transform: none;
       opacity: 0.7;
-      margin-top: 2px;
-      text-align: center;
-      width: 100%;
-      word-break: break-word;
     }
 
-    .nav-links a {
+    .menu a {
       text-decoration: none;
       color: inherit;
-      margin-bottom: 2px;
-      display: block;
-      white-space: nowrap;
+      margin-bottom: 1px;
     }
 
-    .nav-links a:hover { opacity: 0.6; }
+    .menu a:hover {
+      opacity: 0.6;
+    }
+
+    /* END OF EXACT HEADER FROM EXAMPLE 1 */
 
     img { 
       width: 100%; 
@@ -242,7 +241,7 @@
       padding: 0 40px;
     }
 
-    /* NEW: Responsive design for mobile - FLEX with equal spacing */
+    /* NEW: Responsive design for mobile */
     @media (max-width: 768px) {
       .row-3 {
         grid-template-columns: 1fr;
@@ -255,38 +254,9 @@
         padding: 0 20px;
       }
       
-      /* Header stays with equal spacing on mobile */
+      /* Header stays exactly the same on mobile */
       header {
-        display: flex;
-        justify-content: space-between;
         padding: 20px;
-        flex-wrap: nowrap;
-        gap: 15px;
-      }
-      
-      /* All columns get equal flex space */
-      .brand, .contact, .nav-links, .logo {
-        flex: 1;
-        font-size: 11px;
-        min-width: 0;
-      }
-      
-      /* Adjust nav links to fit better */
-      .nav-links a {
-        font-size: 10px;
-        margin-bottom: 1px;
-        white-space: normal; /* Allow wrapping on mobile */
-      }
-      
-      /* Make email smaller */
-      .email {
-        font-size: 9px;
-      }
-      
-      /* Make logo smaller on mobile */
-      .logo img {
-        width: 30px;
-        height: 30px;
       }
       
       .page-title,
@@ -307,80 +277,30 @@
         padding: 0 20px;
       }
     }
-    
-    /* For very small screens, adjust but keep equal spacing */
-    @media (max-width: 480px) {
-      header {
-        padding: 15px;
-        gap: 10px;
-      }
-      
-      .brand, .contact, .nav-links, .logo {
-        font-size: 10px;
-      }
-      
-      .nav-links a {
-        font-size: 9px;
-      }
-      
-      .email {
-        font-size: 8px;
-      }
-      
-      .logo img {
-        width: 25px;
-        height: 25px;
-      }
-    }
-    
-    /* For extremely small screens, adjust further */
-    @media (max-width: 360px) {
-      header {
-        padding: 10px;
-        gap: 8px;
-      }
-      
-      .brand, .contact, .nav-links, .logo {
-        font-size: 9px;
-      }
-      
-      .nav-links a {
-        font-size: 8px;
-      }
-      
-      .email {
-        font-size: 7px;
-      }
-      
-      .logo img {
-        width: 20px;
-        height: 20px;
-      }
-    }
   </style>
 </head>
 
 <body>
 
-<!-- HEADER - 4 columns with equal spacing -->
+<!-- EXACT HEADER FROM EXAMPLE 1 -->
 <header>
-  <div class="brand">ofsaeily</div>
-  
-  <div class="contact">
+  <div class="col">ofsaeily</div>
+
+  <div class="col">
     enquiries
     <span class="email">ofsaeily@gmail.com</span>
   </div>
-  
-  <div class="nav-links">
-    <a href="index.html">collections</a>
-    <a href="archive.html">archive</a>
-    <a href="about.html">about</a>
-    <a href="contact.html">contact</a>
-    <a href="https://linktr.ee/ofsaeily" target="_blank">my links</a>
+
+  <div class="col menu">
+    <a href="index.html">I. collections</a>
+    <a href="archive.html">II. archive</a>
+    <a href="about.html">III. about</a>
+    <a href="contact.html">VI. contact</a>
+     <a href="https://linktr.ee/ofsaeily" target="_blank">V. my links</a>
   </div>
-  
-  <div class="logo">
-    <img src="ofs..png" style="width:40px; height:40px; object-fit: cover;">
+
+  <div class="col">
+    <img src="ofs..png" style="height:40px; width:auto;">
   </div>
 </header>
 
@@ -464,7 +384,6 @@
   <!-- Main exhibition image - FIXED: Using consistent class -->
 <div class="main-exhibition-image">
   <img src="bi9 (2).jpg" alt="birdsongfortheconfined">
-</div>
 </div>
 
   <!-- Will This Be Her Undoing? -->
