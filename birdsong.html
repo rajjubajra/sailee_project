@@ -47,7 +47,9 @@
       position: relative;
       z-index: 2;
       line-height: 1.4;
-      gap: 20px;
+      /* CHANGED: Increased gap between column 2 and 3 */
+      column-gap: 40px;
+      row-gap: 10px;
     }
 
     /* Grain overlay for header */
@@ -282,7 +284,9 @@
       header {
         grid-template-columns: 1fr 1fr 2fr 1fr;
         padding: 20px;
-        gap: 10px;
+        /* CHANGED: Increased gap between column 2 and 3 on mobile too */
+        column-gap: 20px;
+        row-gap: 10px;
       }
       
       /* Reduce font size slightly on mobile for better fit */
@@ -325,7 +329,8 @@
     @media (max-width: 480px) {
       header {
         grid-template-columns: 1fr 1fr 1.5fr 1fr;
-        gap: 8px;
+        /* CHANGED: Adjusted gap for very small screens */
+        column-gap: 15px;
       }
       
       .brand, .contact, .nav-links, .logo {
