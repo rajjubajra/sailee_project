@@ -35,7 +35,7 @@
       z-index: 1;
     }
 
-      /* FIXED: Header with more space between 2nd and 3rd columns */
+    /* FIXED: Header with equal spacing between columns */
     header {
       display: flex;
       justify-content: space-between;
@@ -64,7 +64,7 @@
       z-index: -1;
     }
 
-    /* All header columns - CHANGED: Added specific margins for column 2 */
+    /* All header columns - equal width with flex */
     .brand, .contact, .nav-links, .logo {
       display: flex;
       flex-direction: column;
@@ -73,29 +73,28 @@
       text-transform: uppercase;
       flex: 1;
       min-width: 0; /* Allows text to truncate if needed */
+    }
 
-    /* Brand column */
+    /* Brand column - left aligned */
     .brand {
       justify-content: flex-start;
       text-align: left;
     }
 
-    /* Contact column */
+    /* Contact column - centered */
     .contact {
       text-align: center;
       align-items: center;
       justify-content: flex-start;
-      margin-right: 60px;
     }
 
-    /* Navigation links column */
+    /* Navigation links column - left aligned */
     .nav-links {
       justify-content: flex-start;
-      text-align: center;
-      margin-left: 60px;
+      text-align: left;
     }
 
-    /* Logo column */
+    /* Logo column - right aligned */
     .logo {
       align-items: flex-end;
       text-align: right;
@@ -279,9 +278,7 @@
       padding: 0 40px;
     }
 
-    /* REMOVED ALL MEDIA QUERIES FOR HEADER - Same on all screens */
-    
-    /* Only keep media queries for non-header elements */
+    /* NEW: Responsive design for mobile - FLEX with equal spacing */
     @media (max-width: 768px) {
       .row-3 {
         grid-template-columns: 1fr;
@@ -292,6 +289,40 @@
         grid-template-columns: 1fr;
         gap: 30px;
         padding: 0 20px;
+      }
+      
+      /* Header stays with equal spacing on mobile */
+      header {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        flex-wrap: nowrap;
+        gap: 15px;
+      }
+      
+      /* All columns get equal flex space */
+      .brand, .contact, .nav-links, .logo {
+        flex: 1;
+        font-size: 11px;
+        min-width: 0;
+      }
+      
+      /* Adjust nav links to fit better */
+      .nav-links a {
+        font-size: 10px;
+        margin-bottom: 1px;
+        white-space: normal; /* Allow wrapping on mobile */
+      }
+      
+      /* Make email smaller */
+      .email {
+        font-size: 9px;
+      }
+      
+      /* Make logo smaller on mobile */
+      .logo img {
+        width: 30px;
+        height: 30px;
       }
       
       .page-title,
@@ -313,21 +344,61 @@
       }
     }
     
-    /* For very small screens, adjust non-header elements only */
+    /* For very small screens, adjust but keep equal spacing */
     @media (max-width: 480px) {
-      /* Only adjust page content, not header */
+      header {
+        padding: 15px;
+        gap: 10px;
+      }
+      
+      .brand, .contact, .nav-links, .logo {
+        font-size: 10px;
+      }
+      
+      .nav-links a {
+        font-size: 9px;
+      }
+      
+      .email {
+        font-size: 8px;
+      }
+      
+      .logo img {
+        width: 25px;
+        height: 25px;
+      }
     }
     
-    /* For extremely small screens, adjust non-header elements only */
+    /* For extremely small screens, adjust further */
     @media (max-width: 360px) {
-      /* Only adjust page content, not header */
+      header {
+        padding: 10px;
+        gap: 8px;
+      }
+      
+      .brand, .contact, .nav-links, .logo {
+        font-size: 9px;
+      }
+      
+      .nav-links a {
+        font-size: 8px;
+      }
+      
+      .email {
+        font-size: 7px;
+      }
+      
+      .logo img {
+        width: 20px;
+        height: 20px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<!-- HEADER - Same for PC and mobile -->
+<!-- HEADER - 4 columns with equal spacing -->
 <header>
   <div class="brand">ofsaeily</div>
   
@@ -423,32 +494,14 @@
 <div class="image-title-container">
   <div class="image-title">Reminiscence of a Memory (Diptych)</div>
 </div>
-
-  <div class="divider-60"></div>
-
-  <!-- Main exhibition image - FIXED: Using consistent class -->
-<div class="main-exhibition-image">
-  <img src="bi9 (2).jpg" alt="birdsongfortheconfined">
-</div>
-<div class="image-title-container">
-  <div class="image-title">Takpa Gallery, 2025</div>
-</div>
     
 <div class="divider-60"></div>
 
   <!-- Will This Be Her Undoing? -->
 <div class="row-3">
-  <img src="undoing.jpg" alt="Will-this-be-her-undoing">      
-</div>
-<div class="image-title-container">
-  <div class="image-title">Will This Be Her Undoing?</div>
-</div>
-
-  <div class="divider-60"></div>
-
-    <!-- Will This Be Her Undoing? -->
-<div class="row-3">
-  <img src="undoing.jpg" alt="Will-this-be-her-undoing">      
+  <img src="reminsce 1.jpg" alt="Reminiscence-of-a-Memory">      
+  <img src="reminsce 2.jpg" alt="Reminiscence-of-a-Memory">
+  <img src="reminsce 3.jpg" alt="Reminiscence-of-a-Memory">
 </div>
 <div class="image-title-container">
   <div class="image-title">Will This Be Her Undoing?</div>
