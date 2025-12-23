@@ -35,10 +35,11 @@
       z-index: 1;
     }
 
+    /* FIXED: Header as 4-column grid */
     header {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
       align-items: flex-start;
-      justify-content: space-between;
       padding: 20px 40px;
       background: #ffffff;
       text-transform: uppercase;
@@ -219,7 +220,7 @@
       z-index: 2;
     }
 
-    /* NEW: Consistent image title styling */
+    /* FIXED: Consistent image title styling with equal spacing */
     .image-title-container {
       padding: 0 40px;
       margin-top: 20px;
@@ -229,11 +230,15 @@
     .image-title {
       font-size: 12px;
       line-height: 1.5;
-      /* ADDED: Italic font style */
       font-style: italic;
     }
 
-    /* NEW: Responsive design for mobile */
+    /* NEW: Main exhibition image with consistent spacing */
+    .main-exhibition-image {
+      padding: 0 40px;
+    }
+
+    /* NEW: Responsive design for mobile - FIXED HEADER */
     @media (max-width: 768px) {
       .row-3 {
         grid-template-columns: 1fr;
@@ -246,11 +251,11 @@
         padding: 0 20px;
       }
       
+      /* FIXED: Header stays as 4 columns even on mobile */
       header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         padding: 20px;
+        gap: 10px;
       }
       
       .col {
@@ -260,7 +265,8 @@
       .page-title,
       .text-block,
       .image-title-container,
-      .row-3 {
+      .row-3,
+      .main-exhibition-image {
         padding-left: 20px;
         padding-right: 20px;
       }
@@ -270,8 +276,8 @@
       }
       
       /* Main exhibition image container */
-      div[style*="padding: 0 40px"] {
-        padding: 0 20px !important;
+      .main-exhibition-image {
+        padding: 0 20px;
       }
     }
   </style>
@@ -307,8 +313,8 @@
 
 <div class="divider-60"></div>
 
-<!-- Main exhibition image -->
-<div style="padding: 0 40px;">
+<!-- Main exhibition image - FIXED: Using consistent class -->
+<div class="main-exhibition-image">
   <img src="Picsart_25-12-19_20-32-55-278.jpg" alt="birdsongfortheconfined">
 </div>
 <div class="image-title-container">
