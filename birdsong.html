@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ofsaeily</title>
 
-  <!-- Font - CHANGED to Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400&display=swap" rel="stylesheet">
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400&display=swap" rel="stylesheet">
 
   <style>
     * {
-      font-family: 'Source Sans Pro', sans-serif !important; /* CHANGED */
+      font-family: 'Source Serif Pro', serif !important;
     }
 
     body {
@@ -37,13 +37,18 @@
 
     /* NEW: Header as 4 EQUAL columns for both desktop and mobile */
     header {
-    display: flex;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr; /* EQUAL columns */
       align-items: flex-start;
-      justify-content: space-between;
       padding: 20px 40px;
       background: #ffffff;
+      text-transform: uppercase;
+      font-size: 12px;
       position: relative;
       z-index: 2;
+      line-height: 1.4;
+      column-gap: 20px;
+      row-gap: 10px;
     }
 
     /* Grain overlay for header */
