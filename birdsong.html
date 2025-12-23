@@ -35,20 +35,15 @@
       z-index: 1;
     }
 
-    /* FIXED: Header with equal spacing between columns */
+    
     header {
       display: flex;
-      justify-content: space-between;
       align-items: flex-start;
+      justify-content: space-between;
       padding: 20px 40px;
       background: #efebd7;
-      text-transform: uppercase;
-      font-size: 12px;
       position: relative;
       z-index: 2;
-      line-height: 1.4;
-      width: 100%;
-      box-sizing: border-box;
     }
 
     /* Grain overlay for header */
@@ -64,42 +59,11 @@
       z-index: -1;
     }
 
-    /* All header columns - equal width with flex */
-    .brand, .contact, .nav-links, .logo {
+      .col {
       display: flex;
       flex-direction: column;
-      line-height: 1.4;
-      font-size: 12px;
+      line-height: 1.25;
       text-transform: uppercase;
-      flex: 1;
-      min-width: 0; /* Allows text to truncate if needed */
-    }
-
-    /* Brand column - left aligned */
-    .brand {
-      justify-content: flex-start;
-      text-align: left;
-    }
-
-    /* Contact column - centered */
-    .contact {
-      text-align: center;
-      align-items: center;
-      justify-content: flex-start;
-    }
-
-    /* Navigation links column - left aligned */
-    .nav-links {
-      justify-content: flex-start;
-      text-align: left;
-    }
-
-    /* Logo column - right aligned */
-    .logo {
-      align-items: flex-end;
-      text-align: right;
-      justify-content: flex-start;
-    }
 
     .email {
       text-transform: none;
