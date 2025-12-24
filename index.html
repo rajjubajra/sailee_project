@@ -215,6 +215,102 @@
       margin-top: 10px;
       object-fit: cover;
     }
+
+    /* NEW: Responsive mobile styles */
+    @media (max-width: 768px) {
+      /* Header stays exactly the same */
+      header {
+        padding: 20px;
+      }
+      
+      /* Adjust title for mobile */
+      .title-main {
+        font-size: 22px;
+        padding-left: 20px;
+        padding-right: 20px;
+        text-align: left;
+      }
+      
+      /* Make image row single column on mobile */
+      .image-row-2 {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 0 20px;
+      }
+      
+      /* Adjust image blocks for mobile */
+      .image-block {
+        width: 100%;
+      }
+      
+      /* Adjust spacing for mobile */
+      .divider-120 {
+        height: 80px;
+      }
+      
+      .divider-60 {
+        height: 40px;
+      }
+      
+      .divider-10 {
+        height: 5px;
+      }
+      
+      /* Adjust sections for mobile */
+      .section {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      
+      /* Adjust footer for mobile */
+      footer {
+        padding: 20px;
+      }
+      
+      /* Adjust newsletter for mobile */
+      .newsletter {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .newsletter input {
+        width: 100%;
+        max-width: 220px;
+      }
+      
+      .newsletter button {
+        align-self: flex-start;
+      }
+      
+      /* Adjust click-image for mobile */
+      .click-image {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+
+    /* Extra small devices */
+    @media (max-width: 480px) {
+      .title-main {
+        font-size: 20px;
+      }
+      
+      .divider-120 {
+        height: 60px;
+      }
+      
+      .divider-60 {
+        height: 30px;
+      }
+      
+      .divider-10 {
+        height: 5px;
+      }
+      
+      .image-row-2 {
+        gap: 40px;
+      }
+    }
   </style>
 
 </head>
