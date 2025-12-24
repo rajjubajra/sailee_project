@@ -77,9 +77,16 @@
       opacity: 0.6;
     }
 
-    img {
+    /* Header image */
+    header img {
       height: 40px;
       width: auto;
+    }
+
+    /* Content images */
+    .content-image {
+      width: 100%;
+      height: auto;
     }
 
     /* Add border to all images except those in header */
@@ -225,7 +232,7 @@
       object-fit: cover;
     }
 
-    /* NEW: Styles for the main exhibition image section */
+    /* FIXED: Styles for the main exhibition image section */
     .main-exhibition-image {
       padding: 0 40px;
       position: relative;
@@ -235,6 +242,12 @@
     .image-with-text {
       display: flex;
       flex-direction: column;
+    }
+
+    .image-with-text img {
+      width: 100%;
+      height: auto;
+      border: 1px solid #000;
     }
 
     .image-text {
@@ -411,8 +424,7 @@
 <!-- Main exhibition image -->
 <div class="main-exhibition-image">
   <div class="image-with-text">
-    <img src="Picsart_25-12-19_20-32-55-278.jpg" alt="birdsongfortheconfined">\
-     </div>
+    <img src="Picsart_25-12-19_20-32-55-278.jpg" alt="birdsongfortheconfined" class="content-image">
     <div class="image-text">Takpa Gallery, 2025</div>
   </div>
 </div>
