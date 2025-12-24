@@ -241,6 +241,20 @@
       padding: 0 40px;
     }
 
+    /* NEW: Individual image text styling */
+    .image-with-text {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .image-text {
+      margin-top: 10px;
+      font-size: 12px;
+      line-height: 1.5;
+      font-style: italic;
+      text-align: center;
+    }
+
     /* NEW: Responsive design for mobile */
     @media (max-width: 768px) {
       .row-3 {
@@ -276,6 +290,10 @@
       .main-exhibition-image {
         padding: 0 20px;
       }
+      
+      .image-text {
+        margin-top: 8px;
+      }
     }
   </style>
 </head>
@@ -310,50 +328,57 @@
 
 <div class="divider-60"></div>
 
-<!-- Main exhibition image - FIXED: Using consistent class -->
+<!-- Main exhibition image -->
 <div class="main-exhibition-image">
-  <img src="Picsart_25-12-19_20-32-55-278.jpg" alt="birdsongfortheconfined">
-</div>
-<div class="image-title-container">
-  <div class="image-title">Takpa Gallery, 2025</div>
+  <div class="image-with-text">
+    <img src="Picsart_25-12-19_20-32-55-278.jpg" alt="birdsongfortheconfined">
+    <div class="image-text">Takpa Gallery, 2025</div>
+  </div>
 </div>
 
 <div class="divider-60"></div>
 
-<!-- FIXED SECTION: A Portrait of Lilies and Birdsong Triptych in 3 columns -->
+<!-- A Portrait of Lilies and Birdsong Triptych -->
 <div class="row-3">   
-  <div class="painting-card">
+  <div class="image-with-text">
     <img src="lily 2.jpg" alt="A-portrait-of-lilies">
+    <div class="image-text">A Portrait of Lilies I</div>
   </div>
-  <div class="painting-card">
+  <div class="image-with-text">
     <img src="lily 1.jpg" alt="A-portrait-of-lilies">
+    <div class="image-text">A Portrait of Lilies II</div>
   </div> 
-  <div class="painting-card">
+  <div class="image-with-text">
     <img src="bird 2.jpg" alt="Birdsong-for-the-confined">
+    <div class="image-text">Birdsong (Triptych) no. 1</div>
   </div>
-</div>
-<div class="image-title-container">
-  <div class="image-title">A Portrait of Lilies I - III / Birdsong (Triptych) no. 1</div>
 </div>
 
 <div class="divider-60"></div>
 
 <!-- Birdsong Triptych -->
 <div class="row-3">
-  <img src="bird 1.jpg" alt="Birdsong-for-the-confined">      
-  <img src="bird 2.jpg" alt="Birdsong-for-the-confined">
-  <!-- Empty div removed -->
-</div>
-<div class="image-title-container">
-  <div class="image-title">Birdsong (Triptych) no. 1 / Birdsong (Triptych) no. 2</div>
+  <div class="image-with-text">
+    <img src="bird 1.jpg" alt="Birdsong-for-the-confined">
+    <div class="image-text">Birdsong (Triptych) no. 1</div>
+  </div>      
+  <div class="image-with-text">
+    <img src="bird 2.jpg" alt="Birdsong-for-the-confined">
+    <div class="image-text">Birdsong (Triptych) no. 2</div>
+  </div>
+  <div class="image-with-text">
+    <!-- Empty placeholder for grid alignment -->
+    <div style="height: 1px;"></div>
+  </div>
 </div>
 
-
-<!-- NEW: Two-column layout for single image and text -->
 <div class="divider-60"></div>
+
+<!-- Two-column layout for single image and text -->
 <div class="row-2">
-  <div>
+  <div class="image-with-text">
     <img src="bi8.jpg" alt="birdsongfortheconfined">
+    <div class="image-text">Exhibition installation view</div>
   </div>
   <div class="text-block">
     <p>
@@ -378,151 +403,163 @@
 
 <!-- Reminiscence of a Memory -->
 <div class="row-3">
-  <img src="reminsce 1.jpg" alt="Reminiscence-of-a-Memory">      
-  <img src="reminsce 2.jpg" alt="Reminiscence-of-a-Memory">
-  <img src="reminsce 3.jpg" alt="Reminiscence-of-a-Memory">
-</div>
-<div class="image-title-container">
-  <div class="image-title">Reminiscence of a Memory (Diptych)</div>
+  <div class="image-with-text">
+    <img src="reminsce 1.jpg" alt="Reminiscence-of-a-Memory">
+    <div class="image-text">Reminiscence of a Memory I</div>
+  </div>      
+  <div class="image-with-text">
+    <img src="reminsce 2.jpg" alt="Reminiscence-of-a-Memory">
+    <div class="image-text">Reminiscence of a Memory II</div>
+  </div>
+  <div class="image-with-text">
+    <img src="reminsce 3.jpg" alt="Reminiscence-of-a-Memory">
+    <div class="image-text">Reminiscence of a Memory III</div>
+  </div>
 </div>
     
 <div class="divider-60"></div>
 
-  <!-- NEW: Two-column layout for double image -->
-  <div class="row-2">
-  <img src="bi9 (2).jpg" alt="birdsongfortheconfined">
+<!-- Two-column layout for double image -->
+<div class="row-2">
+  <div class="image-with-text">
     <img src="bi9 (2).jpg" alt="birdsongfortheconfined">
-</div>
-
-  <div class="divider-60"></div>
-
-  <!-- Will This Be Her Undoing? -->
-<div class="row-3">
-  <img src="undoing.jpg" alt="Reminiscence-of-a-Memory">      
-</div>
-<div class="image-title-container">
-  <div class="image-title">Will This Be Her Undoing?</div>
-</div>
-
-   <div class="divider-60"></div>
-
-  <!-- The rest needed for living -->
-<div class="row-3">
-  <img src="undoing.jpg" alt="The rest needed for living">      
-</div>
-<div class="image-title-container">
-  <div class="image-title">The Rest Needed for Living</div>
-</div>
-
-    <div class="divider-60"></div>
-
-  <!-- The day has passed -->
-<div class="row-3">
-  <img src="undoing.jpg" alt="The day has passed">      
-</div>
-<div class="image-title-container">
-  <div class="image-title">The Day Has Passed</div>
-</div>
-
-    <div class="divider-60"></div>
-
-  <!-- The flow of a river -->
-<div class="row-3">
-  <img src="undoing.jpg" alt="The flow of a river">      
-</div>
-<div class="image-title-container">
-  <div class="image-title">The Flow of a River</div>
-</div>
-
-      <div class="divider-60"></div>
-
-  <!-- Translucent Light-->
-<div class="row-3">
-  <img src="undoing.jpg" alt="Translucent Light">      
-</div>
-<div class="image-title-container">
-  <div class="image-title">Translucent Light</div>
-</div>
-
-   <div class="divider-60"></div>
-
-    <!-- A Sense of Quiet-->
-<div class="row-3">
-  <img src="undoing.jpg" alt="A Sense of Quiet">      
-</div>
-<div class="image-title-container">
-  <div class="image-title">A Sense of Quiet</div>
+    <div class="image-text">Gallery installation view I</div>
   </div>
-
-   <div class="divider-60"></div>
-
-  <!-- Fig-->
-<div class="row-3">
-  <img src="undoing.jpg" alt="Fig">      
-</div>
-<div class="image-title-container">
-  <div class="image-title">Fig</div>
+  <div class="image-with-text">
+    <img src="bi9 (2).jpg" alt="birdsongfortheconfined">
+    <div class="image-text">Gallery installation view II</div>
   </div>
-
-   <div class="divider-60"></div>
-
-  <!-- Fig-->
-<div class="row-3">
-  <img src="undoing.jpg" alt="Fig">      
 </div>
-<div class="image-title-container">
-  <div class="image-title">Fig</div>
-  </div>
 
-   <div class="divider-60"></div>
-  
-  <!-- Evening? Late Afternoon?-->
+<div class="divider-60"></div>
+
+<!-- Will This Be Her Undoing? -->
 <div class="row-3">
-  <img src="undoing.jpg" alt="Evening? Late Afternoon?">      
+  <div class="image-with-text">
+    <img src="undoing.jpg" alt="Reminiscence-of-a-Memory">
+    <div class="image-text">Will This Be Her Undoing?</div>
+  </div>      
 </div>
-<div class="image-title-container">
-  <div class="image-title">Evening? Late Afternoon?</div>
-  </div>
 
-   <div class="divider-60"></div>
+<div class="divider-60"></div>
 
-   <!-- Evening? Late Afternoon?-->
+<!-- The rest needed for living -->
 <div class="row-3">
-  <img src="undoing.jpg" alt="Evening? Late Afternoon?">      
+  <div class="image-with-text">
+    <img src="undoing.jpg" alt="The rest needed for living">
+    <div class="image-text">The Rest Needed for Living</div>
+  </div>      
 </div>
-<div class="image-title-container">
-  <div class="image-title">Evening? Late Afternoon?</div>
-  </div>
 
-   <div class="divider-60"></div>
+<div class="divider-60"></div>
 
-  <!-- Dawn I - IV / A tenderness in bloom I - II-->
+<!-- The day has passed -->
 <div class="row-3">
-  <img src="undoing.jpg" alt="Dawn I - IV / A tenderness in bloom I - II">      
+  <div class="image-with-text">
+    <img src="undoing.jpg" alt="The day has passed">
+    <div class="image-text">The Day Has Passed</div>
+  </div>      
 </div>
-<div class="image-title-container">
-  <div class="image-title">Dawn I - IV / A tenderness in bloom I - II</div>
-  </div>
 
-   <div class="divider-60"></div>
+<div class="divider-60"></div>
 
-    <!--Escapism-->
+<!-- The flow of a river -->
 <div class="row-3">
-  <img src="undoing.jpg" alt="Escapism">      
+  <div class="image-with-text">
+    <img src="undoing.jpg" alt="The flow of a river">
+    <div class="image-text">The Flow of a River</div>
+  </div>      
 </div>
-<div class="image-title-container">
-  <div class="image-title">Escapism</div>
-  </div>
 
-   <!--Afloat-->
+<div class="divider-60"></div>
+
+<!-- Translucent Light -->
 <div class="row-3">
-  <img src="undoing.jpg" alt="Afloat">      
+  <div class="image-with-text">
+    <img src="undoing.jpg" alt="Translucent Light">
+    <div class="image-text">Translucent Light</div>
+  </div>      
 </div>
-<div class="image-title-container">
-  <div class="image-title">Afloat I - III</div>
-  </div>
 
-   <div class="divider-60"></div>
+<div class="divider-60"></div>
+
+<!-- A Sense of Quiet -->
+<div class="row-3">
+  <div class="image-with-text">
+    <img src="undoing.jpg" alt="A Sense of Quiet">
+    <div class="image-text">A Sense of Quiet</div>
+  </div>      
+</div>
+
+<div class="divider-60"></div>
+
+<!-- Fig -->
+<div class="row-3">
+  <div class="image-with-text">
+    <img src="undoing.jpg" alt="Fig">
+    <div class="image-text">Fig I</div>
+  </div>      
+</div>
+
+<div class="divider-60"></div>
+
+<!-- Fig -->
+<div class="row-3">
+  <div class="image-with-text">
+    <img src="undoing.jpg" alt="Fig">
+    <div class="image-text">Fig II</div>
+  </div>      
+</div>
+
+<div class="divider-60"></div>
+
+<!-- Evening? Late Afternoon? -->
+<div class="row-3">
+  <div class="image-with-text">
+    <img src="undoing.jpg" alt="Evening? Late Afternoon?">
+    <div class="image-text">Evening? Late Afternoon? I</div>
+  </div>      
+</div>
+
+<div class="divider-60"></div>
+
+<!-- Evening? Late Afternoon? -->
+<div class="row-3">
+  <div class="image-with-text">
+    <img src="undoing.jpg" alt="Evening? Late Afternoon?">
+    <div class="image-text">Evening? Late Afternoon? II</div>
+  </div>      
+</div>
+
+<div class="divider-60"></div>
+
+<!-- Dawn I - IV / A tenderness in bloom I - II -->
+<div class="row-3">
+  <div class="image-with-text">
+    <img src="undoing.jpg" alt="Dawn I - IV / A tenderness in bloom I - II">
+    <div class="image-text">Dawn I - IV / A tenderness in bloom I - II</div>
+  </div>      
+</div>
+
+<div class="divider-60"></div>
+
+<!-- Escapism -->
+<div class="row-3">
+  <div class="image-with-text">
+    <img src="undoing.jpg" alt="Escapism">
+    <div class="image-text">Escapism</div>
+  </div>      
+</div>
+
+<!-- Afloat -->
+<div class="row-3">
+  <div class="image-with-text">
+    <img src="undoing.jpg" alt="Afloat">
+    <div class="image-text">Afloat I - III</div>
+  </div>      
+</div>
+
+<div class="divider-60"></div>
 
 <!-- 1px thin line above footer -->
 <div style="width:100%; height:1px; background:#000;"></div>
