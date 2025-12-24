@@ -239,6 +239,99 @@
     .contact-form button:hover {
       opacity: 0.6;
     }
+
+    /* NEW: Mobile responsive styles */
+    @media (max-width: 768px) {
+      /* Header stays exactly the same */
+      header {
+        padding: 20px;
+      }
+      
+      /* Adjust title for mobile */
+      .title-main {
+        font-size: 22px;
+        padding-left: 20px;
+        padding-right: 20px;
+        text-align: left;
+      }
+      
+      /* Adjust spacing for mobile */
+      .divider-120 {
+        height: 80px;
+      }
+      
+      .divider-60 {
+        height: 40px;
+      }
+      
+      /* Adjust contact wrapper for mobile */
+      .contact-wrapper {
+        padding: 0 20px;
+      }
+      
+      /* Adjust contact text for mobile */
+      .contact {
+        font-size: 12px;
+        line-height: 1.6;
+        max-width: 100%;
+      }
+      
+      /* Adjust contact form for mobile */
+      .contact-form {
+        max-width: 100%;
+      }
+      
+      /* Adjust footer for mobile */
+      footer {
+        padding: 20px;
+      }
+      
+      /* Adjust newsletter for mobile */
+      .newsletter {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .newsletter input {
+        width: 100%;
+        max-width: 220px;
+      }
+      
+      .newsletter button {
+        align-self: flex-start;
+      }
+      
+      /* Adjust section padding for mobile */
+      .section {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+    }
+
+    /* Extra small devices */
+    @media (max-width: 480px) {
+      .title-main {
+        font-size: 20px;
+      }
+      
+      .divider-120 {
+        height: 60px;
+      }
+      
+      .divider-60 {
+        height: 30px;
+      }
+      
+      .contact {
+        font-size: 11px;
+        line-height: 1.7;
+      }
+      
+      .contact-title {
+        font-size: 12px;
+        margin-bottom: 15px;
+      }
+    }
   </style>
 
 </head>
