@@ -154,7 +154,7 @@
       background: #eaebe5;
     }
 
-    /* Video items - fixed width for consistency */
+    /* Video items */
     .carousel-video {
       height: 55vh;
       width: auto;
@@ -163,25 +163,28 @@
       background: #1a1a1a;
     }
 
-    /* Text slide as a special card */
+    /* Text slide - SAME SIZE AS IMAGES */
     .carousel-text-item {
       height: 55vh;
-      width: 500px;
+      width: auto;
+      min-width: 400px;
+      max-width: 600px;
       flex-shrink: 0;
       scroll-snap-align: start;
       background: #eaebe5;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0 30px;
+      padding: 0 40px;
       box-sizing: border-box;
     }
     .text-card {
       max-width: 100%;
+      width: 100%;
       height: auto;
     }
     .text-card .text-title {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 400;
       letter-spacing: 0.3px;
       margin-bottom: 1.5rem;
@@ -199,6 +202,12 @@
     }
     .text-card .text-paragraph:last-of-type {
       margin-bottom: 0;
+    }
+    /* Style for line breaks in text */
+    .text-card .text-paragraph br {
+      display: block;
+      margin: 4px 0;
+      content: "";
     }
 
     /* Navigation arrows */
@@ -281,12 +290,13 @@
       .carousel-container {
         padding: 0 50px;
       }
-      .carousel-img, .carousel-video {
+      .carousel-img, .carousel-video, .carousel-text-item {
         height: 45vh;
       }
       .carousel-text-item {
-        height: 45vh;
-        width: 400px;
+        min-width: 350px;
+        max-width: 500px;
+        padding: 0 30px;
       }
       .carousel-arrow {
         width: 38px;
@@ -299,13 +309,13 @@
       .carousel-container {
         padding: 0 40px;
       }
-      .carousel-img, .carousel-video {
+      .carousel-img, .carousel-video, .carousel-text-item {
         height: 35vh;
       }
       .carousel-text-item {
-        height: 35vh;
-        width: 320px;
-        padding: 0 20px;
+        min-width: 300px;
+        max-width: 400px;
+        padding: 0 25px;
       }
       .carousel-arrow {
         width: 34px;
@@ -324,7 +334,7 @@
         padding: 16px 0 8px 0;
       }
       .text-card .text-title {
-        font-size: 16px;
+        font-size: 18px;
         margin-bottom: 1rem;
       }
     }
@@ -333,13 +343,13 @@
       .carousel-container {
         padding: 0 30px;
       }
-      .carousel-img, .carousel-video {
+      .carousel-img, .carousel-video, .carousel-text-item {
         height: 30vh;
       }
       .carousel-text-item {
-        height: 30vh;
-        width: 260px;
-        padding: 0 15px;
+        min-width: 260px;
+        max-width: 320px;
+        padding: 0 20px;
       }
       .carousel-arrow {
         width: 30px;
@@ -348,6 +358,9 @@
       }
       .carousel-wrapper {
         margin-top: 30px;
+      }
+      .text-card .text-title {
+        font-size: 16px;
       }
     }
   </style>
@@ -376,7 +389,7 @@
   </div>
 </header>
 
-<!-- VARIABLE WIDTH CAROUSEL SECTION - 50px spacing from header -->
+<!-- VARIABLE WIDTH CAROUSEL SECTION -->
 <div class="carousel-wrapper">
   <div class="carousel-container">
     <div class="carousel-frame">
@@ -385,7 +398,7 @@
 
       <div class="carousel-viewport" id="viewport">
         <div class="carousel-track" id="track">
-          <!-- Items injected dynamically - variable width images -->
+          <!-- Items injected dynamically -->
         </div>
       </div>
     </div>
@@ -399,7 +412,7 @@
 </footer>
 
 <script>
-  // ALL YOUR IMAGES + text slide - variable width carousel
+  // ALL IMAGES + text slide with your complete text
   const items = [
     { type: 'image', src: 'Picsart_25-12-19_20-32-55-278.jpg', alt: 'birdsongfortheconfined' },
     { type: 'image', src: 'lily 2.jpg', alt: 'A-portrait-of-lilies' },
@@ -428,11 +441,9 @@
     { type: 'text', 
       title: 'BIRDSONG FOR THE CONFINED', 
       paragraphs: [
-        'A year ago, I learned of the term escapism and realized how much it applied to my everyday life. The epiphany led to a five-part poem and later, a series of photographs, videos, poems, and paintings collectively titled Birdsong for the Confined, birthed from a phase of drowsy eyes and daydreaming, when my way of living became a cage, and I became the confined.',
-        'In my predicament, I discovered that escapism had become a routine and a means of regaining a sense of normalcy. I drifted in and out of the present, losing myself for hours in reveries and then drowning in guilt over it, only to relapse into the same pattern subsequently. This became a maladaptive problem I couldn\'t seem to get rid of.',
-        'Yet, over the course of a month, I had begun writing fervently and regularly in my notebook. It allowed me to anchor and express myself and provided me with a sense of creative freedom. I had a vision—I thought a lot, ran over it repeatedly, lived it, and wanted to capture it.',
-        'At a certain point, I yearned for something more concrete and visual in addition to my writings. I had a few ideas for my paintings, a vision so vivid it seared its presence onto my head day and night. For two months, I experimented with my paintings and ceramics, learned my way around the materials, and occasionally took a series of photographs and videos that would eventually complete the collection.',
-        'In this exhibition, paintings, ceramics and poetry all come together to initiate a dialogue on the confinement of self, conflict, and the transcending nature of art.'
+        'A year ago, I learned of the term "escapism" and realized how much it applied to my everyday life. The epiphany led to a five-part poem and later, a series of photographs, videos, poems, and paintings collectively titled "Birdsong for the Confined," birthed from a phase of drowsy eyes and daydreaming, when my way of living became a cage, and I became the "confined."',
+        'Acrylic and Ink on Canvas.<br>Underglaze on Rakuware.',
+        'Solo Exhibition at Takpa Gallery<br>Lazimpat, Kathmandu<br>(2026)'
       ] }
   ];
 
@@ -445,19 +456,17 @@
   let currentPage = 0;
   let itemsPerPage = 0;
   let totalPages = 0;
-  let resizeObserver = null;
 
   // Calculate how many items fit per page based on viewport width
   function calculateItemsPerPage() {
     if (!viewport) return 2;
     const viewportWidth = viewport.clientWidth;
-    // Average item width ~300px + gap 20px
     const avgItemWidth = 320;
     let count = Math.floor(viewportWidth / avgItemWidth);
     return Math.max(1, Math.min(count, 4));
   }
 
-  // Build the carousel with variable width items
+  // Build the carousel
   function buildCarousel() {
     track.innerHTML = '';
     dotsContainer.innerHTML = '';
@@ -472,7 +481,6 @@
         img.alt = item.alt || `Work ${idx+1}`;
         img.className = 'carousel-img';
         img.loading = idx < 10 ? 'eager' : 'lazy';
-        // Variable width - image keeps its natural aspect ratio
         img.style.height = '55vh';
         img.style.width = 'auto';
         itemDiv.appendChild(img);
@@ -488,7 +496,6 @@
         video.style.height = '55vh';
         video.style.width = 'auto';
         itemDiv.appendChild(video);
-        // Auto-play when in view
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -506,8 +513,9 @@
         textCard.className = 'text-card';
         let html = `<div class="text-title">${escapeText(item.title)}</div>`;
         if (item.paragraphs && Array.isArray(item.paragraphs)) {
-          item.paragraphs.forEach(para => {
-            html += `<div class="text-paragraph">${escapeText(para)}</div>`;
+          item.paragraphs.forEach((para) => {
+            // Allow HTML line breaks to render properly
+            html += `<div class="text-paragraph">${para}</div>`;
           });
         }
         textCard.innerHTML = html;
@@ -523,6 +531,10 @@
 
   function escapeText(str) {
     if (!str) return '';
+    // For text that contains HTML like <br>, we don't escape it
+    if (str.includes('<br>')) {
+      return str;
+    }
     return str.replace(/[&<>]/g, function(m) {
       if (m === '&') return '&amp;';
       if (m === '<') return '&lt;';
@@ -557,10 +569,8 @@
     
     currentPage = page;
     
-    // Calculate scroll position
     const itemsArray = Array.from(track.children);
     const startIndex = currentPage * itemsPerPage;
-    const endIndex = Math.min(startIndex + itemsPerPage, itemsArray.length);
     
     if (startIndex < itemsArray.length) {
       const targetItem = itemsArray[startIndex];
@@ -591,7 +601,6 @@
     }
   }
 
-  // Update current page based on scroll position
   function updateCurrentPageFromScroll() {
     const scrollLeft = viewport.scrollLeft;
     const itemsArray = Array.from(track.children);
@@ -613,12 +622,10 @@
     }
   }
 
-  // Handle scroll events
   function onScroll() {
     updateCurrentPageFromScroll();
   }
 
-  // Handle resize
   function onResize() {
     updatePages();
     createDots();
@@ -660,12 +667,10 @@
     window.addEventListener('mouseup', onDragEnd);
     window.addEventListener('touchend', onDragEnd);
     
-    // Prevent image drag
     const imgs = document.querySelectorAll('.carousel-img');
     imgs.forEach(img => img.addEventListener('dragstart', (e) => e.preventDefault()));
   }
 
-  // Keyboard navigation
   function onKey(e) {
     if (e.key === 'ArrowLeft') {
       prevPage();
@@ -689,7 +694,6 @@
     nextBtn.addEventListener('click', (e) => { e.preventDefault(); nextPage(); });
     window.addEventListener('keydown', onKey);
     
-    // Disable context menu on images
     const allImgs = document.querySelectorAll('.carousel-img');
     allImgs.forEach(img => img.addEventListener('contextmenu', (e) => e.preventDefault()));
   }
