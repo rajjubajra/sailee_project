@@ -121,13 +121,13 @@
       background: #eaebe5;
     }
 
-    /* ALL SLIDES — same fixed height for consistency */
+    /* ALL SLIDES — larger size for more breathing room */
     .slide-img, .slide-video, .text-slide {
       width: 100%;
       display: block;
       object-fit: cover;
-      height: 70vh;
-      min-height: 500px;
+      height: 75vh;
+      min-height: 560px;
     }
 
     .slide-img {
@@ -148,7 +148,7 @@
       overflow-y: auto;
     }
     .text-content {
-      max-width: 800px;
+      max-width: 850px;
       width: 100%;
       margin: 0 auto;
     }
@@ -182,13 +182,13 @@
       background: transparent;
       border: 1px solid #111;
       border-radius: 50%;
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       font-weight: 400;
       color: #111;
       transition: all 0.2s ease;
@@ -202,10 +202,10 @@
       border-color: #111;
     }
     .arrow-prev {
-      left: 16px;
+      left: 18px;
     }
     .arrow-next {
-      right: 16px;
+      right: 18px;
     }
 
     /* dots — 20px padding between slider and navigation */
@@ -250,21 +250,33 @@
     }
 
     /* responsive */
+    @media (max-width: 800px) {
+      .slide-img, .slide-video, .text-slide {
+        height: 65vh;
+        min-height: 480px;
+      }
+      .slider-arrow {
+        width: 38px;
+        height: 38px;
+        font-size: 1.3rem;
+      }
+      .arrow-prev {
+        left: 12px;
+      }
+      .arrow-next {
+        right: 12px;
+      }
+    }
+
     @media (max-width: 700px) {
       .slide-img, .slide-video, .text-slide {
         height: 55vh;
-        min-height: 380px;
+        min-height: 400px;
       }
       .slider-arrow {
-        width: 36px;
-        height: 36px;
-        font-size: 1.2rem;
-      }
-      .arrow-prev {
-        left: 10px;
-      }
-      .arrow-next {
-        right: 10px;
+        width: 34px;
+        height: 34px;
+        font-size: 1.1rem;
       }
       .text-slide {
         padding: 1.5rem 1.5rem;
