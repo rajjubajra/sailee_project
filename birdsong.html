@@ -163,10 +163,9 @@
       background: #1a1a1a;
     }
 
-    /* Text slide as a special card */
+    /* TEXT SLIDE - WIDER (600px fixed width) with scroll if needed */
     .carousel-text-item {
-      height: 55vh;
-      width: 500px;
+      width: 600px;
       flex-shrink: 0;
       scroll-snap-align: start;
       background: #eaebe5;
@@ -175,10 +174,30 @@
       justify-content: center;
       padding: 0 30px;
       box-sizing: border-box;
+      height: auto;
+      min-height: 55vh;
+      max-height: 80vh;
+      overflow-y: auto;
     }
+    
+    /* Custom scrollbar for text slide */
+    .carousel-text-item::-webkit-scrollbar {
+      width: 4px;
+    }
+    .carousel-text-item::-webkit-scrollbar-track {
+      background: #ddd6cc;
+      border-radius: 4px;
+    }
+    .carousel-text-item::-webkit-scrollbar-thumb {
+      background: #8a857c;
+      border-radius: 4px;
+    }
+    
     .text-card {
       max-width: 100%;
+      width: 100%;
       height: auto;
+      padding: 20px 0;
     }
     .text-card .text-title {
       font-size: 18px;
@@ -191,7 +210,7 @@
     }
     .text-card .text-paragraph {
       font-size: 12px;
-      line-height: 1.5;
+      line-height: 1.6;
       color: #2a2a2a;
       margin-bottom: 1rem;
       font-weight: 400;
@@ -285,8 +304,9 @@
         height: 45vh;
       }
       .carousel-text-item {
-        height: 45vh;
-        width: 400px;
+        width: 500px;
+        min-height: 45vh;
+        padding: 0 25px;
       }
       .carousel-arrow {
         width: 38px;
@@ -303,8 +323,8 @@
         height: 35vh;
       }
       .carousel-text-item {
-        height: 35vh;
-        width: 320px;
+        width: 400px;
+        min-height: 35vh;
         padding: 0 20px;
       }
       .carousel-arrow {
@@ -337,14 +357,18 @@
         height: 30vh;
       }
       .carousel-text-item {
-        height: 30vh;
-        width: 260px;
+        width: 320px;
+        min-height: 30vh;
         padding: 0 15px;
       }
       .carousel-arrow {
         width: 30px;
         height: 30px;
         font-size: 1rem;
+      }
+      .text-card .text-paragraph {
+        font-size: 11px;
+        line-height: 1.5;
       }
     }
   </style>
@@ -382,7 +406,7 @@
 
       <div class="carousel-viewport" id="viewport">
         <div class="carousel-track" id="track">
-          <!-- Items injected dynamically - variable width images -->
+          <!-- Items injected dynamically -->
         </div>
       </div>
     </div>
@@ -396,7 +420,7 @@
 </footer>
 
 <script>
-  // ALL YOUR IMAGES + text slide - variable width carousel
+  // ALL IMAGES + text slide - text slide is wider to fit all content
   const items = [
     { type: 'image', src: 'Picsart_25-12-19_20-32-55-278.jpg', alt: 'birdsongfortheconfined' },
     { type: 'image', src: 'lily 2.jpg', alt: 'A-portrait-of-lilies' },
@@ -442,7 +466,6 @@
   let currentPage = 0;
   let itemsPerPage = 0;
   let totalPages = 0;
-  let resizeObserver = null;
 
   // Calculate how many items fit per page based on viewport width
   function calculateItemsPerPage() {
@@ -454,7 +477,7 @@
     return Math.max(1, Math.min(count, 4));
   }
 
-  // Build the carousel with variable width items
+  // Build the carousel
   function buildCarousel() {
     track.innerHTML = '';
     dotsContainer.innerHTML = '';
@@ -469,7 +492,6 @@
         img.alt = item.alt || `Work ${idx+1}`;
         img.className = 'carousel-img';
         img.loading = idx < 10 ? 'eager' : 'lazy';
-        // Variable width - image keeps its natural aspect ratio
         img.style.height = '55vh';
         img.style.width = 'auto';
         itemDiv.appendChild(img);
@@ -554,10 +576,8 @@
     
     currentPage = page;
     
-    // Calculate scroll position
     const itemsArray = Array.from(track.children);
     const startIndex = currentPage * itemsPerPage;
-    const endIndex = Math.min(startIndex + itemsPerPage, itemsArray.length);
     
     if (startIndex < itemsArray.length) {
       const targetItem = itemsArray[startIndex];
@@ -588,7 +608,6 @@
     }
   }
 
-  // Update current page based on scroll position
   function updateCurrentPageFromScroll() {
     const scrollLeft = viewport.scrollLeft;
     const itemsArray = Array.from(track.children);
@@ -610,12 +629,10 @@
     }
   }
 
-  // Handle scroll events
   function onScroll() {
     updateCurrentPageFromScroll();
   }
 
-  // Handle resize
   function onResize() {
     updatePages();
     createDots();
@@ -657,12 +674,10 @@
     window.addEventListener('mouseup', onDragEnd);
     window.addEventListener('touchend', onDragEnd);
     
-    // Prevent image drag
     const imgs = document.querySelectorAll('.carousel-img');
     imgs.forEach(img => img.addEventListener('dragstart', (e) => e.preventDefault()));
   }
 
-  // Keyboard navigation
   function onKey(e) {
     if (e.key === 'ArrowLeft') {
       prevPage();
@@ -686,7 +701,6 @@
     nextBtn.addEventListener('click', (e) => { e.preventDefault(); nextPage(); });
     window.addEventListener('keydown', onKey);
     
-    // Disable context menu on images
     const allImgs = document.querySelectorAll('.carousel-img');
     allImgs.forEach(img => img.addEventListener('contextmenu', (e) => e.preventDefault()));
   }
