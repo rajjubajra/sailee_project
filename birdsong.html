@@ -85,94 +85,102 @@
 
     /* END OF EXACT HEADER FROM EXAMPLE 1 */
 
-    /* slider wrapper with reduced padding on both sides */
-    .slider-wrapper {
+    /* CAROUSEL WRAPPER */
+    .carousel-wrapper {
       width: 100%;
-      padding: 0;
-      margin: 0;
-      background: #eaebe5;
       margin-top: 40px;
-      display: flex;
-      justify-content: center;
+      background: #eaebe5;
     }
 
-    .slider-container {
+    .carousel-container {
       width: 100%;
-      max-width: 1400px;
-      padding: 0 20px;
+      max-width: 100%;
+      overflow: visible;
+      position: relative;
+      padding: 0 60px;
       box-sizing: border-box;
     }
 
-    .slider-frame {
+    /* Main carousel frame */
+    .carousel-frame {
       position: relative;
       width: 100%;
-      overflow: visible;
+      overflow: hidden;
       background: #eaebe5;
-      aspect-ratio: 5 / 4;
     }
 
-    .slider-viewport {
-      overflow: hidden;
+    .carousel-viewport {
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
       cursor: grab;
-      height: 100%;
-      border-radius: 0;
+      scroll-snap-type: x mandatory;
     }
-    .slider-viewport:active {
+    .carousel-viewport:active {
       cursor: grabbing;
     }
-
-    .slider-track {
-      display: flex;
-      transition: transform 0.5s cubic-bezier(0.2, 0.96, 0.4, 1.02);
-      will-change: transform;
-      height: 100%;
+    .carousel-viewport::-webkit-scrollbar {
+      display: none;
     }
 
-    .slide {
-      flex: 0 0 100%;
-      position: relative;
-      background: #eaebe5;
-      height: 100%;
+    /* Track - flex row with variable width items */
+    .carousel-track {
       display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 20px;
+      padding: 20px 0;
+    }
+
+    /* Each image item - variable width based on natural aspect ratio */
+    .carousel-item {
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      background: #eaebe5;
+      display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
     }
 
-    /* IMAGES - object-fit: contain shows full image without cropping */
-    .slide-img {
-      width: 100%;
-      height: 100%;
+    .carousel-img {
+      height: 55vh;
+      width: auto;
+      max-width: none;
       display: block;
       object-fit: contain;
       background: #eaebe5;
     }
-    
-    .slide-video {
-      width: 100%;
-      height: 100%;
+
+    /* Video items - fixed width for consistency */
+    .carousel-video {
+      height: 55vh;
+      width: auto;
       display: block;
       object-fit: contain;
       background: #1a1a1a;
     }
 
-    /* text slide — same 5:4 dimensions */
-    .text-slide {
+    /* Text slide as a special card */
+    .carousel-text-item {
+      height: 55vh;
+      width: 500px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      background: #eaebe5;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #eaebe5;
-      padding: 2rem 3rem;
+      padding: 0 30px;
       box-sizing: border-box;
-      overflow-y: auto;
-      width: 100%;
-      height: 100%;
     }
-    .text-content {
-      max-width: 850px;
-      width: 100%;
-      margin: 0 auto;
+    .text-card {
+      max-width: 100%;
+      height: auto;
     }
-    .text-content .text-title {
+    .text-card .text-title {
       font-size: 18px;
       font-weight: 400;
       letter-spacing: 0.3px;
@@ -181,8 +189,7 @@
       text-transform: uppercase;
       text-align: center;
     }
-    /* Unified paragraph style — justified alignment */
-    .text-content .text-paragraph {
+    .text-card .text-paragraph {
       font-size: 12px;
       line-height: 1.5;
       color: #2a2a2a;
@@ -190,45 +197,45 @@
       font-weight: 400;
       text-align: justify;
     }
-    .text-content .text-paragraph:last-of-type {
+    .text-card .text-paragraph:last-of-type {
       margin-bottom: 0;
     }
 
-    /* arrows - positioned outside the viewport but within frame, not blocked */
-    .slider-arrow {
+    /* Navigation arrows */
+    .carousel-arrow {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
       background: transparent;
       border: 1px solid #111;
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
+      font-size: 1.5rem;
       font-weight: 400;
       color: #111;
       transition: all 0.2s ease;
       z-index: 20;
-      background: rgba(234, 235, 229, 0.8);
-      backdrop-filter: blur(2px);
+      background: rgba(234, 235, 229, 0.85);
+      backdrop-filter: blur(3px);
     }
-    .slider-arrow:hover {
+    .carousel-arrow:hover {
       background: #111;
       color: #fff;
       border-color: #111;
     }
     .arrow-prev {
-      left: -15px;
+      left: 15px;
     }
     .arrow-next {
-      right: -15px;
+      right: 15px;
     }
 
-    /* dots — 20px padding between slider and navigation */
+    /* Dot navigation */
     .dots {
       display: flex;
       justify-content: center;
@@ -269,56 +276,75 @@
       text-transform: uppercase;
     }
 
-    /* responsive */
+    /* Responsive */
     @media (max-width: 900px) {
-      .slider-container {
-        padding: 0 15px;
+      .carousel-container {
+        padding: 0 50px;
       }
-      .arrow-prev {
-        left: -10px;
+      .carousel-img, .carousel-video {
+        height: 45vh;
       }
-      .arrow-next {
-        right: -10px;
+      .carousel-text-item {
+        height: 45vh;
+        width: 400px;
       }
-      .slider-arrow {
-        width: 34px;
-        height: 34px;
-        font-size: 1.1rem;
+      .carousel-arrow {
+        width: 38px;
+        height: 38px;
+        font-size: 1.3rem;
       }
     }
 
     @media (max-width: 700px) {
-      .slider-container {
-        padding: 0 10px;
+      .carousel-container {
+        padding: 0 40px;
       }
-      .arrow-prev {
-        left: -5px;
+      .carousel-img, .carousel-video {
+        height: 35vh;
       }
-      .arrow-next {
-        right: -5px;
+      .carousel-text-item {
+        height: 35vh;
+        width: 320px;
+        padding: 0 20px;
       }
-      .slider-arrow {
-        width: 30px;
-        height: 30px;
-        font-size: 1rem;
-      }
-      .text-slide {
-        padding: 1.5rem 1.5rem;
-      }
-      .text-content .text-title {
-        font-size: 16px;
-        margin-bottom: 1rem;
+      .carousel-arrow {
+        width: 34px;
+        height: 34px;
+        font-size: 1.1rem;
       }
       header {
         padding: 16px 20px;
         flex-wrap: wrap;
         gap: 12px;
       }
-      .slider-wrapper {
+      .carousel-wrapper {
         margin-top: 30px;
       }
       .dots {
         padding: 16px 0 8px 0;
+      }
+      .text-card .text-title {
+        font-size: 16px;
+        margin-bottom: 1rem;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .carousel-container {
+        padding: 0 30px;
+      }
+      .carousel-img, .carousel-video {
+        height: 30vh;
+      }
+      .carousel-text-item {
+        height: 30vh;
+        width: 260px;
+        padding: 0 15px;
+      }
+      .carousel-arrow {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
       }
     }
   </style>
@@ -347,16 +373,16 @@
   </div>
 </header>
 
-<!-- SLIDER SECTION with reduced padding and arrows not blocked -->
-<div class="slider-wrapper">
-  <div class="slider-container">
-    <div class="slider-frame">
-      <button class="slider-arrow arrow-prev" id="prevBtn" aria-label="Previous">&lt;</button>
-      <button class="slider-arrow arrow-next" id="nextBtn" aria-label="Next">&gt;</button>
+<!-- VARIABLE WIDTH CAROUSEL SECTION -->
+<div class="carousel-wrapper">
+  <div class="carousel-container">
+    <div class="carousel-frame">
+      <button class="carousel-arrow arrow-prev" id="prevBtn" aria-label="Previous">‹</button>
+      <button class="carousel-arrow arrow-next" id="nextBtn" aria-label="Next">›</button>
 
-      <div class="slider-viewport" id="viewport">
-        <div class="slider-track" id="track">
-          <!-- slides injected dynamically -->
+      <div class="carousel-viewport" id="viewport">
+        <div class="carousel-track" id="track">
+          <!-- Items injected dynamically - variable width images -->
         </div>
       </div>
     </div>
@@ -370,8 +396,8 @@
 </footer>
 
 <script>
-  // SLIDES: ALL YOUR LOCAL IMAGES + final text slide
-  const slides = [
+  // ALL YOUR IMAGES + text slide - variable width carousel
+  const items = [
     { type: 'image', src: 'Picsart_25-12-19_20-32-55-278.jpg', alt: 'birdsongfortheconfined' },
     { type: 'image', src: 'lily 2.jpg', alt: 'A-portrait-of-lilies' },
     { type: 'image', src: 'lily 1.jpg', alt: 'A-portrait-of-lilies' },
@@ -413,69 +439,83 @@
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
 
-  let currentIndex = 0;
-  const totalSlides = slides.length;
-  let autoInterval = null;
+  let currentPage = 0;
+  let itemsPerPage = 0;
+  let totalPages = 0;
+  let resizeObserver = null;
 
-  function pauseAllVideos() {
-    const videos = track.querySelectorAll('video');
-    videos.forEach(v => v.pause());
+  // Calculate how many items fit per page based on viewport width
+  function calculateItemsPerPage() {
+    if (!viewport) return 2;
+    const viewportWidth = viewport.clientWidth;
+    // Average item width ~300px + gap 20px
+    const avgItemWidth = 320;
+    let count = Math.floor(viewportWidth / avgItemWidth);
+    return Math.max(1, Math.min(count, 4));
   }
 
-  function buildSlider() {
+  // Build the carousel with variable width items
+  function buildCarousel() {
     track.innerHTML = '';
     dotsContainer.innerHTML = '';
 
-    slides.forEach((item, idx) => {
-      const slideDiv = document.createElement('div');
-      slideDiv.className = 'slide';
+    items.forEach((item, idx) => {
+      const itemDiv = document.createElement('div');
+      itemDiv.className = 'carousel-item';
 
       if (item.type === 'image') {
         const img = document.createElement('img');
         img.src = item.src;
         img.alt = item.alt || `Work ${idx+1}`;
-        img.className = 'slide-img';
-        img.loading = idx === 0 ? 'eager' : 'lazy';
-        slideDiv.appendChild(img);
+        img.className = 'carousel-img';
+        img.loading = idx < 10 ? 'eager' : 'lazy';
+        // Variable width - image keeps its natural aspect ratio
+        img.style.height = '55vh';
+        img.style.width = 'auto';
+        itemDiv.appendChild(img);
       } 
       else if (item.type === 'video') {
         const video = document.createElement('video');
         video.src = item.src;
-        video.className = 'slide-video';
+        video.className = 'carousel-video';
         video.loop = true;
         video.muted = true;
         video.playsInline = true;
         video.preload = 'metadata';
-        slideDiv.appendChild(video);
+        video.style.height = '55vh';
+        video.style.width = 'auto';
+        itemDiv.appendChild(video);
+        // Auto-play when in view
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              video.play().catch(e => console.log(''));
+            } else {
+              video.pause();
+            }
+          });
+        }, { threshold: 0.5 });
+        observer.observe(itemDiv);
       }
       else if (item.type === 'text') {
-        slideDiv.classList.add('text-slide');
-        const textWrapper = document.createElement('div');
-        textWrapper.className = 'text-content';
+        itemDiv.classList.add('carousel-text-item');
+        const textCard = document.createElement('div');
+        textCard.className = 'text-card';
         let html = `<div class="text-title">${escapeText(item.title)}</div>`;
         if (item.paragraphs && Array.isArray(item.paragraphs)) {
           item.paragraphs.forEach(para => {
             html += `<div class="text-paragraph">${escapeText(para)}</div>`;
           });
         }
-        textWrapper.innerHTML = html;
-        slideDiv.appendChild(textWrapper);
+        textCard.innerHTML = html;
+        itemDiv.appendChild(textCard);
       }
-      track.appendChild(slideDiv);
+      track.appendChild(itemDiv);
     });
 
-    for (let i = 0; i < totalSlides; i++) {
-      const dot = document.createElement('div');
-      dot.classList.add('dot');
-      if (i === currentIndex) dot.classList.add('active');
-      dot.setAttribute('data-index', i);
-      dot.addEventListener('click', (e) => {
-        e.stopPropagation();
-        goToSlide(parseInt(dot.getAttribute('data-index'), 10));
-        resetAutoPlay();
-      });
-      dotsContainer.appendChild(dot);
-    }
+    updatePages();
+    createDots();
+    scrollToPage(0);
   }
 
   function escapeText(str) {
@@ -488,201 +528,166 @@
     });
   }
 
-  function getViewportWidth() {
-    return viewport ? viewport.clientWidth : window.innerWidth;
+  function updatePages() {
+    itemsPerPage = calculateItemsPerPage();
+    totalPages = Math.ceil(items.length / itemsPerPage);
   }
 
-  function updatePosition(animate = true) {
-    if (!track) return;
-    const slideW = getViewportWidth();
-    const newTranslate = -currentIndex * slideW;
-    if (!animate) {
-      track.style.transition = 'none';
-    } else {
-      track.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.96, 0.4, 1.02)';
+  function createDots() {
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < totalPages; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      if (i === currentPage) dot.classList.add('active');
+      dot.setAttribute('data-page', i);
+      dot.addEventListener('click', () => {
+        scrollToPage(i);
+      });
+      dotsContainer.appendChild(dot);
     }
-    track.style.transform = `translateX(${newTranslate}px)`;
-    if (!animate) {
-      void track.offsetHeight;
-      track.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.96, 0.4, 1.02)';
+  }
+
+  function scrollToPage(page) {
+    if (page < 0) page = 0;
+    if (page >= totalPages) page = totalPages - 1;
+    if (currentPage === page) return;
+    
+    currentPage = page;
+    
+    // Calculate scroll position
+    const itemsArray = Array.from(track.children);
+    const startIndex = currentPage * itemsPerPage;
+    const endIndex = Math.min(startIndex + itemsPerPage, itemsArray.length);
+    
+    if (startIndex < itemsArray.length) {
+      const targetItem = itemsArray[startIndex];
+      const scrollLeft = targetItem.offsetLeft - 20;
+      viewport.scrollTo({ left: scrollLeft, behavior: 'smooth' });
     }
+    
     updateDots();
-    handleVideo();
-  }
-
-  function handleVideo() {
-    pauseAllVideos();
-    const slidesElements = document.querySelectorAll('.slide');
-    if (slidesElements[currentIndex]) {
-      const videoElem = slidesElements[currentIndex].querySelector('video');
-      if (videoElem && slides[currentIndex].type === 'video') {
-        videoElem.muted = true;
-        videoElem.play().catch(e => console.log(''));
-      }
-    }
   }
 
   function updateDots() {
     const dots = document.querySelectorAll('.dot');
     dots.forEach((dot, i) => {
-      if (i === currentIndex) dot.classList.add('active');
+      if (i === currentPage) dot.classList.add('active');
       else dot.classList.remove('active');
     });
   }
 
-  function goToSlide(index) {
-    if (index < 0) index = 0;
-    if (index >= totalSlides) index = totalSlides - 1;
-    if (currentIndex === index) return;
-    currentIndex = index;
-    updatePosition(true);
-  }
-
-  function nextSlide() {
-    let newIndex = currentIndex + 1;
-    if (newIndex >= totalSlides) return;
-    goToSlide(newIndex);
-    resetAutoPlay();
-  }
-
-  function prevSlide() {
-    let newIndex = currentIndex - 1;
-    if (newIndex < 0) return;
-    goToSlide(newIndex);
-    resetAutoPlay();
-  }
-
-  function startAutoPlay() {
-    if (autoInterval) clearInterval(autoInterval);
-    autoInterval = setInterval(() => {
-      if (currentIndex < totalSlides - 1) {
-        nextSlide();
-      } else {
-        stopAutoPlay();
-      }
-    }, 6000);
-  }
-
-  function stopAutoPlay() {
-    if (autoInterval) {
-      clearInterval(autoInterval);
-      autoInterval = null;
+  function nextPage() {
+    if (currentPage < totalPages - 1) {
+      scrollToPage(currentPage + 1);
     }
   }
 
-  function resetAutoPlay() {
-    stopAutoPlay();
-    startAutoPlay();
+  function prevPage() {
+    if (currentPage > 0) {
+      scrollToPage(currentPage - 1);
+    }
   }
 
+  // Update current page based on scroll position
+  function updateCurrentPageFromScroll() {
+    const scrollLeft = viewport.scrollLeft;
+    const itemsArray = Array.from(track.children);
+    
+    for (let i = 0; i < itemsArray.length; i++) {
+      const item = itemsArray[i];
+      const itemLeft = item.offsetLeft;
+      const itemRight = itemLeft + item.offsetWidth;
+      const viewportCenter = scrollLeft + viewport.clientWidth / 2;
+      
+      if (viewportCenter >= itemLeft && viewportCenter <= itemRight) {
+        const newPage = Math.floor(i / itemsPerPage);
+        if (newPage !== currentPage && newPage < totalPages) {
+          currentPage = newPage;
+          updateDots();
+        }
+        break;
+      }
+    }
+  }
+
+  // Handle scroll events
+  function onScroll() {
+    updateCurrentPageFromScroll();
+  }
+
+  // Handle resize
   function onResize() {
-    if (!track) return;
-    const slideW = getViewportWidth();
-    track.style.transition = 'none';
-    track.style.transform = `translateX(${-currentIndex * slideW}px)`;
-    void track.offsetHeight;
-    track.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.96, 0.4, 1.02)';
-    handleVideo();
+    updatePages();
+    createDots();
+    scrollToPage(currentPage);
   }
 
-  // Drag
-  let dragActive = false;
-  let dragInitialX = 0;
-  let dragInitialTranslateVal = 0;
-  let dragStartIdx = 0;
+  // Drag to scroll
+  let isDragging = false;
+  let startX = 0;
+  let scrollStart = 0;
 
   function onDragStart(e) {
-    if (e.target.closest('.slider-arrow') || e.target.closest('.dot')) return;
+    if (e.target.closest('.carousel-arrow') || e.target.closest('.dot')) return;
+    isDragging = true;
+    startX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
+    scrollStart = viewport.scrollLeft;
+    viewport.style.cursor = 'grabbing';
     e.preventDefault();
-    dragActive = true;
-    stopAutoPlay();
-    const clientX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
-    dragInitialX = clientX;
-    const slideW = getViewportWidth();
-    dragInitialTranslateVal = -currentIndex * slideW;
-    track.style.transition = 'none';
-    dragStartIdx = currentIndex;
   }
 
   function onDragMove(e) {
-    if (!dragActive) return;
-    const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
-    const delta = clientX - dragInitialX;
-    const slideW = getViewportWidth();
-    let newTranslate = dragInitialTranslateVal + delta;
-    const minTranslate = -(totalSlides - 1) * slideW;
-    const maxTranslate = 0;
-    if (newTranslate > maxTranslate) newTranslate = maxTranslate + (newTranslate - maxTranslate) * 0.2;
-    if (newTranslate < minTranslate) newTranslate = minTranslate + (newTranslate - minTranslate) * 0.2;
-    track.style.transform = `translateX(${newTranslate}px)`;
+    if (!isDragging) return;
+    const x = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
+    const walk = (x - startX) * 1.5;
+    viewport.scrollLeft = scrollStart - walk;
   }
 
-  function onDragEnd(e) {
-    if (!dragActive) {
-      if (track) track.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.96, 0.4, 1.02)';
-      return;
-    }
-    dragActive = false;
-    const slideW = getViewportWidth();
-    const endClientX = e.type === 'mouseup' ? e.clientX : (e.changedTouches ? e.changedTouches[0].clientX : dragInitialX);
-    const deltaX = endClientX - dragInitialX;
-    let targetIdx = dragStartIdx;
-    const threshold = slideW * 0.2;
-    if (Math.abs(deltaX) > threshold) {
-      if (deltaX < 0) targetIdx = dragStartIdx + 1;
-      else if (deltaX > 0) targetIdx = dragStartIdx - 1;
-    }
-    if (targetIdx < 0) targetIdx = 0;
-    if (targetIdx >= totalSlides) targetIdx = totalSlides - 1;
-    currentIndex = targetIdx;
-    updatePosition(true);
-    handleVideo();
-    startAutoPlay();
-    track.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.96, 0.4, 1.02)';
+  function onDragEnd() {
+    isDragging = false;
+    viewport.style.cursor = 'grab';
+    updateCurrentPageFromScroll();
   }
 
   function initDrag() {
-    const area = document.querySelector('.slider-viewport');
-    if (!area) return;
-    area.addEventListener('mousedown', onDragStart);
-    area.addEventListener('touchstart', onDragStart, { passive: false });
+    viewport.addEventListener('mousedown', onDragStart);
+    viewport.addEventListener('touchstart', onDragStart, { passive: false });
     window.addEventListener('mousemove', onDragMove);
     window.addEventListener('touchmove', onDragMove, { passive: false });
     window.addEventListener('mouseup', onDragEnd);
     window.addEventListener('touchend', onDragEnd);
-    const imgs = document.querySelectorAll('.slide-img');
+    
+    // Prevent image drag
+    const imgs = document.querySelectorAll('.carousel-img');
     imgs.forEach(img => img.addEventListener('dragstart', (e) => e.preventDefault()));
   }
 
+  // Keyboard navigation
   function onKey(e) {
-    if (e.key === 'ArrowLeft') { prevSlide(); e.preventDefault(); }
-    else if (e.key === 'ArrowRight') { nextSlide(); e.preventDefault(); }
-  }
-
-  function initHoverPause() {
-    const container = document.querySelector('.slider-frame');
-    if (!container) return;
-    container.addEventListener('mouseenter', () => stopAutoPlay());
-    container.addEventListener('mouseleave', () => {
-      if (currentIndex < totalSlides - 1) startAutoPlay();
-      else stopAutoPlay();
-    });
+    if (e.key === 'ArrowLeft') {
+      prevPage();
+      e.preventDefault();
+    } else if (e.key === 'ArrowRight') {
+      nextPage();
+      e.preventDefault();
+    }
   }
 
   function init() {
-    buildSlider();
+    buildCarousel();
     setTimeout(() => {
-      updatePosition(false);
-      handleVideo();
-    }, 20);
-    startAutoPlay();
+      viewport.style.cursor = 'grab';
+    }, 100);
+    
     initDrag();
     window.addEventListener('resize', onResize);
-    prevBtn.addEventListener('click', (e) => { e.preventDefault(); prevSlide(); });
-    nextBtn.addEventListener('click', (e) => { e.preventDefault(); nextSlide(); });
+    viewport.addEventListener('scroll', onScroll);
+    prevBtn.addEventListener('click', (e) => { e.preventDefault(); prevPage(); });
+    nextBtn.addEventListener('click', (e) => { e.preventDefault(); nextPage(); });
     window.addEventListener('keydown', onKey);
-    initHoverPause();
-    const allImgs = document.querySelectorAll('.slide-img');
+    
+    // Disable context menu on images
+    const allImgs = document.querySelectorAll('.carousel-img');
     allImgs.forEach(img => img.addEventListener('contextmenu', (e) => e.preventDefault()));
   }
 
