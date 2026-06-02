@@ -85,13 +85,22 @@
 
     /* END OF EXACT HEADER FROM EXAMPLE 1 */
 
-    /* slider wrapper with padding between header and slider */
+    /* slider wrapper with padding on both sides */
     .slider-wrapper {
       width: 100%;
       padding: 0;
       margin: 0;
       background: #eaebe5;
       margin-top: 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .slider-container {
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 40px;
+      box-sizing: border-box;
     }
 
     .slider-frame {
@@ -99,11 +108,13 @@
       width: 100%;
       overflow: hidden;
       background: #eaebe5;
+      aspect-ratio: 5 / 4;
     }
 
     .slider-viewport {
       overflow: hidden;
       cursor: grab;
+      height: 100%;
     }
     .slider-viewport:active {
       cursor: grabbing;
@@ -113,21 +124,22 @@
       display: flex;
       transition: transform 0.5s cubic-bezier(0.2, 0.96, 0.4, 1.02);
       will-change: transform;
+      height: 100%;
     }
 
     .slide {
       flex: 0 0 100%;
       position: relative;
       background: #eaebe5;
+      height: 100%;
     }
 
-    /* ALL SLIDES — larger size for more breathing room */
+    /* ALL SLIDES — fill the 5:4 container completely */
     .slide-img, .slide-video, .text-slide {
       width: 100%;
+      height: 100%;
       display: block;
       object-fit: cover;
-      height: 75vh;
-      min-height: 560px;
     }
 
     .slide-img {
@@ -137,7 +149,7 @@
       background: #1a1a1a;
     }
 
-    /* text slide — same height as image/video slides */
+    /* text slide — same 5:4 dimensions */
     .text-slide {
       display: flex;
       align-items: center;
@@ -182,13 +194,13 @@
       background: transparent;
       border: 1px solid #111;
       border-radius: 50%;
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       font-weight: 400;
       color: #111;
       transition: all 0.2s ease;
@@ -202,10 +214,10 @@
       border-color: #111;
     }
     .arrow-prev {
-      left: 18px;
+      left: -20px;
     }
     .arrow-next {
-      right: 18px;
+      right: -20px;
     }
 
     /* dots — 20px padding between slider and navigation */
@@ -250,33 +262,37 @@
     }
 
     /* responsive */
-    @media (max-width: 800px) {
-      .slide-img, .slide-video, .text-slide {
-        height: 65vh;
-        min-height: 480px;
-      }
-      .slider-arrow {
-        width: 38px;
-        height: 38px;
-        font-size: 1.3rem;
+    @media (max-width: 900px) {
+      .slider-container {
+        padding: 0 20px;
       }
       .arrow-prev {
-        left: 12px;
+        left: -10px;
       }
       .arrow-next {
-        right: 12px;
-      }
-    }
-
-    @media (max-width: 700px) {
-      .slide-img, .slide-video, .text-slide {
-        height: 55vh;
-        min-height: 400px;
+        right: -10px;
       }
       .slider-arrow {
         width: 34px;
         height: 34px;
         font-size: 1.1rem;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .slider-container {
+        padding: 0 15px;
+      }
+      .arrow-prev {
+        left: -5px;
+      }
+      .arrow-next {
+        right: -5px;
+      }
+      .slider-arrow {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
       }
       .text-slide {
         padding: 1.5rem 1.5rem;
@@ -323,20 +339,22 @@
   </div>
 </header>
 
-<!-- SLIDER SECTION with margin-top 40px -->
+<!-- SLIDER SECTION with padding on both sides and 5:4 aspect ratio -->
 <div class="slider-wrapper">
-  <div class="slider-frame">
-    <button class="slider-arrow arrow-prev" id="prevBtn" aria-label="Previous">&lt;</button>
-    <button class="slider-arrow arrow-next" id="nextBtn" aria-label="Next">&gt;</button>
+  <div class="slider-container">
+    <div class="slider-frame">
+      <button class="slider-arrow arrow-prev" id="prevBtn" aria-label="Previous">&lt;</button>
+      <button class="slider-arrow arrow-next" id="nextBtn" aria-label="Next">&gt;</button>
 
-    <div class="slider-viewport" id="viewport">
-      <div class="slider-track" id="track">
-        <!-- slides injected dynamically -->
+      <div class="slider-viewport" id="viewport">
+        <div class="slider-track" id="track">
+          <!-- slides injected dynamically -->
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="dots" id="dotsContainer"></div>
+    <div class="dots" id="dotsContainer"></div>
+  </div>
 </div>
 
 <footer>
