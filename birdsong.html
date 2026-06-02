@@ -2,16 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="favicon.png">
-  <title>ofsaeily</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <link rel="icon" type="image/x-icon" href="favicon.png">
+  <title>ofsaeily — Birdsong for the Confined</title>
 
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400&display=swap" rel="stylesheet">
+  <!-- Font: Source Serif Pro -->
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700;900&display=swap" rel="stylesheet">
 
   <style>
     * {
       font-family: 'Source Serif Pro', serif !important;
+      font-weight: 400;
     }
 
     body {
@@ -19,7 +20,7 @@
       font-size: 12px;
       font-weight: 400;
       background: #eaebe5;
-      color: #000;
+      color: #1a1a1a;
       position: relative;
     }
 
@@ -84,232 +85,208 @@
 
     /* END OF EXACT HEADER FROM EXAMPLE 1 */
 
-    img { 
-      width: 100%; 
-      height: auto; 
+    /* slider wrapper with padding between header and slider */
+    .slider-wrapper {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      background: #eaebe5;
+      margin-top: 40px;
     }
 
-    /* Add border to all images except those in header */
-    img:not(header img) {
-      border: 0px solid #000;
+    .slider-frame {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      background: #eaebe5;
     }
 
-    .divider-60 { height: 60px; }
-    .divider-30 { height: 30px; }
+    .slider-viewport {
+      overflow: hidden;
+      cursor: grab;
+    }
+    .slider-viewport:active {
+      cursor: grabbing;
     }
 
-        /* main container - no decoration */
-        .site {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
-        }
+    .slider-track {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.2, 0.96, 0.4, 1.02);
+      will-change: transform;
+    }
 
+    .slide {
+      flex: 0 0 100%;
+      position: relative;
+      background: #eaebe5;
+    }
 
-        /* slider wrapper - completely borderless, no shadow */
-        .slider-frame {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            background: #eaebe5;
-        }
+    /* ALL SLIDES — same fixed height for consistency */
+    .slide-img, .slide-video, .text-slide {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      height: 70vh;
+      min-height: 500px;
+    }
 
-        .slider-viewport {
-            overflow: hidden;
-            cursor: grab;
-        }
-        .slider-viewport:active {
-            cursor: grabbing;
-        }
+    .slide-img {
+      background: #eaebe5;
+    }
+    .slide-video {
+      background: #1a1a1a;
+    }
 
-        .slider-track {
-            display: flex;
-            transition: transform 0.5s cubic-bezier(0.2, 0.96, 0.4, 1.02);
-            will-change: transform;
-        }
+    /* text slide — same height as image/video slides */
+    .text-slide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #eaebe5;
+      padding: 2rem 3rem;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+    .text-content {
+      max-width: 800px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .text-content .text-title {
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+      margin-bottom: 1.5rem;
+      color: #111;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    /* Unified paragraph style — justified alignment */
+    .text-content .text-paragraph {
+      font-size: 12px;
+      line-height: 1.5;
+      color: #2a2a2a;
+      margin-bottom: 1rem;
+      font-weight: 400;
+      text-align: justify;
+    }
+    .text-content .text-paragraph:last-of-type {
+      margin-bottom: 0;
+    }
 
-        /* each slide — clean, content fills width */
-        .slide {
-            flex: 0 0 100%;
-            position: relative;
-            background: #eaebe5;
-        }
+    /* arrows */
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: 1px solid #111;
+      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: #111;
+      transition: all 0.2s ease;
+      z-index: 20;
+      background: rgba(234, 235, 229, 0.7);
+      backdrop-filter: blur(2px);
+    }
+    .slider-arrow:hover {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+    .arrow-prev {
+      left: 16px;
+    }
+    .arrow-next {
+      right: 16px;
+    }
 
-        /* image and video styling — no text overlay */
-        .slide-img {
-            width: 100%;
-            display: block;
-            object-fit: cover;
-            max-height: 70vh;
-            min-height: 440px;
-            background: #eaebe5;
-        }
-        .slide-video {
-            width: 100%;
-            display: block;
-            object-fit: cover;
-            max-height: 70vh;
-            min-height: 440px;
-            background: #eaebe5;
-        }
+    /* dots — 20px padding between slider and navigation */
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 0;
+      padding: 20px 0 8px 0;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: transparent;
+      border: 1px solid #aaa;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .dot.active {
+      background: #333;
+      border: 1px solid #333;
+      width: 18px;
+      border-radius: 10px;
+    }
+    .dot:hover {
+      border-color: #111;
+    }
 
-        /* text slide — pure minimal text, no decoration */
-        .text-slide {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 440px;
-            background: #fafaf9;
-            padding: 3rem 2rem;
-        }
-        .text-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .text-content .text-title {
-            font-size: 1.4rem;
-            font-weight: 400;
-            letter-spacing: -0.2px;
-            margin-bottom: 1.2rem;
-            color: #111;
-        }
-        .text-content .text-desc {
-            font-size: 0.9rem;
-            line-height: 1.5;
-            color: #333;
-            margin-bottom: 1rem;
-        }
-        .text-content .text-quote {
-            font-size: 0.85rem;
-            color: #555;
-            border-left: 1px solid #ccc;
-            padding-left: 1rem;
-            margin: 1rem 0;
-            font-style: normal;
-        }
-        .text-content .text-material {
-            font-size: 0.75rem;
-            color: #777;
-            margin-top: 1rem;
-        }
+    /* FOOTER */
+    footer {
+      padding: 20px;
+      text-align: center;
+      font-size: 12px;
+      color: #888;
+      background: #eaebe5;
+      border-top: none;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      margin-top: 0;
+      text-transform: uppercase;
+    }
 
-        /* arrows: minimalist with circle border, black, subtle */
-        .slider-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: transparent;
-            border: 1px solid #111;
-            border-radius: 50%;
-            width: 42px;
-            height: 42px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            font-weight: 400;
-            color: #111;
-            transition: all 0.2s ease;
-            z-index: 20;
-            background: rgba(250, 250, 249, 0.7);
-            backdrop-filter: blur(2px);
-        }
-        .slider-arrow:hover {
-            background: #111;
-            color: #fff;
-            border-color: #111;
-        }
-        .arrow-prev {
-            left: 16px;
-        }
-        .arrow-next {
-            right: 16px;
-        }
-
-        /* dots: outline only, minimal */
-        .dots {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 1.8rem;
-            margin-bottom: 0.5rem;
-        }
-        .dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: transparent;
-            border: 1px solid #aaa;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .dot.active {
-            background: #333;
-            border: 1px solid #333;
-            width: 18px;
-            border-radius: 10px;
-        }
-        .dot:hover {
-            border-color: #111;
-        }
-
-              
-        }
-
-        @media (max-width: 700px) {
-            .site {
-                padding: 1rem;
-            }
-            .artist-name h1 {
-                font-size: 1.6rem;
-            }
-            .slide-img, .slide-video, .text-slide {
-                min-height: 340px;
-                max-height: 55vh;
-            }
-            .slider-arrow {
-                width: 36px;
-                height: 36px;
-                font-size: 1.2rem;
-            }
-            .arrow-prev {
-                left: 10px;
-            }
-            .arrow-next {
-                right: 10px;
-            }
-            .text-content {
-                padding: 0 0.5rem;
-            }
-            .text-content .text-title {
-                font-size: 1.2rem;
-            }
-        }    
-
-      footer {
-        padding: 20px;
+    /* responsive */
+    @media (max-width: 700px) {
+      .slide-img, .slide-video, .text-slide {
+        height: 55vh;
+        min-height: 380px;
       }
-      
-      /* Main exhibition image container */
-      .main-exhibition-image {
-        padding: 0 20px;
+      .slider-arrow {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
       }
-      
-      .image-text {
-        margin-top: 8px;
+      .arrow-prev {
+        left: 10px;
       }
-      
-      /* FIXED: Footer divider line stretches 100% on mobile */
-      .footer-divider {
-        width: 100%;
-        margin-left: 0;
-        margin-right: 0;
+      .arrow-next {
+        right: 10px;
+      }
+      .text-slide {
+        padding: 1.5rem 1.5rem;
+      }
+      .text-content .text-title {
+        font-size: 16px;
+        margin-bottom: 1rem;
+      }
+      header {
+        padding: 16px 20px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .slider-wrapper {
+        margin-top: 30px;
+      }
+      .dots {
+        padding: 16px 0 8px 0;
       }
     }
   </style>
 </head>
-
 <body>
 
 <!-- EXACT HEADER FROM EXAMPLE 1 -->
@@ -326,388 +303,335 @@
     <a href="archive.html">II. archive</a>
     <a href="about.html">III. about</a>
     <a href="contact.html">VI. contact</a>
-     <a href="https://linktr.ee/ofsaeily" target="_blank">V. my links</a>
+    <a href="https://linktr.ee/ofsaeily" target="_blank">V. my links</a>
   </div>
 
   <div class="col">
-    <img src="ofs..png" alt="Logo">
+    <img src="ofs..png" alt="Logo" style="width: 28px; height: 28px; object-fit: contain;">
   </div>
-
 </header>
 
+<!-- SLIDER SECTION with margin-top 40px -->
+<div class="slider-wrapper">
+  <div class="slider-frame">
+    <button class="slider-arrow arrow-prev" id="prevBtn" aria-label="Previous">&lt;</button>
+    <button class="slider-arrow arrow-next" id="nextBtn" aria-label="Next">&gt;</button>
 
-
-
-  
-
-    <div class="slider-frame">
-        <button class="slider-arrow arrow-prev" id="prevBtn" aria-label="Previous">&lt;</button>
-        <button class="slider-arrow arrow-next" id="nextBtn" aria-label="Next">&gt;</button>
-
-        <div class="slider-viewport" id="viewport">
-            <div class="slider-track" id="track">
-                <!-- slides injected: media (image/video) with NO text overlay, plus one text slide at the end -->
-            </div>
-        </div>
+    <div class="slider-viewport" id="viewport">
+      <div class="slider-track" id="track">
+        <!-- slides injected dynamically -->
+      </div>
     </div>
+  </div>
 
-    <div class="dots" id="dotsContainer"></div>
-    <div class="minimal-footer">Tatiana Ginsberg — kozo, envelope papers, natural dyes</div>
+  <div class="dots" id="dotsContainer"></div>
 </div>
 
+<footer>
+  © 2025 by ofsaeily
+</footer>
+
 <script>
-    // --------------------------------------------------------------
-    // SLIDES: photos, videos (NO TEXT OVERLAY on media)
-    // FINAL slide is pure text (Shimacho statement)
-    // Navigation: cannot go past first slide (index 0) and cannot go past last slide (text).
-    // No looping. Seamless transition.
-    // --------------------------------------------------------------
-    const slides = [
-        { type: 'image', src: 'https://images.unsplash.com/photo-1612198288036-0a35644b7b57?w=1600&q=80&auto=format', alt: 'Kozo paper with envelope patterns' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1584213418806-8acfc092c500?w=1600&q=80&auto=format', alt: 'Envelope pattern study' },
-        { type: 'video', src: 'https://cdn.pixabay.com/video/2023/02/14/150765-797289560_large.mp4', alt: 'Paper making process' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1612469911895-7201dd114d0e?w=1600&q=80&auto=format', alt: 'Stitched repairs' },
-        { type: 'video', src: 'https://cdn.pixabay.com/video/2022/12/01/142529-778852078_large.mp4', alt: 'Hand stitching paper' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1579783902614-a3fb3927f2e2?w=1600&q=80&auto=format', alt: 'Shimacho notebook' },
-        // FINAL TEXT SLIDE — pure text, no media
-        { type: 'text', 
-          title: 'Shimacho', 
-          description: 'Inspired by Japanese weaving pattern sample books. These pieces use found security envelope papers, together with my own patterned papers. Some of these materials I embed between tissue-thin layers of kozo paper as I form sheets, some I sew on top when the paper is dry.',
-          quote: 'Like the beauty of boro textile repairs (often used on linings), security envelope patterns are unpretentious, utilitarian, and often unexpectedly beautiful.',
-          material: 'Handmade kozo and gampi papers, with natural dyes, pigment, ink, and found security envelope papers, 2022 to present.' }
-    ];
+  // SLIDES: photos + videos + final text slide (Birdsong for the Confined)
+  // All text paragraphs have the same format, justified alignment
+  const slides = [
+    { type: 'image', src: 'https://images.unsplash.com/photo-1612198288036-0a35644b7b57?w=1600&q=80&auto=format', alt: 'Kozo paper with envelope patterns' },
+    { type: 'image', src: 'https://images.unsplash.com/photo-1584213418806-8acfc092c500?w=1600&q=80&auto=format', alt: 'Envelope pattern study' },
+    { type: 'video', src: 'https://cdn.pixabay.com/video/2023/02/14/150765-797289560_large.mp4', alt: 'Paper making process' },
+    { type: 'image', src: 'https://images.unsplash.com/photo-1612469911895-7201dd114d0e?w=1600&q=80&auto=format', alt: 'Stitched repairs' },
+    { type: 'video', src: 'https://cdn.pixabay.com/video/2022/12/01/142529-778852078_large.mp4', alt: 'Hand stitching paper' },
+    { type: 'image', src: 'https://images.unsplash.com/photo-1579783902614-a3fb3927f2e2?w=1600&q=80&auto=format', alt: 'Shimacho notebook' },
+    { type: 'text', 
+      title: 'BIRDSONG FOR THE CONFINED', 
+      paragraphs: [
+        'A year ago, I learned of the term escapism and realized how much it applied to my everyday life. The epiphany led to a five-part poem and later, a series of photographs, videos, poems, and paintings collectively titled Birdsong for the Confined, birthed from a phase of drowsy eyes and daydreaming, when my way of living became a cage, and I became the confined.',
+        'In my predicament, I discovered that escapism had become a routine and a means of regaining a sense of normalcy. I drifted in and out of the present, losing myself for hours in reveries and then drowning in guilt over it, only to relapse into the same pattern subsequently. This became a maladaptive problem I couldn\'t seem to get rid of.',
+        'Yet, over the course of a month, I had begun writing fervently and regularly in my notebook. It allowed me to anchor and express myself and provided me with a sense of creative freedom. I had a vision—I thought a lot, ran over it repeatedly, lived it, and wanted to capture it.',
+        'At a certain point, I yearned for something more concrete and visual in addition to my writings. I had a few ideas for my paintings, a vision so vivid it seared its presence onto my head day and night. For two months, I experimented with my paintings and ceramics, learned my way around the materials, and occasionally took a series of photographs and videos that would eventually complete the collection.',
+        'In this exhibition, paintings, ceramics and poetry all come together to initiate a dialogue on the confinement of self, conflict, and the transcending nature of art.'
+      ] }
+  ];
 
-    // DOM elements
-    const track = document.getElementById('track');
-    const dotsContainer = document.getElementById('dotsContainer');
-    const viewport = document.getElementById('viewport');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
+  const track = document.getElementById('track');
+  const dotsContainer = document.getElementById('dotsContainer');
+  const viewport = document.getElementById('viewport');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
 
-    let currentIndex = 0;
-    const totalSlides = slides.length;
-    let autoInterval = null;
-    let isDragging = false;
-    let startX = 0;
-    let startTranslate = 0;
-    let startDragIndex = 0;
+  let currentIndex = 0;
+  const totalSlides = slides.length;
+  let autoInterval = null;
 
-    // helper: pause all videos
-    function pauseAllVideos() {
-        const videos = track.querySelectorAll('video');
-        videos.forEach(v => v.pause());
-    }
+  function pauseAllVideos() {
+    const videos = track.querySelectorAll('video');
+    videos.forEach(v => v.pause());
+  }
 
-    // Build slider - NO TEXT on media slides, just pure image/video
-    function buildSlider() {
-        track.innerHTML = '';
-        dotsContainer.innerHTML = '';
+  function buildSlider() {
+    track.innerHTML = '';
+    dotsContainer.innerHTML = '';
 
-        slides.forEach((item, idx) => {
-            const slideDiv = document.createElement('div');
-            slideDiv.className = 'slide';
+    slides.forEach((item, idx) => {
+      const slideDiv = document.createElement('div');
+      slideDiv.className = 'slide';
 
-            if (item.type === 'image') {
-                const img = document.createElement('img');
-                img.src = item.src;
-                img.alt = item.alt || `Work ${idx+1}`;
-                img.className = 'slide-img';
-                img.loading = idx === 0 ? 'eager' : 'lazy';
-                slideDiv.appendChild(img);
-            } 
-            else if (item.type === 'video') {
-                const video = document.createElement('video');
-                video.src = item.src;
-                video.className = 'slide-video';
-                video.loop = true;
-                video.muted = true;
-                video.playsInline = true;
-                video.preload = 'metadata';
-                slideDiv.appendChild(video);
-            }
-            else if (item.type === 'text') {
-                slideDiv.classList.add('text-slide');
-                const textWrapper = document.createElement('div');
-                textWrapper.className = 'text-content';
-                textWrapper.innerHTML = `
-                    <div class="text-title">${escapeText(item.title)}</div>
-                    <div class="text-desc">${escapeText(item.description)}</div>
-                    <div class="text-quote">${escapeText(item.quote)}</div>
-                    <div class="text-material">${escapeText(item.material)}</div>
-                `;
-                slideDiv.appendChild(textWrapper);
-            }
-            track.appendChild(slideDiv);
-        });
-
-        // create dots (outline only)
-        for (let i = 0; i < totalSlides; i++) {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            if (i === currentIndex) dot.classList.add('active');
-            dot.setAttribute('data-index', i);
-            dot.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const targetIdx = parseInt(dot.getAttribute('data-index'), 10);
-                goToSlide(targetIdx);
-                resetAutoPlay();
-            });
-            dotsContainer.appendChild(dot);
+      if (item.type === 'image') {
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = item.alt || `Work ${idx+1}`;
+        img.className = 'slide-img';
+        img.loading = idx === 0 ? 'eager' : 'lazy';
+        slideDiv.appendChild(img);
+      } 
+      else if (item.type === 'video') {
+        const video = document.createElement('video');
+        video.src = item.src;
+        video.className = 'slide-video';
+        video.loop = true;
+        video.muted = true;
+        video.playsInline = true;
+        video.preload = 'metadata';
+        slideDiv.appendChild(video);
+      }
+      else if (item.type === 'text') {
+        slideDiv.classList.add('text-slide');
+        const textWrapper = document.createElement('div');
+        textWrapper.className = 'text-content';
+        let html = `<div class="text-title">${escapeText(item.title)}</div>`;
+        if (item.paragraphs && Array.isArray(item.paragraphs)) {
+          item.paragraphs.forEach(para => {
+            html += `<div class="text-paragraph">${escapeText(para)}</div>`;
+          });
         }
-    }
+        textWrapper.innerHTML = html;
+        slideDiv.appendChild(textWrapper);
+      }
+      track.appendChild(slideDiv);
+    });
 
-    function escapeText(str) {
-        if (!str) return '';
-        return str.replace(/[&<>]/g, function(m) {
-            if (m === '&') return '&amp;';
-            if (m === '<') return '&lt;';
-            if (m === '>') return '&gt;';
-            return m;
-        });
-    }
-
-    function getViewportWidth() {
-        return viewport ? viewport.clientWidth : window.innerWidth;
-    }
-
-    // update track position based on currentIndex — seamless transition
-    function updatePosition(animate = true) {
-        if (!track) return;
-        const slideW = getViewportWidth();
-        const newTranslate = -currentIndex * slideW;
-        if (!animate) {
-            track.style.transition = 'none';
-        } else {
-            track.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.96, 0.4, 1.02)';
-        }
-        track.style.transform = `translateX(${newTranslate}px)`;
-        if (!animate) {
-            void track.offsetHeight;
-            track.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.96, 0.4, 1.02)';
-        }
-        updateDots();
-        handleVideo();
-    }
-
-    function handleVideo() {
-        pauseAllVideos();
-        const slidesElements = document.querySelectorAll('.slide');
-        if (slidesElements[currentIndex]) {
-            const videoElem = slidesElements[currentIndex].querySelector('video');
-            if (videoElem && slides[currentIndex].type === 'video') {
-                videoElem.muted = true;
-                videoElem.play().catch(e => console.log(''));
-            }
-        }
-    }
-
-    function updateDots() {
-        const dots = document.querySelectorAll('.dot');
-        dots.forEach((dot, i) => {
-            if (i === currentIndex) dot.classList.add('active');
-            else dot.classList.remove('active');
-        });
-    }
-
-    // NAVIGATION WITH BOUNDARIES: no wrap-around.
-    // Cannot go below 0, cannot go above totalSlides-1.
-    function goToSlide(index) {
-        if (index < 0) index = 0;
-        if (index >= totalSlides) index = totalSlides - 1;
-        if (currentIndex === index) return;
-        currentIndex = index;
-        updatePosition(true);
-    }
-
-    function nextSlide() {
-        let newIndex = currentIndex + 1;
-        if (newIndex >= totalSlides) {
-            // stuck at last slide — cannot go past text slide
-            return;
-        }
-        goToSlide(newIndex);
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      if (i === currentIndex) dot.classList.add('active');
+      dot.setAttribute('data-index', i);
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        goToSlide(parseInt(dot.getAttribute('data-index'), 10));
         resetAutoPlay();
+      });
+      dotsContainer.appendChild(dot);
     }
+  }
 
-    function prevSlide() {
-        let newIndex = currentIndex - 1;
-        if (newIndex < 0) {
-            // stuck at first slide — cannot go before first
-            return;
-        }
-        goToSlide(newIndex);
-        resetAutoPlay();
+  function escapeText(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
+
+  function getViewportWidth() {
+    return viewport ? viewport.clientWidth : window.innerWidth;
+  }
+
+  function updatePosition(animate = true) {
+    if (!track) return;
+    const slideW = getViewportWidth();
+    const newTranslate = -currentIndex * slideW;
+    if (!animate) {
+      track.style.transition = 'none';
+    } else {
+      track.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.96, 0.4, 1.02)';
     }
-
-    // Autoplay: stops at last slide
-    function startAutoPlay() {
-        if (autoInterval) clearInterval(autoInterval);
-        autoInterval = setInterval(() => {
-            if (currentIndex < totalSlides - 1) {
-                nextSlide();
-            } else {
-                stopAutoPlay();
-            }
-        }, 5500);
+    track.style.transform = `translateX(${newTranslate}px)`;
+    if (!animate) {
+      void track.offsetHeight;
+      track.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.96, 0.4, 1.02)';
     }
+    updateDots();
+    handleVideo();
+  }
 
-    function stopAutoPlay() {
-        if (autoInterval) {
-            clearInterval(autoInterval);
-            autoInterval = null;
-        }
+  function handleVideo() {
+    pauseAllVideos();
+    const slidesElements = document.querySelectorAll('.slide');
+    if (slidesElements[currentIndex]) {
+      const videoElem = slidesElements[currentIndex].querySelector('video');
+      if (videoElem && slides[currentIndex].type === 'video') {
+        videoElem.muted = true;
+        videoElem.play().catch(e => console.log(''));
+      }
     }
+  }
 
-    function resetAutoPlay() {
+  function updateDots() {
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach((dot, i) => {
+      if (i === currentIndex) dot.classList.add('active');
+      else dot.classList.remove('active');
+    });
+  }
+
+  function goToSlide(index) {
+    if (index < 0) index = 0;
+    if (index >= totalSlides) index = totalSlides - 1;
+    if (currentIndex === index) return;
+    currentIndex = index;
+    updatePosition(true);
+  }
+
+  function nextSlide() {
+    let newIndex = currentIndex + 1;
+    if (newIndex >= totalSlides) return;
+    goToSlide(newIndex);
+    resetAutoPlay();
+  }
+
+  function prevSlide() {
+    let newIndex = currentIndex - 1;
+    if (newIndex < 0) return;
+    goToSlide(newIndex);
+    resetAutoPlay();
+  }
+
+  function startAutoPlay() {
+    if (autoInterval) clearInterval(autoInterval);
+    autoInterval = setInterval(() => {
+      if (currentIndex < totalSlides - 1) {
+        nextSlide();
+      } else {
         stopAutoPlay();
-        startAutoPlay();
+      }
+    }, 6000);
+  }
+
+  function stopAutoPlay() {
+    if (autoInterval) {
+      clearInterval(autoInterval);
+      autoInterval = null;
     }
+  }
 
-    // resize handler
-    function onResize() {
-        if (!track) return;
-        const slideW = getViewportWidth();
-        track.style.transition = 'none';
-        track.style.transform = `translateX(${-currentIndex * slideW}px)`;
-        void track.offsetHeight;
-        track.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.96, 0.4, 1.02)';
-        handleVideo();
+  function resetAutoPlay() {
+    stopAutoPlay();
+    startAutoPlay();
+  }
+
+  function onResize() {
+    if (!track) return;
+    const slideW = getViewportWidth();
+    track.style.transition = 'none';
+    track.style.transform = `translateX(${-currentIndex * slideW}px)`;
+    void track.offsetHeight;
+    track.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.96, 0.4, 1.02)';
+    handleVideo();
+  }
+
+  // Drag
+  let dragActive = false;
+  let dragInitialX = 0;
+  let dragInitialTranslateVal = 0;
+  let dragStartIdx = 0;
+
+  function onDragStart(e) {
+    if (e.target.closest('.slider-arrow') || e.target.closest('.dot')) return;
+    e.preventDefault();
+    dragActive = true;
+    stopAutoPlay();
+    const clientX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
+    dragInitialX = clientX;
+    const slideW = getViewportWidth();
+    dragInitialTranslateVal = -currentIndex * slideW;
+    track.style.transition = 'none';
+    dragStartIdx = currentIndex;
+  }
+
+  function onDragMove(e) {
+    if (!dragActive) return;
+    const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
+    const delta = clientX - dragInitialX;
+    const slideW = getViewportWidth();
+    let newTranslate = dragInitialTranslateVal + delta;
+    const minTranslate = -(totalSlides - 1) * slideW;
+    const maxTranslate = 0;
+    if (newTranslate > maxTranslate) newTranslate = maxTranslate + (newTranslate - maxTranslate) * 0.2;
+    if (newTranslate < minTranslate) newTranslate = minTranslate + (newTranslate - minTranslate) * 0.2;
+    track.style.transform = `translateX(${newTranslate}px)`;
+  }
+
+  function onDragEnd(e) {
+    if (!dragActive) {
+      if (track) track.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.96, 0.4, 1.02)';
+      return;
     }
-
-    // ---------- DRAG WITH BOUNDARIES (no wrap, seamless) ----------
-    let dragActive = false;
-    let dragInitialX = 0;
-    let dragInitialTranslateVal = 0;
-    let dragStartIdx = 0;
-
-    function onDragStart(e) {
-        if (e.target.closest('.slider-arrow') || e.target.closest('.dot')) return;
-        e.preventDefault();
-        dragActive = true;
-        stopAutoPlay();
-        const clientX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
-        dragInitialX = clientX;
-        const slideW = getViewportWidth();
-        dragInitialTranslateVal = -currentIndex * slideW;
-        track.style.transition = 'none';
-        dragStartIdx = currentIndex;
+    dragActive = false;
+    const slideW = getViewportWidth();
+    const endClientX = e.type === 'mouseup' ? e.clientX : (e.changedTouches ? e.changedTouches[0].clientX : dragInitialX);
+    const deltaX = endClientX - dragInitialX;
+    let targetIdx = dragStartIdx;
+    const threshold = slideW * 0.2;
+    if (Math.abs(deltaX) > threshold) {
+      if (deltaX < 0) targetIdx = dragStartIdx + 1;
+      else if (deltaX > 0) targetIdx = dragStartIdx - 1;
     }
+    if (targetIdx < 0) targetIdx = 0;
+    if (targetIdx >= totalSlides) targetIdx = totalSlides - 1;
+    currentIndex = targetIdx;
+    updatePosition(true);
+    handleVideo();
+    startAutoPlay();
+    track.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.96, 0.4, 1.02)';
+  }
 
-    function onDragMove(e) {
-        if (!dragActive) return;
-        const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
-        const delta = clientX - dragInitialX;
-        const slideW = getViewportWidth();
-        let newTranslate = dragInitialTranslateVal + delta;
-        // boundaries: restrict translation so that we cannot show beyond slide 0 or last slide
-        const minTranslate = -(totalSlides - 1) * slideW;
-        const maxTranslate = 0;
-        if (newTranslate > maxTranslate) {
-            newTranslate = maxTranslate + (newTranslate - maxTranslate) * 0.2;
-        }
-        if (newTranslate < minTranslate) {
-            newTranslate = minTranslate + (newTranslate - minTranslate) * 0.2;
-        }
-        track.style.transform = `translateX(${newTranslate}px)`;
-    }
+  function initDrag() {
+    const area = document.querySelector('.slider-viewport');
+    if (!area) return;
+    area.addEventListener('mousedown', onDragStart);
+    area.addEventListener('touchstart', onDragStart, { passive: false });
+    window.addEventListener('mousemove', onDragMove);
+    window.addEventListener('touchmove', onDragMove, { passive: false });
+    window.addEventListener('mouseup', onDragEnd);
+    window.addEventListener('touchend', onDragEnd);
+    const imgs = document.querySelectorAll('.slide-img');
+    imgs.forEach(img => img.addEventListener('dragstart', (e) => e.preventDefault()));
+  }
 
-    function onDragEnd(e) {
-        if (!dragActive) {
-            if (track) track.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.96, 0.4, 1.02)';
-            return;
-        }
-        dragActive = false;
-        const slideW = getViewportWidth();
-        const endClientX = e.type === 'mouseup' ? e.clientX : (e.changedTouches ? e.changedTouches[0].clientX : dragInitialX);
-        const deltaX = endClientX - dragInitialX;
-        let targetIdx = dragStartIdx;
-        const threshold = slideW * 0.2;
+  function onKey(e) {
+    if (e.key === 'ArrowLeft') { prevSlide(); e.preventDefault(); }
+    else if (e.key === 'ArrowRight') { nextSlide(); e.preventDefault(); }
+  }
 
-        if (Math.abs(deltaX) > threshold) {
-            if (deltaX < 0) targetIdx = dragStartIdx + 1;
-            else if (deltaX > 0) targetIdx = dragStartIdx - 1;
-        } else {
-            targetIdx = dragStartIdx;
-        }
-        // clamp to boundaries
-        if (targetIdx < 0) targetIdx = 0;
-        if (targetIdx >= totalSlides) targetIdx = totalSlides - 1;
-        
-        currentIndex = targetIdx;
-        updatePosition(true);
-        handleVideo();
-        startAutoPlay();
-        track.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.96, 0.4, 1.02)';
-    }
+  function initHoverPause() {
+    const container = document.querySelector('.slider-frame');
+    if (!container) return;
+    container.addEventListener('mouseenter', () => stopAutoPlay());
+    container.addEventListener('mouseleave', () => {
+      if (currentIndex < totalSlides - 1) startAutoPlay();
+      else stopAutoPlay();
+    });
+  }
 
-    function initDrag() {
-        const area = document.querySelector('.slider-viewport');
-        if (!area) return;
-        area.addEventListener('mousedown', onDragStart);
-        area.addEventListener('touchstart', onDragStart, { passive: false });
-        window.addEventListener('mousemove', onDragMove);
-        window.addEventListener('touchmove', onDragMove, { passive: false });
-        window.addEventListener('mouseup', onDragEnd);
-        window.addEventListener('touchend', onDragEnd);
-        // prevent image drag
-        const imgs = document.querySelectorAll('.slide-img');
-        imgs.forEach(img => img.addEventListener('dragstart', (e) => e.preventDefault()));
-    }
+  function init() {
+    buildSlider();
+    setTimeout(() => {
+      updatePosition(false);
+      handleVideo();
+    }, 20);
+    startAutoPlay();
+    initDrag();
+    window.addEventListener('resize', onResize);
+    prevBtn.addEventListener('click', (e) => { e.preventDefault(); prevSlide(); });
+    nextBtn.addEventListener('click', (e) => { e.preventDefault(); nextSlide(); });
+    window.addEventListener('keydown', onKey);
+    initHoverPause();
+    const allImgs = document.querySelectorAll('.slide-img');
+    allImgs.forEach(img => img.addEventListener('contextmenu', (e) => e.preventDefault()));
+  }
 
-    // keyboard navigation with boundaries
-    function onKey(e) {
-        if (e.key === 'ArrowLeft') {
-            prevSlide();
-            e.preventDefault();
-        } else if (e.key === 'ArrowRight') {
-            nextSlide();
-            e.preventDefault();
-        }
-    }
-
-    // Hover pause
-    function initHoverPause() {
-        const container = document.querySelector('.slider-frame');
-        if (!container) return;
-        container.addEventListener('mouseenter', () => stopAutoPlay());
-        container.addEventListener('mouseleave', () => {
-            if (currentIndex < totalSlides - 1) startAutoPlay();
-            else stopAutoPlay();
-        });
-        container.addEventListener('touchstart', () => stopAutoPlay(), { passive: true });
-        container.addEventListener('touchend', () => {
-            if (currentIndex < totalSlides - 1) startAutoPlay();
-        });
-    }
-
-    // initial setup
-    function init() {
-        buildSlider();
-        setTimeout(() => {
-            updatePosition(false);
-            handleVideo();
-        }, 20);
-        startAutoPlay();
-        initDrag();
-        window.addEventListener('resize', onResize);
-        prevBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            prevSlide();
-        });
-        nextBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            nextSlide();
-        });
-        window.addEventListener('keydown', onKey);
-        initHoverPause();
-        // disable context menu on images for cleanliness
-        const allImgs = document.querySelectorAll('.slide-img');
-        allImgs.forEach(img => img.addEventListener('contextmenu', (e) => e.preventDefault()));
-    }
-
-    init();
+  init();
 </script>
 </body>
 </html>
-```
-    
