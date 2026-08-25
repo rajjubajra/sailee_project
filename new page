@@ -232,7 +232,7 @@
             color: #000000;
         }
 
-        /* Slide 1: Slider Section */
+        /* Slider Section */
         .slider-section {
             padding: 2rem 0 1rem 0;
             overflow: visible;
@@ -416,67 +416,6 @@
             opacity: 0.5;
         }
 
-        /* Slide 2: Zen Landscape - taller */
-        .zen-slide {
-            width: calc(100% + 6rem);
-            margin-left: -3rem;
-            margin-right: -3rem;
-            aspect-ratio: 16/10;
-            background: #d4cfc8;
-            overflow: hidden;
-            position: relative;
-            display: block;
-        }
-
-        .zen-slide svg {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
-
-        .zen-text {
-            position: absolute;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            font-size: 8pt;
-            font-weight: 300;
-            letter-spacing: 0.05em;
-            color: #2a2520;
-            line-height: 1.8;
-            max-width: 500px;
-            text-align: center;
-        }
-
-        .zen-text-about {
-            bottom: 22%;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .zen-read-more {
-            position: absolute;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            font-size: 8pt;
-            font-weight: 400;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #2a2520;
-            text-decoration: none;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
-            padding-bottom: 0.15rem;
-            border-bottom: 1px solid rgba(42, 37, 32, 0.3);
-        }
-
-        .zen-read-more:hover {
-            opacity: 0.5;
-        }
-
-        .zen-read-more-about {
-            bottom: 15%;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
         /* Copyright - centered */
         .copyright {
             padding: 2rem 0.5rem 1.5rem 0.5rem;
@@ -510,21 +449,6 @@
             }
             .slider-card-title a {
                 font-size: 8.5pt;
-            }
-            .zen-slide {
-                width: calc(100% + 2rem);
-                margin-left: -1rem;
-                margin-right: -1rem;
-                aspect-ratio: 16/10;
-            }
-            .zen-text-about {
-                max-width: 350px;
-                font-size: 7.5pt;
-                bottom: 20%;
-            }
-            .zen-read-more-about {
-                bottom: 13%;
-                font-size: 7.5pt;
             }
         }
 
@@ -568,23 +492,6 @@
             .slider-dots {
                 gap: 0.5rem;
             }
-
-            .zen-slide {
-                width: calc(100% + 2rem);
-                margin-left: -1rem;
-                margin-right: -1rem;
-                aspect-ratio: 4/3;
-            }
-            .zen-text-about {
-                max-width: 250px;
-                font-size: 7pt;
-                bottom: 18%;
-                line-height: 1.6;
-            }
-            .zen-read-more-about {
-                bottom: 11%;
-                font-size: 7pt;
-            }
         }
     </style>
 </head>
@@ -602,10 +509,8 @@
             <div class="col col-3">
                 <ul class="nav">
                     <li data-page="collections"><span class="number">I.</span> COLLECTIONS</li>
-                    <li data-page="archive"><span class="number">II.</span> ARCHIVE</li>
-                    <li data-page="about"><span class="number">III.</span> ABOUT</li>
-                    <li data-page="contact"><span class="number">IV.</span> CONTACT</li>
-                    <li data-page="links"><span class="number">V.</span> MY LINKS</li>
+                    <li data-page="about"><span class="number">II.</span> ABOUT</li>
+                    <li data-page="contact"><span class="number">III.</span> CONTACT</li>
                 </ul>
             </div>
             <div class="col col-4">
@@ -615,7 +520,7 @@
     </header>
 
     <main class="content">
-        <!-- Slide 1: Slider Section -->
+        <!-- Slider Section -->
         <section class="slider-section">
             <div class="slider-container" id="sliderContainer">
                 <!-- Cards 1-5 with different angles -->
@@ -709,60 +614,6 @@
             </div>
         </section>
 
-        <!-- Slide 2: Zen Landscape - taller -->
-        <div class="zen-slide">
-            <svg width="100%" height="100%" viewBox="0 0 1600 1000" preserveAspectRatio="none" style="background: #d4cfc8;">
-                <!-- Zen Landscape SVG -->
-                <rect width="1600" height="1000" fill="#e8e4de"/>
-                
-                <defs>
-                    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:#d4cfc8;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#e8e4de;stop-opacity:1" />
-                    </linearGradient>
-                    <linearGradient id="mountainGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:#b8b0a6;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#c8c0b6;stop-opacity:1" />
-                    </linearGradient>
-                    <linearGradient id="waterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:#c8c0b6;stop-opacity:0.6" />
-                        <stop offset="100%" style="stop-color:#d4cfc8;stop-opacity:0.3" />
-                    </linearGradient>
-                </defs>
-                
-                <rect width="1600" height="1000" fill="url(#skyGrad)"/>
-                <circle cx="1200" cy="220" r="65" fill="#d4cfc8" opacity="0.4"/>
-                <circle cx="1200" cy="220" r="45" fill="#ccc4ba" opacity="0.3"/>
-                
-                <path d="M0 550 L100 420 L250 460 L400 380 L550 440 L700 390 L850 430 L1000 370 L1150 410 L1300 360 L1450 400 L1600 380 L1600 600 L0 600 Z" fill="#c8c0b6" opacity="0.5"/>
-                <path d="M0 600 L80 470 L200 510 L350 440 L500 490 L650 430 L800 480 L950 420 L1100 470 L1250 410 L1400 460 L1550 420 L1600 440 L1600 700 L0 700 Z" fill="url(#mountainGrad)"/>
-                <path d="M0 660 L200 620 L400 640 L600 610 L800 630 L1000 600 L1200 620 L1400 600 L1600 620 L1600 770 L0 770 Z" fill="#bab2a8" opacity="0.4"/>
-                
-                <ellipse cx="400" cy="790" rx="320" ry="65" fill="url(#waterGrad)"/>
-                <ellipse cx="1200" cy="820" rx="220" ry="45" fill="url(#waterGrad)" opacity="0.5"/>
-                
-                <ellipse cx="300" cy="710" rx="28" ry="14" fill="#b0a89e" opacity="0.4"/>
-                <ellipse cx="500" cy="720" rx="20" ry="10" fill="#b0a89e" opacity="0.3"/>
-                <ellipse cx="1350" cy="700" rx="32" ry="16" fill="#b0a89e" opacity="0.35"/>
-                
-                <ellipse cx="200" cy="740" rx="16" ry="9" fill="#a8a098" opacity="0.3"/>
-                <ellipse cx="208" cy="732" rx="11" ry="7" fill="#a8a098" opacity="0.25"/>
-                <ellipse cx="1400" cy="730" rx="14" ry="8" fill="#a8a098" opacity="0.3"/>
-                <ellipse cx="1408" cy="722" rx="9" ry="6" fill="#a8a098" opacity="0.25"/>
-                
-                <path d="M0 710 Q50 700 100 708 Q150 695 200 705 Q250 698 300 708 Q350 700 400 710" stroke="#b8b0a6" stroke-width="1.5" fill="none" opacity="0.3"/>
-                <path d="M1000 700 Q1050 690 1100 698 Q1150 688 1200 698 Q1250 690 1300 700" stroke="#b8b0a6" stroke-width="1.5" fill="none" opacity="0.25"/>
-            </svg>
-
-            <!-- Centered about text - positioned lower -->
-            <div class="zen-text zen-text-about">
-                Exploring the quiet spaces<br>between architecture, memory,<br>and the everyday.
-            </div>
-
-            <!-- Centered read more link - positioned lower -->
-            <a href="#" class="zen-read-more zen-read-more-about" id="readMoreAbout">read more</a>
-        </div>
-
         <!-- Copyright - centered -->
         <div class="copyright">
             © 2026 OFSAEILY
@@ -842,12 +693,6 @@
                 const title = this.textContent;
                 window.open(`#${title.toLowerCase().replace(/\s+/g, '-')}`, '_blank');
             });
-        });
-
-        // Read more link functionality
-        document.getElementById('readMoreAbout').addEventListener('click', function(e) {
-            e.preventDefault();
-            window.open('#about', '_blank');
         });
 
         // Slider scroll with dot indicators
