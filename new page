@@ -262,11 +262,12 @@
             transition: transform 0.3s ease;
         }
 
+        /* Different angles for each card */
         .slider-card-wrapper:nth-child(1) {
             transform: rotate(-2.5deg) translateY(0px);
         }
         .slider-card-wrapper:nth-child(2) {
-            transform: rotate(1.8deg) translateY(-15px);
+            transform: rotate(1.8deg) translateY(-12px);
         }
         .slider-card-wrapper:nth-child(3) {
             transform: rotate(-1.2deg) translateY(8px);
@@ -414,7 +415,7 @@
             opacity: 0.5;
         }
 
-        /* Slide 2: Zen Landscape with single "about me" text */
+        /* Slide 2: Zen Landscape with centered about text */
         .zen-slide {
             width: calc(100% + 6rem);
             margin-left: -3rem;
@@ -439,14 +440,15 @@
             font-weight: 300;
             letter-spacing: 0.05em;
             color: #2a2520;
-            line-height: 1.6;
-            max-width: 280px;
-            text-align: left;
+            line-height: 1.8;
+            max-width: 500px;
+            text-align: center;
         }
 
         .zen-text-about {
-            bottom: 25%;
-            left: 8%;
+            bottom: 28%;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .zen-read-more {
@@ -469,11 +471,12 @@
         }
 
         .zen-read-more-about {
-            bottom: 17%;
-            left: 8%;
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
-        /* Copyright */
+        /* Copyright - centered */
         .copyright {
             padding: 2rem 0.5rem 1.5rem 0.5rem;
             font-size: 7pt;
@@ -482,11 +485,9 @@
             color: #000000;
             font-weight: 400;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            text-align: right;
-            margin-right: 2rem;
+            text-align: center;
             max-width: 1400px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto;
             padding-left: 3rem;
             padding-right: 3rem;
         }
@@ -515,13 +516,13 @@
                 margin-right: -1rem;
             }
             .zen-text-about {
-                bottom: 22%;
-                left: 6%;
-                max-width: 200px;
+                max-width: 350px;
+                font-size: 7.5pt;
+                bottom: 25%;
             }
             .zen-read-more-about {
-                bottom: 14%;
-                left: 6%;
+                bottom: 17%;
+                font-size: 7.5pt;
             }
         }
 
@@ -552,7 +553,6 @@
 
             .copyright {
                 text-align: center;
-                margin-right: 0;
                 font-size: 6pt;
                 padding: 1.5rem 1rem 1.5rem 1rem;
             }
@@ -573,14 +573,13 @@
                 margin-right: -1rem;
             }
             .zen-text-about {
-                bottom: 20%;
-                left: 5%;
-                max-width: 160px;
+                max-width: 250px;
                 font-size: 7pt;
+                bottom: 22%;
+                line-height: 1.6;
             }
             .zen-read-more-about {
-                bottom: 12%;
-                left: 5%;
+                bottom: 14%;
                 font-size: 7pt;
             }
         }
@@ -616,7 +615,7 @@
         <!-- Slide 1: Slider Section -->
         <section class="slider-section">
             <div class="slider-container" id="sliderContainer">
-                <!-- Cards 1-5 -->
+                <!-- Cards 1-5 with different angles -->
                 <div class="slider-card-wrapper">
                     <div class="slider-card">
                         <div class="slider-card-image">
@@ -707,7 +706,7 @@
             </div>
         </section>
 
-        <!-- Slide 2: Zen Landscape with single "about me" text -->
+        <!-- Slide 2: Zen Landscape with centered about text -->
         <div class="zen-slide">
             <svg width="100%" height="100%" viewBox="0 0 1600 900" preserveAspectRatio="none" style="background: #d4cfc8;">
                 <!-- Zen Landscape SVG -->
@@ -752,16 +751,16 @@
                 <path d="M1000 640 Q1050 630 1100 638 Q1150 628 1200 638 Q1250 630 1300 640" stroke="#b8b0a6" stroke-width="1.5" fill="none" opacity="0.25"/>
             </svg>
 
-            <!-- Single "about me" text -->
+            <!-- Centered about text -->
             <div class="zen-text zen-text-about">
                 Exploring the quiet spaces<br>between architecture, memory,<br>and the everyday.
             </div>
 
-            <!-- Single "read more" link -->
+            <!-- Centered read more link -->
             <a href="#" class="zen-read-more zen-read-more-about" id="readMoreAbout">read more</a>
         </div>
 
-        <!-- Copyright -->
+        <!-- Copyright - centered -->
         <div class="copyright">
             © 2026 OFSAEILY
         </div>
