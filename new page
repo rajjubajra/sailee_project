@@ -190,7 +190,7 @@
         }
 
         .nav li .number {
-            font-style: italic;
+            font-style: normal;
         }
 
         .nav li.vermillion {
@@ -345,6 +345,7 @@
             font-weight: 300;
             margin-bottom: 0.15rem;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-style: normal;
         }
 
         .slider-card-title .blog-date {
