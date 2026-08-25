@@ -189,10 +189,6 @@
             opacity: 0.5;
         }
 
-        .nav li .number {
-            font-style: normal;
-        }
-
         .nav li.vermillion {
             color: #E32636;
             opacity: 1;
@@ -508,9 +504,9 @@
             </div>
             <div class="col col-3">
                 <ul class="nav">
-                    <li data-page="collections"><span class="number">I.</span> COLLECTIONS</li>
-                    <li data-page="about"><span class="number">II.</span> ABOUT</li>
-                    <li data-page="contact"><span class="number">III.</span> CONTACT</li>
+                    <li data-page="collections">COLLECTIONS</li>
+                    <li data-page="about">ABOUT</li>
+                    <li data-page="contact">CONTACT</li>
                 </ul>
             </div>
             <div class="col col-4">
@@ -710,9 +706,10 @@
         container.addEventListener('scroll', function() {
             const scrollLeft = this.scrollLeft;
             const index = Math.round(scrollLeft / cardWidth);
-            if (index !== currentIndex && index < dots.length) {
-                currentIndex = index;
-                updateDots(index);
+            const clampedIndex = Math.max(0, Math.min(index, dots.length - 1));
+            if (clampedIndex !== currentIndex) {
+                currentIndex = clampedIndex;
+                updateDots(clampedIndex);
             }
         });
 
@@ -734,11 +731,20 @@
             resizeTimeout = setTimeout(() => {
                 const scrollLeft = container.scrollLeft;
                 const index = Math.round(scrollLeft / cardWidth);
-                if (index !== currentIndex && index < dots.length) {
-                    currentIndex = index;
-                    updateDots(index);
+                const clampedIndex = Math.max(0, Math.min(index, dots.length - 1));
+                if (clampedIndex !== currentIndex) {
+                    currentIndex = clampedIndex;
+                    updateDots(clampedIndex);
                 }
             }, 100);
+        });
+
+        window.addEventListener('load', function() {
+            const scrollLeft = container.scrollLeft;
+            const index = Math.round(scrollLeft / cardWidth);
+            const clampedIndex = Math.max(0, Math.min(index, dots.length - 1));
+            currentIndex = clampedIndex;
+            updateDots(clampedIndex);
         });
     </script>
 </body>
