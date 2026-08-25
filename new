@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OFSAEILY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f2eb;
+            min-height: 100vh;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #000000;
+            font-size: 8pt;
+            overflow-x: hidden;
+        }
+
+        /* Grain texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.4;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4"/><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.15 0"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.3"/></svg>');
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            mix-blend-mode: multiply;
+        }
+
+        /* Paper texture */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.1;
+            background-image: 
+                radial-gradient(circle at 30% 40%, rgba(180,160,140,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(130,110,90,0.1) 0%, transparent 40%);
+            background-blend-mode: overlay;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            z-index: 100;
+            background: rgba(245, 242, 235, 1);
+            transition: background 0.3s ease, backdrop-filter 0.3s ease;
+            font-size: 8pt;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #000000;
+            border-bottom: none;
+        }
+
+        .header.scrolled {
+            background: rgba(245, 242, 235, 0.5);
+            backdrop-filter: blur(6px);
+        }
+
+        .header:not(.scrolled) {
+            background: rgba(245, 242, 235, 1);
+            backdrop-filter: none;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            max-width: 1200px;
+            flex-direction: row;
+            flex-wrap: nowrap;
+        }
+
+        .col {
+            display: flex;
+            align-items: flex-start;
+            font-size: 8pt;
+            flex: 1;
+            min-width: 0;
+            padding: 0.5rem 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #000000;
+        }
+
+        .col-1 {
+            justify-content: flex-start;
+            padding-left: 0;
+        }
+
+        .logo-text {
+            font-size: 8pt;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: #000000;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            white-space: nowrap;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-text:hover {
+            opacity: 0.5;
+        }
+
+        .col-2 {
+            justify-content: flex-start;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.05rem;
+        }
+
+        .enquiries {
+            font-size: 8pt;
+            letter-spacing: 0.05em;
+            color: #000000;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .email {
+            font-size: 8pt;
+            letter-spacing: 0.05em;
+            color: #000000;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            text-transform: lowercase;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: opacity 0.3s ease, color 0.3s ease;
+        }
+
+        .email:hover {
+            opacity: 0.5;
+        }
+
+        .email.vermillion {
+            color: #E32636;
+            opacity: 1;
+        }
+
+        .col-3 {
+            justify-content: center;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.15rem;
+            list-style: none;
+            font-size: 8pt;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #000000;
+        }
+
+        .nav li {
+            color: #000000;
+            font-weight: 400;
+            font-size: 8pt;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            white-space: nowrap;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: opacity 0.3s ease, color 0.3s ease;
+        }
+
+        .nav li:hover {
+            opacity: 0.5;
+        }
+
+        .nav li .number {
+            font-style: italic;
+        }
+
+        .nav li.vermillion {
+            color: #E32636;
+            opacity: 1;
+        }
+
+        .col-4 {
+            justify-content: flex-end;
+            padding-right: 0;
+        }
+
+        .logo-image {
+            width: 30px;
+            height: 30px;
+            background: #000000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f5f2eb;
+            font-size: 8pt;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            flex-shrink: 0;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        /* Content area */
+        .content {
+            padding-top: 7rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 3rem;
+            padding-right: 3rem;
+            font-size: 8pt;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #000000;
+        }
+
+        /* Slide 1: Slider Section */
+        .slider-section {
+            padding: 2rem 0 1rem 0;
+            overflow: visible;
+            position: relative;
+            width: 100%;
+        }
+
+        .slider-container {
+            display: flex;
+            gap: 2.5rem;
+            overflow-x: auto;
+            padding: 2rem 0.5rem 2rem 0.5rem;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            align-items: flex-start;
+        }
+
+        .slider-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .slider-card-wrapper {
+            flex: 0 0 280px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+
+        .slider-card-wrapper:nth-child(1) {
+            transform: rotate(-2.5deg) translateY(0px);
+        }
+        .slider-card-wrapper:nth-child(2) {
+            transform: rotate(1.8deg) translateY(-15px);
+        }
+        .slider-card-wrapper:nth-child(3) {
+            transform: rotate(-1.2deg) translateY(8px);
+        }
+        .slider-card-wrapper:nth-child(4) {
+            transform: rotate(2.2deg) translateY(-10px);
+        }
+        .slider-card-wrapper:nth-child(5) {
+            transform: rotate(-1.8deg) translateY(12px);
+        }
+
+        .slider-card-wrapper:hover {
+            transform: scale(1.02) rotate(0deg) translateY(0);
+            z-index: 5;
+        }
+
+        .slider-card {
+            aspect-ratio: 4/5;
+            background: #f0ede8;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .slider-card:hover {
+            transform: scale(1.02);
+        }
+
+        .slider-card-image {
+            width: 100%;
+            height: 100%;
+            background: #d4cfc8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider-card-image .placeholder {
+            font-size: 6pt;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #999;
+            font-weight: 300;
+        }
+
+        .slider-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-card-title {
+            text-align: left;
+            padding: 0.8rem 0.2rem 0.2rem 0.2rem;
+            opacity: 0;
+            transform: translateY(-5px);
+            transition: all 0.4s ease;
+        }
+
+        .slider-card-wrapper:hover .slider-card-title {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slider-card-title .blog-number {
+            display: block;
+            font-size: 7pt;
+            letter-spacing: 0.1em;
+            color: #999;
+            font-weight: 300;
+            margin-bottom: 0.15rem;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .slider-card-title .blog-date {
+            display: block;
+            font-size: 6.5pt;
+            letter-spacing: 0.08em;
+            color: #aaa;
+            font-weight: 300;
+            margin-top: 0.1rem;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .slider-card-title a {
+            color: #000000;
+            font-size: 9.5pt;
+            font-weight: 450;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.3;
+            transition: opacity 0.3s ease;
+            display: inline-block;
+        }
+
+        .slider-card-title a:hover {
+            opacity: 0.5;
+        }
+
+        .slider-card-wrapper:nth-child(1) .slider-card-title {
+            transition-delay: 0.05s;
+        }
+        .slider-card-wrapper:nth-child(2) .slider-card-title {
+            transition-delay: 0.05s;
+        }
+        .slider-card-wrapper:nth-child(3) .slider-card-title {
+            transition-delay: 0.1s;
+        }
+        .slider-card-wrapper:nth-child(4) .slider-card-title {
+            transition-delay: 0.08s;
+        }
+        .slider-card-wrapper:nth-child(5) .slider-card-title {
+            transition-delay: 0.12s;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 1.5rem 0 0.5rem 0;
+        }
+
+        .slider-dots .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: transparent;
+            border: 1.5px solid #000000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-dots .dot.active {
+            background: #000000;
+            border-color: #000000;
+        }
+
+        .slider-dots .dot:hover {
+            opacity: 0.5;
+        }
+
+        /* Slide 2: Zen Landscape with single "about me" text */
+        .zen-slide {
+            width: calc(100% + 6rem);
+            margin-left: -3rem;
+            margin-right: -3rem;
+            aspect-ratio: 16/9;
+            background: #d4cfc8;
+            overflow: hidden;
+            position: relative;
+            display: block;
+        }
+
+        .zen-slide svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .zen-text {
+            position: absolute;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-size: 8pt;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            color: #2a2520;
+            line-height: 1.6;
+            max-width: 280px;
+            text-align: left;
+        }
+
+        .zen-text-about {
+            bottom: 25%;
+            left: 8%;
+        }
+
+        .zen-read-more {
+            position: absolute;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-size: 8pt;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #2a2520;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            padding-bottom: 0.15rem;
+            border-bottom: 1px solid rgba(42, 37, 32, 0.3);
+        }
+
+        .zen-read-more:hover {
+            opacity: 0.5;
+        }
+
+        .zen-read-more-about {
+            bottom: 17%;
+            left: 8%;
+        }
+
+        /* Copyright */
+        .copyright {
+            padding: 2rem 0.5rem 1.5rem 0.5rem;
+            font-size: 7pt;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #000000;
+            font-weight: 400;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            text-align: right;
+            margin-right: 2rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 3rem;
+            padding-right: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 800px) {
+            .slider-card-wrapper {
+                flex: 0 0 220px;
+            }
+            .slider-card-wrapper:nth-child(1),
+            .slider-card-wrapper:nth-child(2),
+            .slider-card-wrapper:nth-child(3),
+            .slider-card-wrapper:nth-child(4),
+            .slider-card-wrapper:nth-child(5) {
+                transform: rotate(0deg) translateY(0);
+            }
+            .slider-card-wrapper:hover {
+                transform: scale(1.02) rotate(0deg) translateY(0);
+            }
+            .slider-card-title a {
+                font-size: 8.5pt;
+            }
+            .zen-slide {
+                width: calc(100% + 2rem);
+                margin-left: -1rem;
+                margin-right: -1rem;
+            }
+            .zen-text-about {
+                bottom: 22%;
+                left: 6%;
+                max-width: 200px;
+            }
+            .zen-read-more-about {
+                bottom: 14%;
+                left: 6%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .slider-card-wrapper {
+                flex: 0 0 180px;
+            }
+            
+            .header {
+                padding: 1rem;
+            }
+            
+            .content {
+                padding-left: 1rem;
+                padding-right: 1rem;
+                padding-top: 6rem;
+            }
+
+            .slider-card-title a {
+                font-size: 7.5pt;
+            }
+            .slider-card-title .blog-number {
+                font-size: 6pt;
+            }
+            .slider-card-title .blog-date {
+                font-size: 5.5pt;
+            }
+
+            .copyright {
+                text-align: center;
+                margin-right: 0;
+                font-size: 6pt;
+                padding: 1.5rem 1rem 1.5rem 1rem;
+            }
+
+            .slider-dots .dot {
+                width: 5px;
+                height: 5px;
+                border-width: 1px;
+            }
+
+            .slider-dots {
+                gap: 0.5rem;
+            }
+
+            .zen-slide {
+                width: calc(100% + 2rem);
+                margin-left: -1rem;
+                margin-right: -1rem;
+            }
+            .zen-text-about {
+                bottom: 20%;
+                left: 5%;
+                max-width: 160px;
+                font-size: 7pt;
+            }
+            .zen-read-more-about {
+                bottom: 12%;
+                left: 5%;
+                font-size: 7pt;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-content">
+            <div class="col col-1">
+                <a href="#" class="logo-text" id="homeLink">OFSAEILY</a>
+            </div>
+            <div class="col col-2">
+                <span class="enquiries">ENQUIRIES</span>
+                <span class="email" id="emailLink">OFSAEILY@GMAIL.COM</span>
+            </div>
+            <div class="col col-3">
+                <ul class="nav">
+                    <li data-page="collections"><span class="number">I.</span> COLLECTIONS</li>
+                    <li data-page="archive"><span class="number">II.</span> ARCHIVE</li>
+                    <li data-page="about"><span class="number">III.</span> ABOUT</li>
+                    <li data-page="contact"><span class="number">IV.</span> CONTACT</li>
+                    <li data-page="links"><span class="number">V.</span> MY LINKS</li>
+                </ul>
+            </div>
+            <div class="col col-4">
+                <div class="logo-image">O</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="content">
+        <!-- Slide 1: Slider Section -->
+        <section class="slider-section">
+            <div class="slider-container" id="sliderContainer">
+                <!-- Cards 1-5 -->
+                <div class="slider-card-wrapper">
+                    <div class="slider-card">
+                        <div class="slider-card-image">
+                            <svg width="100%" height="100%" viewBox="0 0 400 500" preserveAspectRatio="none" style="background: #d4cfc8;">
+                                <rect width="400" height="500" fill="#d4cfc8"/>
+                                <text x="200" y="250" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#aaa" letter-spacing="0.2em">IMAGE</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="slider-card-title">
+                        <span class="blog-number">001</span>
+                        <a href="#" class="blog-link">The Architecture of Quiet</a>
+                        <span class="blog-date">12.08.2026</span>
+                    </div>
+                </div>
+
+                <div class="slider-card-wrapper">
+                    <div class="slider-card">
+                        <div class="slider-card-image">
+                            <svg width="100%" height="100%" viewBox="0 0 400 500" preserveAspectRatio="none" style="background: #d4cfc8;">
+                                <rect width="400" height="500" fill="#d4cfc8"/>
+                                <text x="200" y="250" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#aaa" letter-spacing="0.2em">IMAGE</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="slider-card-title">
+                        <span class="blog-number">002</span>
+                        <a href="#" class="blog-link">Notes from the Periphery</a>
+                        <span class="blog-date">08.08.2026</span>
+                    </div>
+                </div>
+
+                <div class="slider-card-wrapper">
+                    <div class="slider-card">
+                        <div class="slider-card-image">
+                            <svg width="100%" height="100%" viewBox="0 0 400 500" preserveAspectRatio="none" style="background: #d4cfc8;">
+                                <rect width="400" height="500" fill="#d4cfc8"/>
+                                <text x="200" y="250" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#aaa" letter-spacing="0.2em">IMAGE</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="slider-card-title">
+                        <span class="blog-number">003</span>
+                        <a href="#" class="blog-link">On Light &amp; Memory</a>
+                        <span class="blog-date">01.08.2026</span>
+                    </div>
+                </div>
+
+                <div class="slider-card-wrapper">
+                    <div class="slider-card">
+                        <div class="slider-card-image">
+                            <svg width="100%" height="100%" viewBox="0 0 400 500" preserveAspectRatio="none" style="background: #d4cfc8;">
+                                <rect width="400" height="500" fill="#d4cfc8"/>
+                                <text x="200" y="250" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#aaa" letter-spacing="0.2em">IMAGE</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="slider-card-title">
+                        <span class="blog-number">004</span>
+                        <a href="#" class="blog-link">The Color of Silence</a>
+                        <span class="blog-date">25.07.2026</span>
+                    </div>
+                </div>
+
+                <div class="slider-card-wrapper">
+                    <div class="slider-card">
+                        <div class="slider-card-image">
+                            <svg width="100%" height="100%" viewBox="0 0 400 500" preserveAspectRatio="none" style="background: #d4cfc8;">
+                                <rect width="400" height="500" fill="#d4cfc8"/>
+                                <text x="200" y="250" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#aaa" letter-spacing="0.2em">IMAGE</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="slider-card-title">
+                        <span class="blog-number">005</span>
+                        <a href="#" class="blog-link">The Edge of Knowing</a>
+                        <span class="blog-date">10.07.2026</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slider-dots" id="sliderDots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
+                <span class="dot" data-index="3"></span>
+                <span class="dot" data-index="4"></span>
+            </div>
+        </section>
+
+        <!-- Slide 2: Zen Landscape with single "about me" text -->
+        <div class="zen-slide">
+            <svg width="100%" height="100%" viewBox="0 0 1600 900" preserveAspectRatio="none" style="background: #d4cfc8;">
+                <!-- Zen Landscape SVG -->
+                <rect width="1600" height="900" fill="#e8e4de"/>
+                
+                <defs>
+                    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#d4cfc8;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#e8e4de;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="mountainGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#b8b0a6;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#c8c0b6;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="waterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#c8c0b6;stop-opacity:0.6" />
+                        <stop offset="100%" style="stop-color:#d4cfc8;stop-opacity:0.3" />
+                    </linearGradient>
+                </defs>
+                
+                <rect width="1600" height="900" fill="url(#skyGrad)"/>
+                <circle cx="1200" cy="200" r="60" fill="#d4cfc8" opacity="0.4"/>
+                <circle cx="1200" cy="200" r="40" fill="#ccc4ba" opacity="0.3"/>
+                
+                <path d="M0 500 L100 380 L250 420 L400 340 L550 400 L700 350 L850 390 L1000 330 L1150 370 L1300 320 L1450 360 L1600 340 L1600 550 L0 550 Z" fill="#c8c0b6" opacity="0.5"/>
+                <path d="M0 550 L80 430 L200 470 L350 400 L500 450 L650 390 L800 440 L950 380 L1100 430 L1250 370 L1400 420 L1550 380 L1600 400 L1600 650 L0 650 Z" fill="url(#mountainGrad)"/>
+                <path d="M0 600 L200 560 L400 580 L600 550 L800 570 L1000 540 L1200 560 L1400 540 L1600 560 L1600 700 L0 700 Z" fill="#bab2a8" opacity="0.4"/>
+                
+                <ellipse cx="400" cy="720" rx="300" ry="60" fill="url(#waterGrad)"/>
+                <ellipse cx="1200" cy="750" rx="200" ry="40" fill="url(#waterGrad)" opacity="0.5"/>
+                
+                <ellipse cx="300" cy="650" rx="25" ry="12" fill="#b0a89e" opacity="0.4"/>
+                <ellipse cx="500" cy="660" rx="18" ry="9" fill="#b0a89e" opacity="0.3"/>
+                <ellipse cx="1350" cy="640" rx="30" ry="14" fill="#b0a89e" opacity="0.35"/>
+                
+                <ellipse cx="200" cy="680" rx="15" ry="8" fill="#a8a098" opacity="0.3"/>
+                <ellipse cx="208" cy="672" rx="10" ry="6" fill="#a8a098" opacity="0.25"/>
+                <ellipse cx="1400" cy="670" rx="12" ry="7" fill="#a8a098" opacity="0.3"/>
+                <ellipse cx="1408" cy="662" rx="8" ry="5" fill="#a8a098" opacity="0.25"/>
+                
+                <path d="M0 650 Q50 640 100 648 Q150 635 200 645 Q250 638 300 648 Q350 640 400 650" stroke="#b8b0a6" stroke-width="1.5" fill="none" opacity="0.3"/>
+                <path d="M1000 640 Q1050 630 1100 638 Q1150 628 1200 638 Q1250 630 1300 640" stroke="#b8b0a6" stroke-width="1.5" fill="none" opacity="0.25"/>
+            </svg>
+
+            <!-- Single "about me" text -->
+            <div class="zen-text zen-text-about">
+                Exploring the quiet spaces<br>between architecture, memory,<br>and the everyday.
+            </div>
+
+            <!-- Single "read more" link -->
+            <a href="#" class="zen-read-more zen-read-more-about" id="readMoreAbout">read more</a>
+        </div>
+
+        <!-- Copyright -->
+        <div class="copyright">
+            © 2026 OFSAEILY
+        </div>
+    </main>
+
+    <script>
+        const header = document.getElementById('header');
+        let timeout;
+
+        window.addEventListener('scroll', function() {
+            const scrollY = window.scrollY;
+
+            if (scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            clearTimeout(timeout);
+
+            if (scrollY > 20) {
+                timeout = setTimeout(function() {
+                    header.classList.remove('scrolled');
+                }, 300);
+            }
+        });
+
+        // Home link functionality
+        const homeLink = document.getElementById('homeLink');
+        homeLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open('#home', '_blank');
+        });
+
+        // Email functionality
+        const emailElement = document.getElementById('emailLink');
+        let emailClicked = false;
+
+        emailElement.addEventListener('click', function(e) {
+            e.preventDefault();
+            emailClicked = !emailClicked;
+            
+            if (emailClicked) {
+                this.classList.add('vermillion');
+                window.open('mailto:OFSAEILY@GMAIL.COM', '_blank');
+            } else {
+                this.classList.remove('vermillion');
+            }
+        });
+
+        // Navigation items functionality
+        const navItems = document.querySelectorAll('.nav li');
+        const navItemStates = {};
+
+        navItems.forEach(function(item) {
+            navItemStates[item.textContent.trim()] = false;
+            
+            item.addEventListener('click', function(e) {
+                const key = this.textContent.trim();
+                navItemStates[key] = !navItemStates[key];
+                
+                if (navItemStates[key]) {
+                    this.classList.add('vermillion');
+                    const page = this.getAttribute('data-page');
+                    window.open(`#${page}`, '_blank');
+                } else {
+                    this.classList.remove('vermillion');
+                }
+            });
+        });
+
+        // Blog title links functionality
+        document.querySelectorAll('.blog-link').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const title = this.textContent;
+                window.open(`#${title.toLowerCase().replace(/\s+/g, '-')}`, '_blank');
+            });
+        });
+
+        // Read more link functionality
+        document.getElementById('readMoreAbout').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open('#about', '_blank');
+        });
+
+        // Slider scroll with dot indicators
+        const container = document.getElementById('sliderContainer');
+        const dots = document.querySelectorAll('.dot');
+        let currentIndex = 0;
+        const cardWidth = 280 + 40;
+
+        function updateDots(index) {
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        container.addEventListener('scroll', function() {
+            const scrollLeft = this.scrollLeft;
+            const index = Math.round(scrollLeft / cardWidth);
+            if (index !== currentIndex && index < dots.length) {
+                currentIndex = index;
+                updateDots(index);
+            }
+        });
+
+        dots.forEach((dot) => {
+            dot.addEventListener('click', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                currentIndex = index;
+                container.scrollTo({
+                    left: index * cardWidth,
+                    behavior: 'smooth'
+                });
+                updateDots(index);
+            });
+        });
+
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                const scrollLeft = container.scrollLeft;
+                const index = Math.round(scrollLeft / cardWidth);
+                if (index !== currentIndex && index < dots.length) {
+                    currentIndex = index;
+                    updateDots(index);
+                }
+            }, 100);
+        });
+    </script>
+</body>
+</html>
