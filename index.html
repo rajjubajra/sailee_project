@@ -87,26 +87,33 @@
             max-width: 1400px;
         }
 
-        .header-left {
+        .header-col {
             display: flex;
             align-items: flex-start;
-            gap: 2rem;
-            flex-shrink: 0;
+            flex: 1;
+            padding: 0.5rem 0;
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #000000;
         }
 
-        .header-center {
-            display: flex;
+        .header-col-1 {
+            justify-content: flex-start;
+            gap: 2rem;
+        }
+
+        .header-col-2 {
+            justify-content: flex-start;
             flex-direction: column;
             align-items: flex-start;
-            gap: 0.15rem;
-            flex-shrink: 0;
-            margin-left: 70px;
+            gap: 0.05rem;
         }
 
-        .header-right {
-            display: flex;
-            align-items: flex-start;
-            flex-shrink: 0;
+        .header-col-3 {
+            justify-content: center;
+        }
+
+        .header-col-4 {
+            justify-content: flex-end;
         }
 
         .logo-text {
@@ -485,23 +492,29 @@
             left: 0;
             right: 0;
             padding: 0 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
             z-index: 3;
             pointer-events: none;
             width: 100%;
+            display: flex;
+            justify-content: center;
         }
 
         .footer-overlay * {
             pointer-events: auto;
         }
 
+        .footer-content {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1400px;
+        }
+
         .footer-left {
             display: flex;
             gap: 2.5rem;
             align-items: flex-start;
-            flex: 1;
         }
 
         .footer-social-wrapper {
@@ -546,7 +559,6 @@
             text-align: right;
             opacity: 0.5;
             padding-top: 0.15rem;
-            flex-shrink: 0;
         }
 
         /* Responsive */
@@ -586,11 +598,8 @@
             .footer-left {
                 gap: 1.5rem;
             }
-            .header-left {
+            .header-col-1 {
                 gap: 1rem;
-            }
-            .header-center {
-                margin-left: 35px;
             }
         }
 
@@ -644,15 +653,16 @@
             .footer-overlay {
                 padding: 0 1rem;
                 bottom: 2%;
-                flex-direction: column;
+            }
+            .footer-content {
+                flex-wrap: wrap;
                 gap: 0.8rem;
-                align-items: center;
+                justify-content: center;
             }
             .footer-left {
                 flex-direction: column;
                 gap: 0.8rem;
                 align-items: center;
-                flex: none;
             }
             .footer-social-wrapper {
                 align-items: center;
@@ -671,13 +681,21 @@
             .header-content {
                 flex-wrap: wrap;
                 gap: 0.5rem;
+                justify-content: center;
             }
-            .header-left {
+            .header-col-1 {
                 flex-wrap: wrap;
                 gap: 0.5rem;
+                justify-content: center;
             }
-            .header-center {
-                margin-left: 15px;
+            .header-col-2 {
+                align-items: center;
+            }
+            .header-col-3 {
+                justify-content: center;
+            }
+            .nav {
+                align-items: center;
             }
         }
     </style>
@@ -686,18 +704,20 @@
     <!-- Header -->
     <header class="header" id="header">
         <div class="header-content">
-            <div class="header-left">
+            <div class="header-col header-col-1">
                 <a href="#" class="logo-text" id="homeLink">OFSAEILY</a>
-                <div class="header-center">
-                    <span class="enquiries">ENQUIRIES</span>
-                    <span class="email" id="emailLink">OFSAEILY@GMAIL.COM</span>
-                </div>
             </div>
-            <ul class="nav">
-                <li data-page="collections" id="collectionsNav">COLLECTIONS</li>
-                <li data-page="about" id="aboutNav">ABOUT</li>
-            </ul>
-            <div class="header-right">
+            <div class="header-col header-col-2">
+                <span class="enquiries">ENQUIRIES</span>
+                <span class="email" id="emailLink">OFSAEILY@GMAIL.COM</span>
+            </div>
+            <div class="header-col header-col-3">
+                <ul class="nav">
+                    <li data-page="collections" id="collectionsNav">COLLECTIONS</li>
+                    <li data-page="about" id="aboutNav">ABOUT</li>
+                </ul>
+            </div>
+            <div class="header-col header-col-4">
                 <div class="logo-image">
                     <img src="ofs.png" alt="Logo">
                 </div>
@@ -770,17 +790,19 @@
 
             <!-- Footer overlay -->
             <div class="footer-overlay">
-                <div class="footer-left">
-                    <div class="footer-social-wrapper">
-                        <span class="footer-social-label">Instagram</span>
-                        <a href="https://www.instagram.com/ofsaeily?igsi=NW85aWFia2l2eWcy" class="footer-social-link" id="instagramLink">@OFSAEILY</a>
+                <div class="footer-content">
+                    <div class="footer-left">
+                        <div class="footer-social-wrapper">
+                            <span class="footer-social-label">Instagram</span>
+                            <a href="https://www.instagram.com/ofsaeily?igsi=NW85aWFia2l2eWcy" class="footer-social-link" id="instagramLink">@OFSAEILY</a>
+                        </div>
+                        <div class="footer-social-wrapper">
+                            <span class="footer-social-label">Substack</span>
+                            <a href="#" class="footer-social-link" id="substackLink">OFSAEILY</a>
+                        </div>
                     </div>
-                    <div class="footer-social-wrapper">
-                        <span class="footer-social-label">Substack</span>
-                        <a href="#" class="footer-social-link" id="substackLink">OFSAEILY</a>
-                    </div>
+                    <span class="footer-copyright">© 2026 OFSAEILY</span>
                 </div>
-                <span class="footer-copyright">© 2026 OFSAEILY</span>
             </div>
         </div>
     </main>
