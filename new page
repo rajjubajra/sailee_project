@@ -228,7 +228,7 @@
             color: #000000;
         }
 
-        /* Slider Section */
+        /* Slide 1: Slider Section */
         .slider-section {
             padding: 2rem 0 1rem 0;
             overflow: visible;
@@ -412,6 +412,49 @@
             opacity: 0.5;
         }
 
+        /* Slide 2: Cover Portrait - more height */
+        .cover-slide {
+            width: calc(100% + 6rem);
+            margin-left: -3rem;
+            margin-right: -3rem;
+            aspect-ratio: 16/8.5;
+            background: #d4cfc8;
+            overflow: hidden;
+            position: relative;
+            display: block;
+        }
+
+        .cover-slide svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* Read More link - positioned inside the slide */
+        .cover-read-more {
+            position: absolute;
+            bottom: 12%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-size: 8pt;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            border-bottom: 1px solid #ffffff;
+            padding-bottom: 0.15rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+        }
+
+        .cover-read-more:hover {
+            opacity: 0.6;
+        }
+
         /* Copyright - centered */
         .copyright {
             padding: 2rem 0.5rem 1.5rem 0.5rem;
@@ -445,6 +488,16 @@
             }
             .slider-card-title a {
                 font-size: 8.5pt;
+            }
+            .cover-slide {
+                width: calc(100% + 2rem);
+                margin-left: -1rem;
+                margin-right: -1rem;
+                aspect-ratio: 16/7;
+            }
+            .cover-read-more {
+                font-size: 7pt;
+                bottom: 10%;
             }
         }
 
@@ -488,6 +541,17 @@
             .slider-dots {
                 gap: 0.5rem;
             }
+
+            .cover-slide {
+                width: calc(100% + 2rem);
+                margin-left: -1rem;
+                margin-right: -1rem;
+                aspect-ratio: 4/3;
+            }
+            .cover-read-more {
+                font-size: 6.5pt;
+                bottom: 8%;
+            }
         }
     </style>
 </head>
@@ -506,7 +570,6 @@
                 <ul class="nav">
                     <li data-page="collections">COLLECTIONS</li>
                     <li data-page="about">ABOUT</li>
-                    <li data-page="contact">CONTACT</li>
                 </ul>
             </div>
             <div class="col col-4">
@@ -516,7 +579,7 @@
     </header>
 
     <main class="content">
-        <!-- Slider Section -->
+        <!-- Slide 1: Slider Section -->
         <section class="slider-section">
             <div class="slider-container" id="sliderContainer">
                 <!-- Cards 1-5 with different angles -->
@@ -610,6 +673,56 @@
             </div>
         </section>
 
+        <!-- Slide 2: Cover Portrait - more height -->
+        <div class="cover-slide">
+            <svg width="100%" height="100%" viewBox="0 0 1600 850" preserveAspectRatio="xMidYMid meet" style="background: #d4cfc8;">
+                <!-- Background -->
+                <rect width="1600" height="850" fill="#d4cfc8"/>
+                
+                <!-- Hair / Silhouette -->
+                <ellipse cx="800" cy="350" rx="500" ry="450" fill="#3a3530" opacity="0.85"/>
+                <ellipse cx="800" cy="320" rx="430" ry="400" fill="#4a4440"/>
+                
+                <!-- Shoulders / Body -->
+                <path d="M320 600 Q480 540 640 580 Q800 590 960 580 Q1120 540 1280 600 L1360 850 L240 850 Z" fill="#3a3530" opacity="0.6"/>
+                
+                <!-- Face shape -->
+                <ellipse cx="800" cy="370" rx="280" ry="250" fill="#d4cfc8" opacity="0.3"/>
+                
+                <!-- Covered face with geometric shape -->
+                <rect x="580" y="280" width="440" height="320" rx="20" fill="#2a2520" opacity="0.85"/>
+                <rect x="620" y="300" width="360" height="280" rx="12" fill="#3a3530" opacity="0.7"/>
+                
+                <!-- Geometric lines on the cover -->
+                <line x1="620" y1="350" x2="980" y2="350" stroke="#5a5550" stroke-width="2" opacity="0.4"/>
+                <line x1="620" y1="390" x2="980" y2="390" stroke="#5a5550" stroke-width="2" opacity="0.4"/>
+                <line x1="620" y1="430" x2="980" y2="430" stroke="#5a5550" stroke-width="2" opacity="0.4"/>
+                <line x1="620" y1="470" x2="980" y2="470" stroke="#5a5550" stroke-width="2" opacity="0.4"/>
+                <line x1="620" y1="510" x2="980" y2="510" stroke="#5a5550" stroke-width="2" opacity="0.4"/>
+                <line x1="800" y1="300" x2="800" y2="580" stroke="#5a5550" stroke-width="2" opacity="0.3"/>
+                
+                <!-- Eyes suggestion (covered but faint) -->
+                <ellipse cx="700" cy="350" rx="30" ry="12" fill="#5a5550" opacity="0.3"/>
+                <ellipse cx="900" cy="350" rx="30" ry="12" fill="#5a5550" opacity="0.3"/>
+                
+                <!-- Neck -->
+                <rect x="700" y="520" width="200" height="90" fill="#c8c0b6" opacity="0.3"/>
+                
+                <!-- Collar / clothing detail -->
+                <path d="M640 570 Q720 590 800 580 Q880 590 960 570" stroke="#2a2520" stroke-width="4" fill="none" opacity="0.4"/>
+                
+                <!-- Subtle highlight on cover -->
+                <rect x="660" y="310" width="280" height="35" rx="8" fill="#5a5550" opacity="0.2"/>
+                
+                <!-- Additional geometric details -->
+                <rect x="700" y="520" width="60" height="10" rx="2" fill="#5a5550" opacity="0.15"/>
+                <rect x="840" y="520" width="60" height="10" rx="2" fill="#5a5550" opacity="0.15"/>
+            </svg>
+
+            <!-- Read More link - positioned inside the slide -->
+            <a href="#" class="cover-read-more" id="readMoreLink">read more</a>
+        </div>
+
         <!-- Copyright - centered -->
         <div class="copyright">
             © 2026 OFSAEILY
@@ -689,6 +802,12 @@
                 const title = this.textContent;
                 window.open(`#${title.toLowerCase().replace(/\s+/g, '-')}`, '_blank');
             });
+        });
+
+        // Read more link functionality
+        document.getElementById('readMoreLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open('#about', '_blank');
         });
 
         // Slider scroll with dot indicators
