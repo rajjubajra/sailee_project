@@ -82,26 +82,31 @@
         .header-content {
             display: flex;
             align-items: flex-start;
+            justify-content: space-between;
             width: 100%;
             max-width: 1400px;
-            flex-direction: row;
-            flex-wrap: nowrap;
         }
 
-        .col {
+        .header-left {
             display: flex;
             align-items: flex-start;
-            font-size: 8pt;
-            flex: 1;
-            min-width: 0;
-            padding: 0.5rem 0;
-            font-family: 'Source Sans Pro', sans-serif;
-            color: #000000;
+            gap: 2rem;
+            flex-shrink: 0;
         }
 
-        .col-1 {
-            justify-content: flex-start;
-            padding-left: 0;
+        .header-center {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.15rem;
+            flex-shrink: 0;
+            margin-left: 70px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: flex-start;
+            flex-shrink: 0;
         }
 
         .logo-text {
@@ -118,13 +123,6 @@
 
         .logo-text:hover {
             opacity: 0.5;
-        }
-
-        .col-2 {
-            justify-content: flex-start;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.05rem;
         }
 
         .enquiries {
@@ -154,10 +152,6 @@
         .email.vermillion {
             color: #E32636;
             opacity: 1;
-        }
-
-        .col-3 {
-            justify-content: flex-start;
         }
 
         .nav {
@@ -193,12 +187,6 @@
         .nav li.vermillion {
             color: #E32636;
             opacity: 1;
-        }
-
-        .col-4 {
-            justify-content: flex-end;
-            padding-right: 0;
-            flex: 0 0 auto;
         }
 
         .logo-image {
@@ -513,6 +501,7 @@
             display: flex;
             gap: 2.5rem;
             align-items: flex-start;
+            flex: 1;
         }
 
         .footer-social-wrapper {
@@ -557,6 +546,7 @@
             text-align: right;
             opacity: 0.5;
             padding-top: 0.15rem;
+            flex-shrink: 0;
         }
 
         /* Responsive */
@@ -595,6 +585,12 @@
             }
             .footer-left {
                 gap: 1.5rem;
+            }
+            .header-left {
+                gap: 1rem;
+            }
+            .header-center {
+                margin-left: 35px;
             }
         }
 
@@ -656,6 +652,7 @@
                 flex-direction: column;
                 gap: 0.8rem;
                 align-items: center;
+                flex: none;
             }
             .footer-social-wrapper {
                 align-items: center;
@@ -671,6 +668,17 @@
             .footer-social-label {
                 font-size: 6pt;
             }
+            .header-content {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            .header-left {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            .header-center {
+                margin-left: 15px;
+            }
         }
     </style>
 </head>
@@ -678,20 +686,18 @@
     <!-- Header -->
     <header class="header" id="header">
         <div class="header-content">
-            <div class="col col-1">
+            <div class="header-left">
                 <a href="#" class="logo-text" id="homeLink">OFSAEILY</a>
+                <div class="header-center">
+                    <span class="enquiries">ENQUIRIES</span>
+                    <span class="email" id="emailLink">OFSAEILY@GMAIL.COM</span>
+                </div>
             </div>
-            <div class="col col-2">
-                <span class="enquiries">ENQUIRIES</span>
-                <span class="email" id="emailLink">OFSAEILY@GMAIL.COM</span>
-            </div>
-            <div class="col col-3">
-                <ul class="nav">
-                    <li data-page="collections" id="collectionsNav">COLLECTIONS</li>
-                    <li data-page="about" id="aboutNav">ABOUT</li>
-                </ul>
-            </div>
-            <div class="col col-4">
+            <ul class="nav">
+                <li data-page="collections" id="collectionsNav">COLLECTIONS</li>
+                <li data-page="about" id="aboutNav">ABOUT</li>
+            </ul>
+            <div class="header-right">
                 <div class="logo-image">
                     <img src="ofs.png" alt="Logo">
                 </div>
