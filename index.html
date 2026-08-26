@@ -1,389 +1,988 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/x-icon" href="favicon.png">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ofsaeily</title>
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OFSAEILY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <!-- Font: Source Serif Pro -->
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400&display=swap" rel="stylesheet">
+        body {
+            background: #f5f2eb;
+            min-height: 100vh;
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #000000;
+            font-size: 8pt;
+            overflow-x: hidden;
+        }
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Source Serif Pro', serif;
-      font-size: 12px;
-      font-weight: 400;
-      background: #eaebe5;
-      color: #000;
-      position: relative;
-    }
+        /* Grain texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.4;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4"/><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.15 0"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.3"/></svg>');
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            mix-blend-mode: multiply;
+        }
 
-    /* Grain overlay for body */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 1;
-    }
+        /* Paper texture */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.1;
+            background-image: 
+                radial-gradient(circle at 30% 40%, rgba(180,160,140,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(130,110,90,0.1) 0%, transparent 40%);
+            background-blend-mode: overlay;
+        }
 
-    header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      padding: 20px 40px;
-      background: #eaebe5;
-      position: relative;
-      z-index: 2;
-    }
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            z-index: 100;
+            background: rgba(245, 242, 235, 1);
+            transition: background 0.3s ease, backdrop-filter 0.3s ease;
+            font-size: 8pt;
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #000000;
+            border-bottom: none;
+        }
 
-    /* Grain overlay for header */
-    header::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: -1;
-    }
+        .header.scrolled {
+            background: rgba(245, 242, 235, 0.5);
+            backdrop-filter: blur(6px);
+        }
 
-    .col {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.25;
-      text-transform: uppercase;
-    }
+        .header:not(.scrolled) {
+            background: rgba(245, 242, 235, 1);
+            backdrop-filter: none;
+        }
 
-    .email {
-      text-transform: none;
-      opacity: 0.7;
-    }
+        .header-content {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            max-width: 1200px;
+            flex-direction: row;
+            flex-wrap: nowrap;
+        }
 
-    .menu a {
-      text-decoration: none;
-      color: inherit;
-      margin-bottom: 1px;
-    }
+        .col {
+            display: flex;
+            align-items: flex-start;
+            font-size: 8pt;
+            flex: 1;
+            min-width: 0;
+            padding: 0.5rem 0;
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #000000;
+        }
 
-    .menu a:hover {
-      opacity: 0.6;
-    }
+        .col-1 {
+            justify-content: flex-start;
+            padding-left: 0;
+        }
 
-    img {
-      height: 40px;
-      width: auto;
-    }
+        .logo-text {
+            font-size: 8pt;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: #000000;
+            font-family: 'Source Sans Pro', sans-serif;
+            white-space: nowrap;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
 
-    /* Add border to all images except those in header */
-    img:not(header img) {
-      border: 0px solid #000;
-    }
+        .logo-text:hover {
+            opacity: 0.5;
+        }
 
-    .divider-120 { height: 120px; }
-    .divider-60 { height: 60px; }
-    .divider-10 { height: 10px; }
+        .col-2 {
+            justify-content: flex-start;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.05rem;
+        }
 
-    .title-main {
-      font-size: 26px;
-      text-transform: uppercase;
-      padding-left: 40px;
-      position: relative;
-      z-index: 2;
-    }
+        .enquiries {
+            font-size: 8pt;
+            letter-spacing: 0.05em;
+            color: #000000;
+            font-family: 'Source Sans Pro', sans-serif;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
 
-    .thin-line {
-      width: 100%;
-      height: 1px;
-      background: #000;
-      position: relative;
-      z-index: 2;
-    }
+        .email {
+            font-size: 8pt;
+            letter-spacing: 0.05em;
+            color: #000000;
+            font-family: 'Source Sans Pro', sans-serif;
+            text-transform: lowercase;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: opacity 0.3s ease, color 0.3s ease;
+        }
 
-    .section {
-      padding-left: 40px;
-      padding-right: 40px;
-      position: relative;
-      z-index: 2;
-    }
+        .email:hover {
+            opacity: 0.5;
+        }
 
-    .title-small {
-      font-size: 12px;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      position: relative;
-      z-index: 2;
-    }
+        .email.vermillion {
+            color: #E32636;
+            opacity: 1;
+        }
 
-    .click-image {
-      width: 300px;
-      height: auto;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-    }
+        .col-3 {
+            justify-content: center;
+        }
 
-    /* ---------------------- FOOTER ---------------------- */
-    footer {
-      padding: 40px;
-      background: #eaebe5;
-      text-transform: uppercase;
-      position: relative;
-      z-index: 2;
-    }
+        .nav {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.15rem;
+            list-style: none;
+            font-size: 8pt;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-family: 'Source Sans Pro', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #000000;
+        }
 
-    /* Grain overlay for footer */
-    footer::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: -1;
-    }
+        .nav li {
+            color: #000000;
+            font-weight: 400;
+            font-size: 8pt;
+            font-family: 'Source Sans Pro', sans-serif;
+            white-space: nowrap;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: opacity 0.3s ease, color 0.3s ease;
+        }
 
-    .newsletter-title {
-      margin-bottom: 10px;
-      font-size: 12px;
-    }
+        .nav li:hover {
+            opacity: 0.5;
+        }
 
-    .newsletter {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
+        .nav li.vermillion {
+            color: #E32636;
+            opacity: 1;
+        }
 
-    .newsletter input {
-      padding: 6px 10px;
-      border: 1px solid #000;
-      background: transparent;
-      font-family: 'Source Serif Pro', serif;
-      font-size: 12px;
-      width: 220px;
-    }
+        .col-4 {
+            justify-content: flex-end;
+            padding-right: 0;
+        }
 
-    .newsletter button {
-      padding: 6px 14px;
-      border: 1px solid #000;
-      background: transparent;
-      cursor: pointer;
-      font-family: 'Source Serif Pro', serif;
-      font-size: 12px;
-      text-transform: uppercase;
-    }
+        .logo-image {
+            width: 40px;
+            height: 40px;
+            background: #d4cfc8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+        }
 
-    .newsletter button:hover {
-      opacity: 0.6;
-    }
+        .logo-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-    .footer-copy {
-      opacity: 0.7;
-    }
+        .logo-image .placeholder {
+            font-size: 8pt;
+            letter-spacing: 0.05em;
+            color: #999;
+            font-weight: 300;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
 
-    .image-row-2 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      padding: 0 40px;
-      position: relative;
-      z-index: 2;
-    }
+        /* Content area */
+        .content {
+            padding-top: 7rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 3rem;
+            padding-right: 3rem;
+            font-size: 8pt;
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #000000;
+            padding-bottom: 0;
+        }
 
-    .image-block {
-      display: flex;
-      flex-direction: column;
-      text-transform: uppercase;
-      font-size: 12px;
-      position: relative;
-      z-index: 2;
-    }
+        /* Slide 1: Slider Section */
+        .slider-section {
+            padding: 2rem 0 1rem 0;
+            overflow: visible;
+            position: relative;
+            width: 100%;
+        }
 
-    .image-block img {
-      width: 100%;
-      height: auto;
-      cursor: pointer;
-      margin-top: 10px;
-      object-fit: cover;
-    }
+        .slider-container {
+            display: flex;
+            gap: 2.5rem;
+            overflow-x: auto;
+            padding: 2rem 0.5rem 2rem 0.5rem;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            align-items: flex-start;
+        }
 
-    /* NEW: Responsive mobile styles */
-    @media (max-width: 768px) {
-      /* Header stays exactly the same */
-      header {
-        padding: 20px;
-      }
-      
-      /* Adjust title for mobile */
-      .title-main {
-        font-size: 22px;
-        padding-left: 20px;
-        padding-right: 20px;
-        text-align: left;
-      }
-      
-      /* Make image row single column on mobile */
-      .image-row-2 {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        padding: 0 20px;
-      }
-      
-      /* Adjust image blocks for mobile */
-      .image-block {
-        width: 100%;
-      }
-      
-      /* Adjust spacing for mobile */
-      .divider-120 {
-        height: 80px;
-      }
-      
-      .divider-60 {
-        height: 40px;
-      }
-      
-      .divider-10 {
-        height: 5px;
-      }
-      
-      /* Adjust sections for mobile */
-      .section {
-        padding-left: 20px;
-        padding-right: 20px;
-      }
-      
-      /* Adjust footer for mobile */
-      footer {
-        padding: 20px;
-      }
-      
-      /* Adjust newsletter for mobile */
-      .newsletter {
-        flex-direction: column;
-        gap: 10px;
-      }
-      
-      .newsletter input {
-        width: 100%;
-        max-width: 220px;
-      }
-      
-      .newsletter button {
-        align-self: flex-start;
-      }
-      
-      /* Adjust click-image for mobile */
-      .click-image {
-        width: 100%;
-        max-width: 300px;
-      }
-    }
+        .slider-container::-webkit-scrollbar {
+            display: none;
+        }
 
-    /* Extra small devices */
-    @media (max-width: 480px) {
-      .title-main {
-        font-size: 20px;
-      }
-      
-      .divider-120 {
-        height: 60px;
-      }
-      
-      .divider-60 {
-        height: 30px;
-      }
-      
-      .divider-10 {
-        height: 5px;
-      }
-      
-      .image-row-2 {
-        gap: 40px;
-      }
-    }
-  </style>
+        .slider-card-wrapper {
+            flex: 0 0 280px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
 
+        .slider-card-wrapper:nth-child(1) {
+            transform: rotate(-2.5deg) translateY(0px);
+        }
+        .slider-card-wrapper:nth-child(2) {
+            transform: rotate(1.8deg) translateY(-12px);
+        }
+        .slider-card-wrapper:nth-child(3) {
+            transform: rotate(-1.2deg) translateY(8px);
+        }
+        .slider-card-wrapper:nth-child(4) {
+            transform: rotate(2.2deg) translateY(-10px);
+        }
+        .slider-card-wrapper:nth-child(5) {
+            transform: rotate(-1.8deg) translateY(12px);
+        }
+
+        .slider-card-wrapper:hover {
+            transform: scale(1.02) rotate(0deg) translateY(0);
+            z-index: 5;
+        }
+
+        .slider-card {
+            aspect-ratio: 4/5;
+            background: #f0ede8;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .slider-card:hover {
+            transform: scale(1.02);
+        }
+
+        .slider-card-image {
+            width: 100%;
+            height: 100%;
+            background: #d4cfc8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider-card-image .placeholder {
+            font-size: 6pt;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #999;
+            font-weight: 300;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+
+        .slider-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-card-title {
+            text-align: left;
+            padding: 0.8rem 0.2rem 0.2rem 0.2rem;
+            opacity: 0;
+            transform: translateY(-5px);
+            transition: all 0.4s ease;
+        }
+
+        .slider-card-wrapper:hover .slider-card-title {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slider-card-title .blog-number {
+            display: block;
+            font-size: 7pt;
+            letter-spacing: 0.1em;
+            color: #999;
+            font-weight: 300;
+            margin-bottom: 0.15rem;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: normal;
+        }
+
+        .slider-card-title .blog-date {
+            display: block;
+            font-size: 6.5pt;
+            letter-spacing: 0.08em;
+            color: #aaa;
+            font-weight: 300;
+            margin-top: 0.1rem;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+
+        .slider-card-title a {
+            color: #000000;
+            font-size: 9.5pt;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            font-family: 'Source Sans Pro', sans-serif;
+            line-height: 1.3;
+            transition: opacity 0.3s ease;
+            display: inline-block;
+        }
+
+        .slider-card-title a:hover {
+            opacity: 0.5;
+        }
+
+        .slider-card-wrapper:nth-child(1) .slider-card-title {
+            transition-delay: 0.05s;
+        }
+        .slider-card-wrapper:nth-child(2) .slider-card-title {
+            transition-delay: 0.05s;
+        }
+        .slider-card-wrapper:nth-child(3) .slider-card-title {
+            transition-delay: 0.1s;
+        }
+        .slider-card-wrapper:nth-child(4) .slider-card-title {
+            transition-delay: 0.08s;
+        }
+        .slider-card-wrapper:nth-child(5) .slider-card-title {
+            transition-delay: 0.12s;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 1.5rem 0 0.5rem 0;
+        }
+
+        .slider-dots .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: transparent;
+            border: 1.5px solid #000000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-dots .dot.active {
+            background: #000000;
+            border-color: #000000;
+        }
+
+        .slider-dots .dot:hover {
+            opacity: 0.5;
+        }
+
+        /* Slide 2: Hover to reveal text */
+        .cover-slide {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            margin-right: calc(-50vw + 50%);
+            height: 100vh;
+            background: #101010;
+            overflow: hidden;
+            position: relative;
+            display: block;
+            cursor: pointer;
+        }
+
+        /* Picture layer */
+        .cover-image-part {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #d4cfc8;
+            overflow: hidden;
+            z-index: 1;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .cover-image-part svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* Dark text layer - hidden by default */
+        .cover-text-part {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #101010;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 4rem 6rem;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            pointer-events: none;
+        }
+
+        /* On hover: picture fades out, text fades in */
+        .cover-slide:hover .cover-image-part {
+            opacity: 0;
+            transform: scale(1.05);
+        }
+
+        .cover-slide:hover .cover-text-part {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .cover-text-part .about-text {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 8pt;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            color: #ffffff;
+            line-height: 1.8;
+            max-width: 600px;
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Read More link - below about text, left-aligned */
+        .cover-read-more {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 8pt;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            padding-bottom: 0.15rem;
+            align-self: flex-start;
+        }
+
+        .cover-read-more:hover {
+            opacity: 0.6;
+        }
+
+        /* Footer overlay */
+        .footer-overlay {
+            position: absolute;
+            bottom: 3%;
+            left: 0;
+            right: 0;
+            padding: 0 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            z-index: 3;
+            pointer-events: none;
+            width: 100%;
+        }
+
+        .footer-overlay * {
+            pointer-events: auto;
+        }
+
+        .footer-left {
+            display: flex;
+            gap: 2.5rem;
+            align-items: flex-start;
+        }
+
+        .footer-social-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.1rem;
+        }
+
+        .footer-social-label {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 6pt;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #ffffff;
+            font-weight: 300;
+            opacity: 0.25;
+        }
+
+        .footer-social-link {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 8pt;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+            opacity: 0.5;
+        }
+
+        .footer-social-link:hover {
+            opacity: 1;
+        }
+
+        .footer-copyright {
+            font-size: 8pt;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #ffffff;
+            font-weight: 300;
+            font-family: 'Source Sans Pro', sans-serif;
+            text-align: right;
+            opacity: 0.5;
+            padding-top: 0.15rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 800px) {
+            .slider-card-wrapper {
+                flex: 0 0 220px;
+            }
+            .slider-card-wrapper:nth-child(1),
+            .slider-card-wrapper:nth-child(2),
+            .slider-card-wrapper:nth-child(3),
+            .slider-card-wrapper:nth-child(4),
+            .slider-card-wrapper:nth-child(5) {
+                transform: rotate(0deg) translateY(0);
+            }
+            .slider-card-wrapper:hover {
+                transform: scale(1.02) rotate(0deg) translateY(0);
+            }
+            .slider-card-title a {
+                font-size: 8.5pt;
+            }
+            .cover-text-part {
+                padding: 3rem 3rem;
+            }
+            .cover-text-part .about-text {
+                font-size: 8pt;
+                max-width: 400px;
+            }
+            .footer-overlay {
+                padding: 0 1.5rem;
+                bottom: 2.5%;
+            }
+            .footer-social-link {
+                font-size: 8pt;
+            }
+            .footer-copyright {
+                font-size: 8pt;
+            }
+            .footer-social-label {
+                font-size: 6pt;
+            }
+            .footer-left {
+                gap: 1.5rem;
+            }
+            .logo-image {
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .slider-card-wrapper {
+                flex: 0 0 180px;
+            }
+            
+            .header {
+                padding: 1rem;
+            }
+            
+            .content {
+                padding-left: 1rem;
+                padding-right: 1rem;
+                padding-top: 6rem;
+                padding-bottom: 0;
+            }
+
+            .slider-card-title a {
+                font-size: 7.5pt;
+            }
+            .slider-card-title .blog-number {
+                font-size: 6pt;
+            }
+            .slider-card-title .blog-date {
+                font-size: 5.5pt;
+            }
+
+            .slider-dots .dot {
+                width: 5px;
+                height: 5px;
+                border-width: 1px;
+            }
+
+            .slider-dots {
+                gap: 0.5rem;
+            }
+
+            .cover-text-part {
+                padding: 2rem 1.5rem;
+            }
+            .cover-text-part .about-text {
+                font-size: 8pt;
+                max-width: 300px;
+                margin-bottom: 1rem;
+            }
+            .cover-read-more {
+                font-size: 7pt;
+            }
+            .footer-overlay {
+                padding: 0 1rem;
+                bottom: 2%;
+                flex-direction: column;
+                gap: 0.8rem;
+                align-items: center;
+            }
+            .footer-left {
+                flex-direction: column;
+                gap: 0.8rem;
+                align-items: center;
+            }
+            .footer-social-wrapper {
+                align-items: center;
+            }
+            .footer-social-link {
+                font-size: 8pt;
+            }
+            .footer-copyright {
+                font-size: 8pt;
+                text-align: center;
+                padding-top: 0;
+            }
+            .footer-social-label {
+                font-size: 6pt;
+            }
+            .logo-image {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<header>
-
-  <div class="col">ofsaeily</div>
-
-  <div class="col">
-    enquiries
-    <span class="email">ofsaeily@gmail.com</span>
-  </div>
-
-  <div class="col menu">
-    <a href="index.html">I. collections</a>
-    <a href="archive.html">II. archive</a>
-    <a href="about.html">III. about</a>
-    <a href="contact.html">VI. contact</a>
-     <a href="https://linktr.ee/ofsaeily" target="_blank">V. my links</a>
-  </div>
-
-<div class="col">
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-content">
+            <div class="col col-1">
+                <a href="#" class="logo-text" id="homeLink">OFSAEILY</a>
+            </div>
+            <div class="col col-2">
+                <span class="enquiries">ENQUIRIES</span>
+                <span class="email" id="emailLink">OFSAEILY@GMAIL.COM</span>
+            </div>
+            <div class="col col-3">
+                <ul class="nav">
+                    <li data-page="collections">COLLECTIONS</li>
+                    <li data-page="about">ABOUT</li>
+                </ul>
+            </div>
+            <div class="col col-4">
+                <div class="logo-image">
   <img src="ofs..png" alt="Logo" style="width: 40px; height: 40px; object-fit: contain;">
 </div>
+            </div>
+        </div>
+    </header>
 
-</header>
+    <main class="content">
+        <!-- Slide 1: Slider Section -->
+        <section class="slider-section">
+            <div class="slider-container" id="sliderContainer">
+                <!-- Cards 1-5 -->
+                <div class="slider-card-wrapper">
+                    <div class="slider-card">
+                        <div class="slider-card-image">
+                            <svg width="100%" height="100%" viewBox="0 0 400 500" preserveAspectRatio="none" style="background: #d4cfc8;">
+                                <rect width="400" height="500" fill="#d4cfc8"/>
+                                <text x="200" y="250" text-anchor="middle" font-family="Source Sans Pro, sans-serif" font-size="12" fill="#aaa" letter-spacing="0.2em">IMAGE</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="slider-card-title">
+                        <span class="collection number">001</span>
+                        <a href="#" class="collection-link">Birdsong for the confined</a>
+                        <span class="collection-date">12.08.2026</span>
+                    </div>
+                </div>
 
-<!-- 120px divider -->
-<div class="divider-120"></div>
+                <div class="slider-card-wrapper">
+                    <div class="slider-card">
+                        <div class="slider-card-image">
+                            <svg width="100%" height="100%" viewBox="0 0 400 500" preserveAspectRatio="none" style="background: #d4cfc8;">
+                                <rect width="400" height="500" fill="#d4cfc8"/>
+                                <a href="birdsong.html"><img src="Picsart_25-12-18_22-23-42-094.png" alt="Image 2"></a>
+                                <text x="200" y="250" text-anchor="middle" font-family="Source Sans Pro, sans-serif" font-size="12" fill="#aaa" letter-spacing="0.2em">IMAGE</text>
+                            </svg>
+                        </div>
+                    </div>
 
-<!-- Title: I. COLLECTIONS -->
-<div class="title-main">I. COLLECTIONS</div>
+        
 
-<!-- 60px divider -->
-<div class="divider-60"></div>
+            <div class="slider-dots" id="sliderDots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+            </div>
+        </section>
 
-<!-- Thinner line -->
-<div class="thin-line"></div>
+        <!-- Slide 2: Hover to reveal -->
+        <div class="cover-slide" id="coverSlide">
+            <!-- Picture layer -->
+            <div class="cover-image-part">
+                <svg width="100%" height="100%" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" style="background: #d4cfc8;">
+<a href="birdsong.html"><img src="Picsart_25-12-18_22-23-42-094.png" alt="Image 2"></a>
+                    <rect width="1600" height="900" fill="#d4cfc8"/>
+                    <ellipse cx="800" cy="370" rx="520" ry="470" fill="#3a3530" opacity="0.85"/>
+                    <ellipse cx="800" cy="340" rx="440" ry="420" fill="#4a4440"/>
+                    <path d="M320 630 Q480 570 640 610 Q800 620 960 610 Q1120 570 1280 630 L1360 900 L240 900 Z" fill="#3a3530" opacity="0.6"/>
+                    <ellipse cx="800" cy="390" rx="290" ry="260" fill="#d4cfc8" opacity="0.3"/>
+                    <rect x="570" y="290" width="460" height="340" rx="20" fill="#2a2520" opacity="0.85"/>
+                    <rect x="610" y="310" width="380" height="300" rx="12" fill="#3a3530" opacity="0.7"/>
+                    <line x1="610" y1="360" x2="990" y2="360" stroke="#5a5550" stroke-width="2" opacity="0.4"/>
+                    <line x1="610" y1="400" x2="990" y2="400" stroke="#5a5550" stroke-width="2" opacity="0.4"/>
+                    <line x1="610" y1="440" x2="990" y2="440" stroke="#5a5550" stroke-width="2" opacity="0.4"/>
+                    <line x1="610" y1="480" x2="990" y2="480" stroke="#5a5550" stroke-width="2" opacity="0.4"/>
+                    <line x1="610" y1="520" x2="990" y2="520" stroke="#5a5550" stroke-width="2" opacity="0.4"/>
+                    <line x1="800" y1="310" x2="800" y2="610" stroke="#5a5550" stroke-width="2" opacity="0.3"/>
+                    <ellipse cx="690" cy="370" rx="32" ry="14" fill="#5a5550" opacity="0.3"/>
+                    <ellipse cx="910" cy="370" rx="32" ry="14" fill="#5a5550" opacity="0.3"/>
+                    <rect x="700" y="550" width="200" height="90" fill="#c8c0b6" opacity="0.3"/>
+                    <path d="M640 600 Q720 620 800 610 Q880 620 960 600" stroke="#2a2520" stroke-width="4" fill="none" opacity="0.4"/>
+                    <rect x="650" y="320" width="300" height="35" rx="8" fill="#5a5550" opacity="0.2"/>
+                    <rect x="700" y="550" width="60" height="10" rx="2" fill="#5a5550" opacity="0.15"/>
+                    <rect x="840" y="550" width="60" height="10" rx="2" fill="#5a5550" opacity="0.15"/>
+                </svg>
+            </div>
 
-<!-- 60px divider -->
-<div class="divider-60"></div>
+            <!-- Dark text layer - left aligned -->
+            <div class="cover-text-part">
+                <div class="about-text">
+                    We are a small studio exploring the quiet spaces between architecture, memory, and the everyday. Through image, text, and curation, we document the unseen rhythms of the world around us.
+                </div>
+                
+                <a href="#" class="cover-read-more" id="readMoreLink">read more</a>
+            </div>
 
-<!-- Section -->
-<div class="image-row-2">
-
-  <div class="image-block">
-    <div class="title">Birdsong for the confined</div>
-    <a href="birdsong.html"><img src="Picsart_25-12-18_22-23-42-094.png" alt="Image 2"></a>
+            <!-- Footer overlay -->
+            <div class="footer-overlay">
+                <div class="footer-left">
+                    <div class="footer-social-wrapper">
+                        <span class="footer-social-label">Instagram</span>
+                        <a href="https://www.instagram.com/ofsaeily?igsi=NW85aWFia2l2eWcy" class="footer-social-link" id="instagramLink">@OFSAEILY</a>
   </div>
+                    </div>
+                    <div class="footer-social-wrapper">
+                        <span class="footer-social-label">Substack</span>
+                        <a href="#" class="footer-social-link" id="substackLink">OFSAEILY</a>
+                    </div>
+                </div>
+                <span class="footer-copyright">© 2026 OFSAEILY</span>
+            </div>
+        </div>
+    </main>
 
+    <script>
+        const header = document.getElementById('header');
+        let timeout;
 
+        window.addEventListener('scroll', function() {
+            const scrollY = window.scrollY;
 
-</div>
+            if (scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
 
-<!-- 60px divider -->
-<div class="divider-60"></div>
+            clearTimeout(timeout);
 
-<!-- Thinner line -->
-<div class="thin-line"></div>
+            if (scrollY > 20) {
+                timeout = setTimeout(function() {
+                    header.classList.remove('scrolled');
+                }, 300);
+            }
+        });
 
-<!-- 60px divider -->
-<div class="divider-10"></div>
+        // Home link functionality
+        const homeLink = document.getElementById('homeLink');
+        homeLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open('#home', '_blank');
+        });
 
-<!-- ---------------------- FOOTER ---------------------- -->
-<footer>
+        // Email functionality
+        const emailElement = document.getElementById('emailLink');
+        let emailClicked = false;
 
+        emailElement.addEventListener('click', function(e) {
+            e.preventDefault();
+            emailClicked = !emailClicked;
+            
+            if (emailClicked) {
+                this.classList.add('vermillion');
+                window.open('mailto:OFSAEILY@GMAIL.COM', '_blank');
+            } else {
+                this.classList.remove('vermillion');
+            }
+        });
 
+        // Navigation items functionality
+        const navItems = document.querySelectorAll('.nav li');
+        const navItemStates = {};
 
-  <div class="footer-copy">© 2025 by ofsaeily</div>
+        navItems.forEach(function(item) {
+            navItemStates[item.textContent.trim()] = false;
+            
+            item.addEventListener('click', function(e) {
+                const key = this.textContent.trim();
+                navItemStates[key] = !navItemStates[key];
+                
+                if (navItemStates[key]) {
+                    this.classList.add('vermillion');
+                    const page = this.getAttribute('data-page');
+                    window.open(`#${page}`, '_blank');
+                } else {
+                    this.classList.remove('vermillion');
+                }
+            });
+        });
 
-</footer>
+        // Blog title links functionality
+        document.querySelectorAll('.blog-link').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const title = this.textContent;
+                window.open(`#${title.toLowerCase().replace(/\s+/g, '-')}`, '_blank');
+            });
+        });
 
+        // Read more link functionality
+        document.getElementById('readMoreLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open('#about', '_blank');
+        });
+
+        // Instagram link functionality
+        document.getElementById('instagramLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open('https://instagram.com/ofsaeily', '_blank');
+        });
+
+        // Substack link functionality
+        document.getElementById('substackLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open('https://ofsaeily.substack.com', '_blank');
+        });
+
+        // Slider scroll with dot indicators
+        const container = document.getElementById('sliderContainer');
+        const dots = document.querySelectorAll('.dot');
+        let currentIndex = 0;
+        const cardWidth = 280 + 40;
+
+        function updateDots(index) {
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        container.addEventListener('scroll', function() {
+            const scrollLeft = this.scrollLeft;
+            const index = Math.round(scrollLeft / cardWidth);
+            const clampedIndex = Math.max(0, Math.min(index, dots.length - 1));
+            if (clampedIndex !== currentIndex) {
+                currentIndex = clampedIndex;
+                updateDots(clampedIndex);
+            }
+        });
+
+        dots.forEach((dot) => {
+            dot.addEventListener('click', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                currentIndex = index;
+                container.scrollTo({
+                    left: index * cardWidth,
+                    behavior: 'smooth'
+                });
+                updateDots(index);
+            });
+        });
+
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                const scrollLeft = container.scrollLeft;
+                const index = Math.round(scrollLeft / cardWidth);
+                const clampedIndex = Math.max(0, Math.min(index, dots.length - 1));
+                if (clampedIndex !== currentIndex) {
+                    currentIndex = clampedIndex;
+                    updateDots(clampedIndex);
+                }
+            }, 100);
+        });
+
+        window.addEventListener('load', function() {
+            const scrollLeft = container.scrollLeft;
+            const index = Math.round(scrollLeft / cardWidth);
+            const clampedIndex = Math.max(0, Math.min(index, dots.length - 1));
+            currentIndex = clampedIndex;
+            updateDots(clampedIndex);
+        });
+    </script>
 </body>
 </html>
