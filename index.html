@@ -203,28 +203,17 @@
         .logo-image {
             width: 40px;
             height: 40px;
-            background: #d4cfc8;
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             flex-shrink: 0;
-            border: 2px solid rgba(0, 0, 0, 0.1);
         }
 
         .logo-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .logo-image .placeholder {
-            font-size: 8pt;
-            letter-spacing: 0.05em;
-            color: #999;
-            font-weight: 300;
-            font-family: 'Source Sans Pro', sans-serif;
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
         }
 
         /* Content area */
@@ -276,15 +265,6 @@
         .slider-card-wrapper:nth-child(2) {
             transform: rotate(1.8deg) translateY(-12px);
         }
-        .slider-card-wrapper:nth-child(3) {
-            transform: rotate(-1.2deg) translateY(8px);
-        }
-        .slider-card-wrapper:nth-child(4) {
-            transform: rotate(2.2deg) translateY(-10px);
-        }
-        .slider-card-wrapper:nth-child(5) {
-            transform: rotate(-1.8deg) translateY(12px);
-        }
 
         .slider-card-wrapper:hover {
             transform: scale(1.02) rotate(0deg) translateY(0);
@@ -317,6 +297,12 @@
             position: relative;
         }
 
+        .slider-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .slider-card-image .placeholder {
             font-size: 6pt;
             letter-spacing: 0.2em;
@@ -324,12 +310,6 @@
             color: #999;
             font-weight: 300;
             font-family: 'Source Sans Pro', sans-serif;
-        }
-
-        .slider-card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
 
         .slider-card-title {
@@ -345,7 +325,7 @@
             transform: translateY(0);
         }
 
-        .slider-card-title .blog-number {
+        .slider-card-title .collection-number {
             display: block;
             font-size: 7pt;
             letter-spacing: 0.1em;
@@ -356,7 +336,7 @@
             font-style: normal;
         }
 
-        .slider-card-title .blog-date {
+        .slider-card-title .collection-date {
             display: block;
             font-size: 6.5pt;
             letter-spacing: 0.08em;
@@ -366,7 +346,7 @@
             font-family: 'Source Sans Pro', sans-serif;
         }
 
-        .slider-card-title a {
+        .slider-card-title .collection-link {
             color: #000000;
             font-size: 9.5pt;
             font-weight: 600;
@@ -378,7 +358,7 @@
             display: inline-block;
         }
 
-        .slider-card-title a:hover {
+        .slider-card-title .collection-link:hover {
             opacity: 0.5;
         }
 
@@ -387,15 +367,6 @@
         }
         .slider-card-wrapper:nth-child(2) .slider-card-title {
             transition-delay: 0.05s;
-        }
-        .slider-card-wrapper:nth-child(3) .slider-card-title {
-            transition-delay: 0.1s;
-        }
-        .slider-card-wrapper:nth-child(4) .slider-card-title {
-            transition-delay: 0.08s;
-        }
-        .slider-card-wrapper:nth-child(5) .slider-card-title {
-            transition-delay: 0.12s;
         }
 
         .slider-dots {
@@ -448,6 +419,12 @@
             overflow: hidden;
             z-index: 1;
             transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .cover-image-part img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .cover-image-part svg {
@@ -593,16 +570,13 @@
                 flex: 0 0 220px;
             }
             .slider-card-wrapper:nth-child(1),
-            .slider-card-wrapper:nth-child(2),
-            .slider-card-wrapper:nth-child(3),
-            .slider-card-wrapper:nth-child(4),
-            .slider-card-wrapper:nth-child(5) {
+            .slider-card-wrapper:nth-child(2) {
                 transform: rotate(0deg) translateY(0);
             }
             .slider-card-wrapper:hover {
                 transform: scale(1.02) rotate(0deg) translateY(0);
             }
-            .slider-card-title a {
+            .slider-card-title .collection-link {
                 font-size: 8.5pt;
             }
             .cover-text-part {
@@ -628,10 +602,6 @@
             .footer-left {
                 gap: 1.5rem;
             }
-            .logo-image {
-                width: 35px;
-                height: 35px;
-            }
         }
 
         @media (max-width: 600px) {
@@ -650,13 +620,13 @@
                 padding-bottom: 0;
             }
 
-            .slider-card-title a {
+            .slider-card-title .collection-link {
                 font-size: 7.5pt;
             }
-            .slider-card-title .blog-number {
+            .slider-card-title .collection-number {
                 font-size: 6pt;
             }
-            .slider-card-title .blog-date {
+            .slider-card-title .collection-date {
                 font-size: 5.5pt;
             }
 
@@ -707,10 +677,6 @@
             .footer-social-label {
                 font-size: 6pt;
             }
-            .logo-image {
-                width: 30px;
-                height: 30px;
-            }
         }
     </style>
 </head>
@@ -727,14 +693,14 @@
             </div>
             <div class="col col-3">
                 <ul class="nav">
-                    <li data-page="collections">COLLECTIONS</li>
-                    <li data-page="about">ABOUT</li>
+                    <li data-page="collections" id="collectionsNav">COLLECTIONS</li>
+                    <li data-page="about" id="aboutNav">ABOUT</li>
                 </ul>
             </div>
             <div class="col col-4">
                 <div class="logo-image">
-  <img src="ofs..png" alt="Logo" style="width: 40px; height: 40px; object-fit: contain;">
-</div>
+                    <img src="ofs..png" alt="Logo">
+                </div>
             </div>
         </div>
     </header>
@@ -743,7 +709,23 @@
         <!-- Slide 1: Slider Section -->
         <section class="slider-section">
             <div class="slider-container" id="sliderContainer">
-                <!-- Cards 1-5 -->
+                <!-- Card 1: Birdsong for the confined -->
+                <div class="slider-card-wrapper">
+                    <div class="slider-card">
+                        <div class="slider-card-image">
+                            <a href="birdsong.html">
+                                <img src="Picsart_25-12-18_22-23-42-094.png" alt="Birdsong for the confined" style="width: 100%; height: 100%; object-fit: cover;">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="slider-card-title">
+                        <span class="collection-number">001</span>
+                        <a href="birdsong.html" class="collection-link">Birdsong for the confined</a>
+                        <span class="collection-date">12.08.2026</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
                 <div class="slider-card-wrapper">
                     <div class="slider-card">
                         <div class="slider-card-image">
@@ -754,24 +736,12 @@
                         </div>
                     </div>
                     <div class="slider-card-title">
-                        <span class="collection number">001</span>
-                        <a href="#" class="collection-link">Birdsong for the confined</a>
-                        <span class="collection-date">12.08.2026</span>
+                        <span class="collection-number">002</span>
+                        <a href="#" class="collection-link">The Architecture of Quiet</a>
+                        <span class="collection-date">08.08.2026</span>
                     </div>
                 </div>
-
-                <div class="slider-card-wrapper">
-                    <div class="slider-card">
-                        <div class="slider-card-image">
-                            <svg width="100%" height="100%" viewBox="0 0 400 500" preserveAspectRatio="none" style="background: #d4cfc8;">
-                                <rect width="400" height="500" fill="#d4cfc8"/>
-                                <a href="birdsong.html"><img src="Picsart_25-12-18_22-23-42-094.png" alt="Image 2"></a>
-                                <text x="200" y="250" text-anchor="middle" font-family="Source Sans Pro, sans-serif" font-size="12" fill="#aaa" letter-spacing="0.2em">IMAGE</text>
-                            </svg>
-                        </div>
-                    </div>
-
-        
+            </div>
 
             <div class="slider-dots" id="sliderDots">
                 <span class="dot active" data-index="0"></span>
@@ -784,7 +754,6 @@
             <!-- Picture layer -->
             <div class="cover-image-part">
                 <svg width="100%" height="100%" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" style="background: #d4cfc8;">
-<a href="birdsong.html"><img src="Picsart_25-12-18_22-23-42-094.png" alt="Image 2"></a>
                     <rect width="1600" height="900" fill="#d4cfc8"/>
                     <ellipse cx="800" cy="370" rx="520" ry="470" fill="#3a3530" opacity="0.85"/>
                     <ellipse cx="800" cy="340" rx="440" ry="420" fill="#4a4440"/>
@@ -823,7 +792,6 @@
                     <div class="footer-social-wrapper">
                         <span class="footer-social-label">Instagram</span>
                         <a href="https://www.instagram.com/ofsaeily?igsi=NW85aWFia2l2eWcy" class="footer-social-link" id="instagramLink">@OFSAEILY</a>
-  </div>
                     </div>
                     <div class="footer-social-wrapper">
                         <span class="footer-social-label">Substack</span>
@@ -880,29 +848,28 @@
             }
         });
 
-        // Navigation items functionality
-        const navItems = document.querySelectorAll('.nav li');
-        const navItemStates = {};
+        // Navigation items functionality - COLLECTIONS
+        document.getElementById('collectionsNav').addEventListener('click', function(e) {
+            e.preventDefault();
+            this.classList.add('vermillion');
+            window.open('#collections', '_blank');
+            setTimeout(() => {
+                this.classList.remove('vermillion');
+            }, 500);
+        });
 
-        navItems.forEach(function(item) {
-            navItemStates[item.textContent.trim()] = false;
-            
-            item.addEventListener('click', function(e) {
-                const key = this.textContent.trim();
-                navItemStates[key] = !navItemStates[key];
-                
-                if (navItemStates[key]) {
-                    this.classList.add('vermillion');
-                    const page = this.getAttribute('data-page');
-                    window.open(`#${page}`, '_blank');
-                } else {
-                    this.classList.remove('vermillion');
-                }
-            });
+        // Navigation items functionality - ABOUT
+        document.getElementById('aboutNav').addEventListener('click', function(e) {
+            e.preventDefault();
+            this.classList.add('vermillion');
+            window.open('#about', '_blank');
+            setTimeout(() => {
+                this.classList.remove('vermillion');
+            }, 500);
         });
 
         // Blog title links functionality
-        document.querySelectorAll('.blog-link').forEach(function(link) {
+        document.querySelectorAll('.collection-link').forEach(function(link) {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const title = this.textContent;
@@ -986,4 +953,3 @@
     </script>
 </body>
 </html>
-                
