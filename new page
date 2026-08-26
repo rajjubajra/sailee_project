@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OFSAEILY</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,7 +15,7 @@
         body {
             background: #f5f2eb;
             min-height: 100vh;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
             color: #000000;
             font-size: 8pt;
             overflow-x: hidden;
@@ -63,7 +63,7 @@
             background: rgba(245, 242, 235, 1);
             transition: background 0.3s ease, backdrop-filter 0.3s ease;
             font-size: 8pt;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
             color: #000000;
             border-bottom: none;
         }
@@ -94,7 +94,7 @@
             flex: 1;
             min-width: 0;
             padding: 0.5rem 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
             color: #000000;
         }
 
@@ -108,7 +108,7 @@
             font-weight: 400;
             letter-spacing: 0.05em;
             color: #000000;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
             white-space: nowrap;
             cursor: pointer;
             text-decoration: none;
@@ -130,7 +130,7 @@
             font-size: 8pt;
             letter-spacing: 0.05em;
             color: #000000;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
             text-transform: uppercase;
             white-space: nowrap;
         }
@@ -139,7 +139,7 @@
             font-size: 8pt;
             letter-spacing: 0.05em;
             color: #000000;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
             text-transform: lowercase;
             white-space: nowrap;
             cursor: pointer;
@@ -168,7 +168,7 @@
             font-size: 8pt;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
             margin: 0;
             padding: 0;
             color: #000000;
@@ -178,7 +178,7 @@
             color: #000000;
             font-weight: 400;
             font-size: 8pt;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
             white-space: nowrap;
             letter-spacing: 0.05em;
             cursor: pointer;
@@ -200,20 +200,30 @@
         }
 
         .logo-image {
-            width: 30px;
-            height: 30px;
-            background: #000000;
+            width: 40px;
+            height: 40px;
+            background: #d4cfc8;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #f5f2eb;
-            font-size: 8pt;
-            font-weight: 400;
-            letter-spacing: 0.05em;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            overflow: hidden;
             flex-shrink: 0;
             border: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-image .placeholder {
+            font-size: 8pt;
+            letter-spacing: 0.05em;
+            color: #999;
+            font-weight: 300;
+            font-family: 'Source Sans Pro', sans-serif;
         }
 
         /* Content area */
@@ -224,7 +234,7 @@
             padding-left: 3rem;
             padding-right: 3rem;
             font-size: 8pt;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
             color: #000000;
             padding-bottom: 0;
         }
@@ -312,6 +322,7 @@
             text-transform: uppercase;
             color: #999;
             font-weight: 300;
+            font-family: 'Source Sans Pro', sans-serif;
         }
 
         .slider-card-image img {
@@ -340,7 +351,7 @@
             color: #999;
             font-weight: 300;
             margin-bottom: 0.15rem;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
             font-style: normal;
         }
 
@@ -351,16 +362,16 @@
             color: #aaa;
             font-weight: 300;
             margin-top: 0.1rem;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
         }
 
         .slider-card-title a {
             color: #000000;
             font-size: 9.5pt;
-            font-weight: 450;
+            font-weight: 600;
             letter-spacing: 0.05em;
             text-decoration: none;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
             line-height: 1.3;
             transition: opacity 0.3s ease;
             display: inline-block;
@@ -475,7 +486,7 @@
         }
 
         .cover-text-part .about-text {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
             font-size: 8pt;
             font-weight: 300;
             letter-spacing: 0.05em;
@@ -488,9 +499,9 @@
 
         /* Read More link - below about text, left-aligned */
         .cover-read-more {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
             font-size: 8pt;
-            font-weight: 400;
+            font-weight: 600;
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: #ffffff;
@@ -539,7 +550,7 @@
         }
 
         .footer-social-label {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
             font-size: 6pt;
             letter-spacing: 0.15em;
             text-transform: uppercase;
@@ -549,7 +560,7 @@
         }
 
         .footer-social-link {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
             font-size: 8pt;
             letter-spacing: 0.1em;
             text-transform: uppercase;
@@ -569,7 +580,7 @@
             text-transform: uppercase;
             color: #ffffff;
             font-weight: 300;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Source Sans Pro', sans-serif;
             text-align: right;
             opacity: 0.5;
             padding-top: 0.15rem;
@@ -615,6 +626,10 @@
             }
             .footer-left {
                 gap: 1.5rem;
+            }
+            .logo-image {
+                width: 35px;
+                height: 35px;
             }
         }
 
@@ -691,6 +706,10 @@
             .footer-social-label {
                 font-size: 6pt;
             }
+            .logo-image {
+                width: 30px;
+                height: 30px;
+            }
         }
     </style>
 </head>
@@ -712,7 +731,15 @@
                 </ul>
             </div>
             <div class="col col-4">
-                <div class="logo-image">O</div>
+                <div class="logo-image">
+                    <svg width="100%" height="100%" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="20" fill="#d4cfc8"/>
+                        <circle cx="20" cy="20" r="17" fill="#c8c0b6" opacity="0.5"/>
+                        <circle cx="20" cy="20" r="13" fill="#b8b0a6" opacity="0.3"/>
+                        <circle cx="20" cy="20" r="8" fill="#a8a098" opacity="0.2"/>
+                        <text x="20" y="24" text-anchor="middle" font-family="Source Sans Pro, sans-serif" font-size="10" fill="#666" letter-spacing="0.1em">O</text>
+                    </svg>
+                </div>
             </div>
         </div>
     </header>
@@ -727,7 +754,7 @@
                         <div class="slider-card-image">
                             <svg width="100%" height="100%" viewBox="0 0 400 500" preserveAspectRatio="none" style="background: #d4cfc8;">
                                 <rect width="400" height="500" fill="#d4cfc8"/>
-                                <text x="200" y="250" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#aaa" letter-spacing="0.2em">IMAGE</text>
+                                <text x="200" y="250" text-anchor="middle" font-family="Source Sans Pro, sans-serif" font-size="12" fill="#aaa" letter-spacing="0.2em">IMAGE</text>
                             </svg>
                         </div>
                     </div>
@@ -743,7 +770,7 @@
                         <div class="slider-card-image">
                             <svg width="100%" height="100%" viewBox="0 0 400 500" preserveAspectRatio="none" style="background: #d4cfc8;">
                                 <rect width="400" height="500" fill="#d4cfc8"/>
-                                <text x="200" y="250" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#aaa" letter-spacing="0.2em">IMAGE</text>
+                                <text x="200" y="250" text-anchor="middle" font-family="Source Sans Pro, sans-serif" font-size="12" fill="#aaa" letter-spacing="0.2em">IMAGE</text>
                             </svg>
                         </div>
                     </div>
@@ -759,7 +786,7 @@
                         <div class="slider-card-image">
                             <svg width="100%" height="100%" viewBox="0 0 400 500" preserveAspectRatio="none" style="background: #d4cfc8;">
                                 <rect width="400" height="500" fill="#d4cfc8"/>
-                                <text x="200" y="250" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#aaa" letter-spacing="0.2em">IMAGE</text>
+                                <text x="200" y="250" text-anchor="middle" font-family="Source Sans Pro, sans-serif" font-size="12" fill="#aaa" letter-spacing="0.2em">IMAGE</text>
                             </svg>
                         </div>
                     </div>
@@ -775,7 +802,7 @@
                         <div class="slider-card-image">
                             <svg width="100%" height="100%" viewBox="0 0 400 500" preserveAspectRatio="none" style="background: #d4cfc8;">
                                 <rect width="400" height="500" fill="#d4cfc8"/>
-                                <text x="200" y="250" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#aaa" letter-spacing="0.2em">IMAGE</text>
+                                <text x="200" y="250" text-anchor="middle" font-family="Source Sans Pro, sans-serif" font-size="12" fill="#aaa" letter-spacing="0.2em">IMAGE</text>
                             </svg>
                         </div>
                     </div>
@@ -791,7 +818,7 @@
                         <div class="slider-card-image">
                             <svg width="100%" height="100%" viewBox="0 0 400 500" preserveAspectRatio="none" style="background: #d4cfc8;">
                                 <rect width="400" height="500" fill="#d4cfc8"/>
-                                <text x="200" y="250" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#aaa" letter-spacing="0.2em">IMAGE</text>
+                                <text x="200" y="250" text-anchor="middle" font-family="Source Sans Pro, sans-serif" font-size="12" fill="#aaa" letter-spacing="0.2em">IMAGE</text>
                             </svg>
                         </div>
                     </div>
