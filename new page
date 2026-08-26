@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" type="image/x-icon" href="favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OFSAEILY</title>
@@ -732,14 +733,8 @@
             </div>
             <div class="col col-4">
                 <div class="logo-image">
-                    <svg width="100%" height="100%" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="20" cy="20" r="20" fill="#d4cfc8"/>
-                        <circle cx="20" cy="20" r="17" fill="#c8c0b6" opacity="0.5"/>
-                        <circle cx="20" cy="20" r="13" fill="#b8b0a6" opacity="0.3"/>
-                        <circle cx="20" cy="20" r="8" fill="#a8a098" opacity="0.2"/>
-                        <text x="20" y="24" text-anchor="middle" font-family="Source Sans Pro, sans-serif" font-size="10" fill="#666" letter-spacing="0.1em">O</text>
-                    </svg>
-                </div>
+  <img src="ofs..png" alt="Logo" style="width: 40px; height: 40px; object-fit: contain;">
+</div>
             </div>
         </div>
     </header>
@@ -759,9 +754,9 @@
                         </div>
                     </div>
                     <div class="slider-card-title">
-                        <span class="blog-number">001</span>
-                        <a href="#" class="blog-link">The Architecture of Quiet</a>
-                        <span class="blog-date">12.08.2026</span>
+                        <span class="collection number">001</span>
+                        <a href="#" class="collection-link">Birdsong for the confined</a>
+                        <span class="collection-date">12.08.2026</span>
                     </div>
                 </div>
 
@@ -770,72 +765,17 @@
                         <div class="slider-card-image">
                             <svg width="100%" height="100%" viewBox="0 0 400 500" preserveAspectRatio="none" style="background: #d4cfc8;">
                                 <rect width="400" height="500" fill="#d4cfc8"/>
+                                <a href="birdsong.html"><img src="Picsart_25-12-18_22-23-42-094.png" alt="Image 2"></a>
                                 <text x="200" y="250" text-anchor="middle" font-family="Source Sans Pro, sans-serif" font-size="12" fill="#aaa" letter-spacing="0.2em">IMAGE</text>
                             </svg>
                         </div>
                     </div>
-                    <div class="slider-card-title">
-                        <span class="blog-number">002</span>
-                        <a href="#" class="blog-link">Notes from the Periphery</a>
-                        <span class="blog-date">08.08.2026</span>
-                    </div>
-                </div>
 
-                <div class="slider-card-wrapper">
-                    <div class="slider-card">
-                        <div class="slider-card-image">
-                            <svg width="100%" height="100%" viewBox="0 0 400 500" preserveAspectRatio="none" style="background: #d4cfc8;">
-                                <rect width="400" height="500" fill="#d4cfc8"/>
-                                <text x="200" y="250" text-anchor="middle" font-family="Source Sans Pro, sans-serif" font-size="12" fill="#aaa" letter-spacing="0.2em">IMAGE</text>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="slider-card-title">
-                        <span class="blog-number">003</span>
-                        <a href="#" class="blog-link">On Light &amp; Memory</a>
-                        <span class="blog-date">01.08.2026</span>
-                    </div>
-                </div>
-
-                <div class="slider-card-wrapper">
-                    <div class="slider-card">
-                        <div class="slider-card-image">
-                            <svg width="100%" height="100%" viewBox="0 0 400 500" preserveAspectRatio="none" style="background: #d4cfc8;">
-                                <rect width="400" height="500" fill="#d4cfc8"/>
-                                <text x="200" y="250" text-anchor="middle" font-family="Source Sans Pro, sans-serif" font-size="12" fill="#aaa" letter-spacing="0.2em">IMAGE</text>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="slider-card-title">
-                        <span class="blog-number">004</span>
-                        <a href="#" class="blog-link">The Color of Silence</a>
-                        <span class="blog-date">25.07.2026</span>
-                    </div>
-                </div>
-
-                <div class="slider-card-wrapper">
-                    <div class="slider-card">
-                        <div class="slider-card-image">
-                            <svg width="100%" height="100%" viewBox="0 0 400 500" preserveAspectRatio="none" style="background: #d4cfc8;">
-                                <rect width="400" height="500" fill="#d4cfc8"/>
-                                <text x="200" y="250" text-anchor="middle" font-family="Source Sans Pro, sans-serif" font-size="12" fill="#aaa" letter-spacing="0.2em">IMAGE</text>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="slider-card-title">
-                        <span class="blog-number">005</span>
-                        <a href="#" class="blog-link">The Edge of Knowing</a>
-                        <span class="blog-date">10.07.2026</span>
-                    </div>
-                </div>
-            </div>
+        
 
             <div class="slider-dots" id="sliderDots">
                 <span class="dot active" data-index="0"></span>
                 <span class="dot" data-index="1"></span>
-                <span class="dot" data-index="2"></span>
-                <span class="dot" data-index="3"></span>
-                <span class="dot" data-index="4"></span>
             </div>
         </section>
 
@@ -844,6 +784,7 @@
             <!-- Picture layer -->
             <div class="cover-image-part">
                 <svg width="100%" height="100%" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" style="background: #d4cfc8;">
+<a href="birdsong.html"><img src="Picsart_25-12-18_22-23-42-094.png" alt="Image 2"></a>
                     <rect width="1600" height="900" fill="#d4cfc8"/>
                     <ellipse cx="800" cy="370" rx="520" ry="470" fill="#3a3530" opacity="0.85"/>
                     <ellipse cx="800" cy="340" rx="440" ry="420" fill="#4a4440"/>
@@ -881,7 +822,8 @@
                 <div class="footer-left">
                     <div class="footer-social-wrapper">
                         <span class="footer-social-label">Instagram</span>
-                        <a href="#" class="footer-social-link" id="instagramLink">@OFSAEILY</a>
+                        <a href="https://www.instagram.com/ofsaeily?igsi=NW85aWFia2l2eWcy" class="footer-social-link" id="instagramLink">@OFSAEILY</a>
+  </div>
                     </div>
                     <div class="footer-social-wrapper">
                         <span class="footer-social-label">Substack</span>
