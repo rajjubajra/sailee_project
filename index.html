@@ -404,7 +404,7 @@
             opacity: 1;
         }
 
-        /* Footer - all elements in full opacity black */
+        /* Footer */
         .footer {
             width: 100%;
             padding: 2rem 3rem 3rem 3rem;
@@ -427,6 +427,7 @@
             flex-direction: column;
             align-items: flex-start;
             gap: 0.15rem;
+            padding-top: 0;
         }
 
         .footer-column .label {
@@ -466,15 +467,64 @@
             margin-top: 0.5rem;
         }
 
-        /* Column 3 - Newsletter + Between Falling Leaves (uppercase) */
+        /* Column 1 - OFSAEILY + Copyright with hidden label for alignment */
+        .footer-column-1 {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.15rem;
+            padding-top: 0;
+        }
+
+        .footer-column-1 .hidden-label {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #000000;
+            opacity: 0;
+            margin-bottom: 0.1rem;
+            visibility: hidden;
+            height: 10px;
+        }
+
+        .footer-column-1 .value {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: #000000;
+            opacity: 1;
+            text-decoration: none;
+            line-height: 1.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-column-1 .value:hover {
+            opacity: 0.5;
+        }
+
+        .footer-column-1 .copyright {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: #000000;
+            opacity: 1;
+            margin-top: 0.5rem;
+        }
+
+        /* Column 3 - Newsletter + Between Falling Leaves */
         .footer-column-3 {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             gap: 0.15rem;
+            padding-top: 0;
         }
 
-        .newsletter-label {
+        .footer-column-3 .newsletter-label {
             font-family: 'Source Sans Pro', sans-serif;
             font-size: 10px;
             font-weight: 400;
@@ -482,9 +532,10 @@
             text-transform: uppercase;
             color: #000000;
             opacity: 1;
+            margin-bottom: 0.1rem;
         }
 
-        .falling-leaves-link {
+        .footer-column-3 .falling-leaves-link {
             font-family: 'Source Sans Pro', sans-serif;
             font-size: 12px;
             font-weight: 400;
@@ -497,7 +548,7 @@
             display: inline-block;
         }
 
-        .falling-leaves-link:hover {
+        .footer-column-3 .falling-leaves-link:hover {
             opacity: 0.5;
         }
 
@@ -627,9 +678,10 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <!-- Column 1: OFSAEILY + Copyright -->
-            <div class="footer-column">
-                <span class="value" style="font-weight: 400; font-size: 12px;">OFSAEILY</span>
+            <!-- Column 1: OFSAEILY + Copyright with hidden label for alignment -->
+            <div class="footer-column-1">
+                <span class="hidden-label">Placeholder</span>
+                <span class="value">OFSAEILY</span>
                 <span class="copyright">© OFSAEILY 2026</span>
             </div>
 
@@ -641,8 +693,8 @@
                 <a href="https://www.instagram.com/ofsaeily?igsi=NW85aWFia2l2eWcy" class="value" target="_blank">@OFSAEILY</a>
             </div>
 
-            <!-- Column 3: Newsletter + Between Falling Leaves (uppercase) -->
-            <div class="footer-column footer-column-3">
+            <!-- Column 3: Newsletter + Between Falling Leaves -->
+            <div class="footer-column-3">
                 <span class="newsletter-label">Newsletter ↓</span>
                 <a href="https://saeily.substack.com/embed" class="falling-leaves-link" target="_blank">Between Falling Leaves</a>
             </div>
