@@ -50,7 +50,7 @@
             background-blend-mode: overlay;
         }
 
-        /* Header */
+        /* Header - fixed */
         .header {
             position: fixed;
             top: 0;
@@ -133,23 +133,27 @@
         }
 
         .enquiries {
+            font-size: 6.5pt;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            color: #000000;
+            font-family: 'Source Sans Pro', sans-serif;
+            text-transform: uppercase;
+            white-space: nowrap;
+            opacity: 1;
+        }
+
+        .email {
             font-size: 8pt;
+            font-weight: 400;
             letter-spacing: 0.05em;
             color: #000000;
             font-family: 'Source Sans Pro', sans-serif;
             text-transform: uppercase;
             white-space: nowrap;
-        }
-
-        .email {
-            font-size: 8pt;
-            letter-spacing: 0.05em;
-            color: #000000;
-            font-family: 'Source Sans Pro', sans-serif;
-            text-transform: lowercase;
-            white-space: nowrap;
             cursor: pointer;
             transition: opacity 0.3s ease, color 0.3s ease;
+            text-decoration: none;
         }
 
         .email:hover {
@@ -183,11 +187,17 @@
             font-family: 'Source Sans Pro', sans-serif;
             white-space: nowrap;
             letter-spacing: 0.05em;
-            cursor: pointer;
             transition: opacity 0.3s ease, color 0.3s ease;
         }
 
-        .nav li:hover {
+        .nav li a {
+            color: #000000;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav li a:hover {
             opacity: 0.5;
         }
 
@@ -385,336 +395,213 @@
             opacity: 0.5;
         }
 
-        /* Slide 2: Hover to reveal text */
-        .cover-slide {
-            width: 100vw;
-            margin-left: calc(-50vw + 50%);
-            margin-right: calc(-50vw + 50%);
-            height: 100vh;
-            background: #101010;
-            overflow: hidden;
-            position: relative;
-            display: block;
-            cursor: pointer;
-        }
-
-        /* Picture layer */
-        .cover-image-part {
-            position: absolute;
-            top: 0;
-            left: 0;
+        /* Full page black divider - 1px */
+        .divider-full {
             width: 100%;
-            height: 100%;
-            background: #d4cfc8;
-            overflow: hidden;
-            z-index: 1;
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .cover-image-part img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .cover-image-part svg {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
-
-        /* Dark text layer - hidden by default */
-        .cover-text-part {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #101010;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: center;
-            padding: 4rem 6rem;
-            opacity: 0;
-            transition: opacity 0.8s ease;
-            pointer-events: none;
-        }
-
-        /* On hover: picture fades out, text fades in */
-        .cover-slide:hover .cover-image-part {
-            opacity: 0;
-            transform: scale(1.05);
-        }
-
-        .cover-slide:hover .cover-text-part {
+            height: 1px;
+            background: #000000;
+            margin: 0;
             opacity: 1;
-            pointer-events: auto;
         }
 
-        .cover-text-part .about-text {
-            font-family: 'Source Sans Pro', sans-serif;
-            font-size: 8pt;
-            font-weight: 300;
-            letter-spacing: 0.05em;
-            color: #ffffff;
-            line-height: 1.8;
-            max-width: 600px;
-            text-align: left;
-            margin-bottom: 1.5rem;
-        }
-
-        /* Read More link - below about text, left-aligned */
-        .cover-read-more {
-            font-family: 'Source Sans Pro', sans-serif;
-            font-size: 8pt;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #ffffff;
-            text-decoration: none;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-            padding-bottom: 0.15rem;
-            align-self: flex-start;
-        }
-
-        .cover-read-more:hover {
-            opacity: 0.6;
-        }
-
-        /* Footer overlay */
-        .footer-overlay {
-            position: absolute;
-            bottom: 3%;
-            left: 0;
-            right: 0;
-            padding: 0 3rem;
-            z-index: 3;
-            pointer-events: none;
+        /* Footer - all elements in full opacity black */
+        .footer {
             width: 100%;
-            display: flex;
-            justify-content: center;
+            padding: 2rem 3rem 3rem 3rem;
+            background: #f5f2eb;
+            font-size: 8pt;
+            font-family: 'Source Sans Pro', sans-serif;
         }
 
-        .footer-overlay * {
-            pointer-events: auto;
-        }
-
-        /* Footer uses same structure as header */
         .footer-content {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 1400px;
-        }
-
-        .footer-col {
-            display: flex;
-            align-items: flex-start;
-            flex: 1;
-            padding: 0.5rem 0;
-            font-family: 'Source Sans Pro', sans-serif;
-        }
-
-        .footer-col-1 {
-            justify-content: flex-start;
+            display: grid;
+            grid-template-columns: 1.5fr 2fr 1.5fr;
             gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: start;
         }
 
-        .footer-col-2 {
-            justify-content: flex-start;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.05rem;
-        }
-
-        .footer-col-3 {
-            justify-content: center;
-        }
-
-        .footer-col-4 {
-            justify-content: flex-end;
-        }
-
-        .footer-social-wrapper {
+        .footer-column {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            gap: 0.1rem;
+            gap: 0.15rem;
         }
 
-        .footer-social-label {
+        .footer-column .label {
             font-family: 'Source Sans Pro', sans-serif;
-            font-size: 6pt;
+            font-size: 6.5pt;
+            font-weight: 400;
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            color: #ffffff;
-            font-weight: 300;
-            opacity: 0.25;
+            color: #000000;
+            opacity: 1;
+            margin-bottom: 0.1rem;
         }
 
-        .footer-social-link {
+        .footer-column .value {
             font-family: 'Source Sans Pro', sans-serif;
             font-size: 8pt;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #ffffff;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: #000000;
+            opacity: 1;
             text-decoration: none;
+            line-height: 1.5;
             transition: opacity 0.3s ease;
+        }
+
+        .footer-column .value:hover {
             opacity: 0.5;
         }
 
-        .footer-social-link:hover {
+        .footer-column .copyright {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 8pt;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: #000000;
+            opacity: 1;
+            margin-top: 0.5rem;
+        }
+
+        /* Newsletter - all black full opacity */
+        .footer-newsletter {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer-newsletter .newsletter-text {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 7.5pt;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+            color: #000000;
+            opacity: 1;
+            line-height: 1.5;
+            max-width: 280px;
+        }
+
+        .footer-newsletter .newsletter-label {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 6.5pt;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #000000;
             opacity: 1;
         }
 
-        .footer-copyright {
-            font-size: 8pt;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #ffffff;
-            font-weight: 300;
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .newsletter-form input {
+            background: transparent;
+            border: 1px solid #000000;
+            padding: 0.3rem 0.6rem;
             font-family: 'Source Sans Pro', sans-serif;
-            text-align: right;
+            font-size: 7.5pt;
+            color: #000000;
+            outline: none;
+            transition: border-color 0.3s ease;
+            width: 160px;
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(0, 0, 0, 0.4);
+            font-weight: 300;
+        }
+
+        .newsletter-form input:focus {
+            border-color: #000000;
+        }
+
+        .newsletter-form .submit-btn {
+            background: none;
+            border: 1px solid #000000;
+            padding: 0.3rem 1rem;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 7pt;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #000000;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            opacity: 1;
+        }
+
+        .newsletter-form .submit-btn:hover {
             opacity: 0.5;
-            padding-top: 0.15rem;
         }
 
         /* Responsive */
-        @media (max-width: 800px) {
-            .slider-card-wrapper {
-                flex: 0 0 220px;
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
             }
-            .slider-card-wrapper:nth-child(1) {
-                transform: rotate(0deg) translateY(0);
-            }
-            .slider-card-wrapper:hover {
-                transform: scale(1.02) rotate(0deg) translateY(0);
-            }
-            .slider-card-title .collection-link {
-                font-size: 8.5pt;
-            }
-            .cover-text-part {
-                padding: 3rem 3rem;
-            }
-            .cover-text-part .about-text {
-                font-size: 8pt;
-                max-width: 400px;
-            }
-            .footer-overlay {
-                padding: 0 1.5rem;
-                bottom: 2.5%;
-            }
-            .footer-social-link {
-                font-size: 8pt;
-            }
-            .footer-copyright {
-                font-size: 8pt;
-            }
-            .footer-social-label {
-                font-size: 6pt;
-            }
-            .header-col-1 {
-                gap: 1rem;
-            }
-            .footer-col-1 {
-                gap: 1rem;
+            .footer-column:last-child {
+                grid-column: 1 / -1;
             }
         }
 
-        @media (max-width: 600px) {
-            .slider-card-wrapper {
-                flex: 0 0 180px;
+        @media (max-width: 768px) {
+            .footer {
+                padding: 1.5rem 1.5rem 2rem 1.5rem;
             }
             
             .header {
-                padding: 1rem 3rem;
+                padding: 1rem 1.5rem;
+            }
+            
+            .content {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .newsletter-form input {
+                width: 100%;
+            }
+            
+            .footer-newsletter .newsletter-text {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .footer {
+                padding: 1rem 1rem 2rem 1rem;
+            }
+            
+            .header {
+                padding: 1rem 1rem;
             }
             
             .content {
                 padding-left: 1rem;
                 padding-right: 1rem;
                 padding-top: 6rem;
-                padding-bottom: 0;
             }
 
-            .slider-card-title .collection-link {
-                font-size: 7.5pt;
-            }
-            .slider-card-title .collection-number {
-                font-size: 6pt;
-            }
-            .slider-card-title .collection-date {
-                font-size: 5.5pt;
-            }
-
-            .slider-dots .dot {
-                width: 5px;
-                height: 5px;
-                border-width: 1px;
-            }
-
-            .slider-dots {
-                gap: 0.5rem;
-            }
-
-            .cover-text-part {
-                padding: 2rem 1.5rem;
-            }
-            .cover-text-part .about-text {
-                font-size: 8pt;
-                max-width: 300px;
-                margin-bottom: 1rem;
-            }
-            .cover-read-more {
-                font-size: 7pt;
-            }
-            .footer-overlay {
-                padding: 0 1rem;
-                bottom: 2%;
-            }
-            .footer-content {
-                flex-wrap: wrap;
-                gap: 0.5rem;
-                justify-content: center;
-            }
-            .footer-col-1 {
-                flex-wrap: wrap;
-                gap: 0.5rem;
-                justify-content: center;
-            }
-            .footer-col-2 {
-                align-items: center;
-            }
-            .footer-col-3 {
-                justify-content: center;
-            }
-            .footer-social-wrapper {
-                align-items: center;
-            }
-            .footer-social-link {
-                font-size: 8pt;
-            }
-            .footer-copyright {
-                font-size: 8pt;
-                text-align: center;
-                padding-top: 0;
-            }
-            .footer-social-label {
-                font-size: 6pt;
-            }
             .header-content {
                 flex-wrap: wrap;
-                gap: 0.5rem;
+                gap: 0.3rem;
                 justify-content: center;
             }
             .header-col-1 {
                 flex-wrap: wrap;
-                gap: 0.5rem;
+                gap: 0.3rem;
                 justify-content: center;
             }
             .header-col-2 {
@@ -730,7 +617,7 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header - fixed -->
     <header class="header" id="header">
         <div class="header-content">
             <div class="header-col header-col-1">
@@ -738,12 +625,12 @@
             </div>
             <div class="header-col header-col-2">
                 <span class="enquiries">ENQUIRIES</span>
-                <span class="email" id="emailLink">OFSAEILY@GMAIL.COM</span>
+                <a href="mailto:OFSAEILY@GMAIL.COM" class="email" id="emailLink">OFSAEILY@GMAIL.COM</a>
             </div>
             <div class="header-col header-col-3">
                 <ul class="nav">
-                    <li data-page="collections" id="collectionsNav">COLLECTIONS</li>
-                    <li data-page="about" id="aboutNav">ABOUT</li>
+                    <li><a href="index.html" id="collectionsNav">COLLECTIONS</a></li>
+                    <li><a href="about.html" id="aboutNav">ABOUT</a></li>
                 </ul>
             </div>
             <div class="header-col header-col-4">
@@ -780,66 +667,40 @@
             </div>
         </section>
 
-        <!-- Slide 2: Hover to reveal -->
-        <div class="cover-slide" id="coverSlide">
-            <!-- Picture layer -->
-            <div class="cover-image-part">
-                <svg width="100%" height="100%" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" style="background: #d4cfc8;">
-                    <rect width="1600" height="900" fill="#d4cfc8"/>
-                    <ellipse cx="800" cy="370" rx="520" ry="470" fill="#3a3530" opacity="0.85"/>
-                    <ellipse cx="800" cy="340" rx="440" ry="420" fill="#4a4440"/>
-                    <path d="M320 630 Q480 570 640 610 Q800 620 960 610 Q1120 570 1280 630 L1360 900 L240 900 Z" fill="#3a3530" opacity="0.6"/>
-                    <ellipse cx="800" cy="390" rx="290" ry="260" fill="#d4cfc8" opacity="0.3"/>
-                    <rect x="570" y="290" width="460" height="340" rx="20" fill="#2a2520" opacity="0.85"/>
-                    <rect x="610" y="310" width="380" height="300" rx="12" fill="#3a3530" opacity="0.7"/>
-                    <line x1="610" y1="360" x2="990" y2="360" stroke="#5a5550" stroke-width="2" opacity="0.4"/>
-                    <line x1="610" y1="400" x2="990" y2="400" stroke="#5a5550" stroke-width="2" opacity="0.4"/>
-                    <line x1="610" y1="440" x2="990" y2="440" stroke="#5a5550" stroke-width="2" opacity="0.4"/>
-                    <line x1="610" y1="480" x2="990" y2="480" stroke="#5a5550" stroke-width="2" opacity="0.4"/>
-                    <line x1="610" y1="520" x2="990" y2="520" stroke="#5a5550" stroke-width="2" opacity="0.4"/>
-                    <line x1="800" y1="310" x2="800" y2="610" stroke="#5a5550" stroke-width="2" opacity="0.3"/>
-                    <ellipse cx="690" cy="370" rx="32" ry="14" fill="#5a5550" opacity="0.3"/>
-                    <ellipse cx="910" cy="370" rx="32" ry="14" fill="#5a5550" opacity="0.3"/>
-                    <rect x="700" y="550" width="200" height="90" fill="#c8c0b6" opacity="0.3"/>
-                    <path d="M640 600 Q720 620 800 610 Q880 620 960 600" stroke="#2a2520" stroke-width="4" fill="none" opacity="0.4"/>
-                    <rect x="650" y="320" width="300" height="35" rx="8" fill="#5a5550" opacity="0.2"/>
-                    <rect x="700" y="550" width="60" height="10" rx="2" fill="#5a5550" opacity="0.15"/>
-                    <rect x="840" y="550" width="60" height="10" rx="2" fill="#5a5550" opacity="0.15"/>
-                </svg>
+        <!-- Full page black divider - 1px -->
+        <div class="divider-full"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <!-- Column 1: OFSAEILY + Copyright --> 
+            <div class="footer-column">
+                <span class="value" style="font-weight: 400; font-size: 9pt;">OFSAEILY</span>
+                <span class="copyright">© OFSAEILY 2026</span>
             </div>
 
-            <!-- Dark text layer - left aligned -->
-            <div class="cover-text-part">
-                <div class="about-text">
-                    We are a small studio exploring the quiet spaces between architecture, memory, and the everyday. Through image, text, and curation, we document the unseen rhythms of the world around us.
-                </div>
-                
-                <a href="#" class="cover-read-more" id="readMoreLink">read more</a>
+            <!-- Column 2: Enquiries + Instagram -->
+            <div class="footer-column">
+                <span class="label">Enquiries</span>
+                <a href="mailto:OFSAEILY@GMAIL.COM" class="value">OFSAEILY@GMAIL.COM</a>
+                <span class="label" style="margin-top: 0.5rem;">Instagram</span>
+                <a href="https://www.instagram.com/ylieasfo?igsi=MWZmMXpnbTNxZHJ4bQ==" class="value" target="_blank">@OFSAEILY</a>
             </div>
 
-            <!-- Footer overlay - now matches header EXACTLY -->
-            <div class="footer-overlay">
-                <div class="footer-content">
-                    <div class="footer-col footer-col-1">
-                        <div class="footer-social-wrapper">
-                            <span class="footer-social-label">Instagram</span>
-                            <a href="https://www.instagram.com/ofsaeily?igsi=NW85aWFia2l2eWcy" class="footer-social-link" id="instagramLink">@OFSAEILY</a>
-                        </div>
-                    </div>
-                    <div class="footer-col footer-col-2">
-                        <div class="footer-social-wrapper">
-                            <span class="footer-social-label">Substack</span>
-                            <a href="#" class="footer-social-link" id="substackLink">OFSAEILY</a>
-                        </div>
-                    </div>
-                    <div class="footer-col footer-col-3"></div>
-                    <div class="footer-col footer-col-4">
-                        <span class="footer-copyright">© 2026 OFSAEILY</span>
-                    </div>
+            <!-- Column 3: Substack Newsletter -->
+            <div class="footer-column footer-newsletter">
+                <span class="newsletter-label">Substack Newsletter</span>
+                <span class="newsletter-text">Subscribe for the Dispatch: projects in process, archival finds, and the work behind works.</span>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Email address">
+                    <a href="https://ofsaeily.substack.com" target="_blank">
+                        <button class="submit-btn">Submit</button>
+                    </a>
                 </div>
             </div>
         </div>
-    </main>
+    </footer>
 
     <script>
         const header = document.getElementById('header');
@@ -868,69 +729,6 @@
         homeLink.addEventListener('click', function(e) {
             e.preventDefault();
             window.open('#home', '_blank');
-        });
-
-        // Email functionality
-        const emailElement = document.getElementById('emailLink');
-        let emailClicked = false;
-
-        emailElement.addEventListener('click', function(e) {
-            e.preventDefault();
-            emailClicked = !emailClicked;
-            
-            if (emailClicked) {
-                this.classList.add('vermillion');
-                window.open('mailto:OFSAEILY@GMAIL.COM', '_blank');
-            } else {
-                this.classList.remove('vermillion');
-            }
-        });
-
-        // Navigation items functionality - COLLECTIONS
-        document.getElementById('collectionsNav').addEventListener('click', function(e) {
-            e.preventDefault();
-            this.classList.add('vermillion');
-            window.open('#collections', '_blank');
-            setTimeout(() => {
-                this.classList.remove('vermillion');
-            }, 500);
-        });
-
-        // Navigation items functionality - ABOUT
-        document.getElementById('aboutNav').addEventListener('click', function(e) {
-            e.preventDefault();
-            this.classList.add('vermillion');
-            window.open('#about', '_blank');
-            setTimeout(() => {
-                this.classList.remove('vermillion');
-            }, 500);
-        });
-
-        // Blog title links functionality
-        document.querySelectorAll('.collection-link').forEach(function(link) {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const title = this.textContent;
-                window.open(`#${title.toLowerCase().replace(/\s+/g, '-')}`, '_blank');
-            });
-        });
-
-        // Read more link functionality
-        document.getElementById('readMoreLink').addEventListener('click', function(e) {
-            e.preventDefault();
-            window.open('#about', '_blank');
-        });
-
-        // Instagram link functionality
-        document.getElementById('instagramLink').addEventListener('click', function(e) {
-            e.preventDefault();
-            window.open('https://instagram.com/ofsaeily', '_blank');
-        });
-
-        // Substack link functionality
-        document.getElementById('substackLink').addEventListener('click', function(e) {
-            e.preventDefault();
-            window.open('https://ofsaeily.substack.com', '_blank');
         });
 
         // Slider scroll with dot indicators
