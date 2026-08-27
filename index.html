@@ -466,25 +466,15 @@
             margin-top: 0.5rem;
         }
 
-        /* Newsletter - all black full opacity */
-        .footer-newsletter {
+        /* Column 3 - Newsletter + Between Falling Leaves (uppercase) */
+        .footer-column-3 {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            align-items: flex-start;
+            gap: 0.15rem;
         }
 
-        .footer-newsletter .newsletter-text {
-            font-family: 'Source Sans Pro', sans-serif;
-            font-size: 7.5pt;
-            font-weight: 400;
-            letter-spacing: 0.03em;
-            color: #000000;
-            opacity: 1;
-            line-height: 1.5;
-            max-width: 280px;
-        }
-
-        .footer-newsletter .newsletter-label {
+        .newsletter-label {
             font-family: 'Source Sans Pro', sans-serif;
             font-size: 6.5pt;
             font-weight: 400;
@@ -494,49 +484,20 @@
             opacity: 1;
         }
 
-        .newsletter-form {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .newsletter-form input {
-            background: transparent;
-            border: 1px solid #000000;
-            padding: 0.3rem 0.6rem;
+        .falling-leaves-link {
             font-family: 'Source Sans Pro', sans-serif;
-            font-size: 7.5pt;
-            color: #000000;
-            outline: none;
-            transition: border-color 0.3s ease;
-            width: 160px;
-        }
-
-        .newsletter-form input::placeholder {
-            color: rgba(0, 0, 0, 0.4);
-            font-weight: 300;
-        }
-
-        .newsletter-form input:focus {
-            border-color: #000000;
-        }
-
-        .newsletter-form .submit-btn {
-            background: none;
-            border: 1px solid #000000;
-            padding: 0.3rem 1rem;
-            font-family: 'Source Sans Pro', sans-serif;
-            font-size: 7pt;
-            letter-spacing: 0.15em;
+            font-size: 8pt;
+            font-weight: 400;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
             color: #000000;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
             opacity: 1;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+            display: inline-block;
         }
 
-        .newsletter-form .submit-btn:hover {
+        .falling-leaves-link:hover {
             opacity: 0.5;
         }
 
@@ -568,14 +529,6 @@
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 1rem;
-            }
-            
-            .newsletter-form input {
-                width: 100%;
-            }
-            
-            .footer-newsletter .newsletter-text {
-                max-width: 100%;
             }
         }
 
@@ -674,7 +627,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <!-- Column 1: OFSAEILY + Copyright --> 
+            <!-- Column 1: OFSAEILY + Copyright -->
             <div class="footer-column">
                 <span class="value" style="font-weight: 400; font-size: 9pt;">OFSAEILY</span>
                 <span class="copyright">© OFSAEILY 2026</span>
@@ -688,16 +641,10 @@
                 <a href="https://www.instagram.com/ofsaeily?igsi=NW85aWFia2l2eWcy" class="value" target="_blank">@OFSAEILY</a>
             </div>
 
-            <!-- Column 3: Substack Newsletter -->
-            <div class="footer-column footer-newsletter">
-                <span class="newsletter-label">Substack Newsletter</span>
-                <span class="newsletter-text">Subscribe for the Dispatch: projects in process, archival finds, and the work behind works.</span>
-                <div class="newsletter-form">
-                    <input type="email" placeholder="Email address">
-                    <a href="https://ofsaeily.substack.com" target="_blank">
-                        <button class="submit-btn">Submit</button>
-                    </a>
-                </div>
+            <!-- Column 3: Newsletter + Between Falling Leaves (uppercase) -->
+            <div class="footer-column footer-column-3">
+                <span class="newsletter-label">Newsletter ↓</span>
+                <a href="https://saeily.substack.com/embed" class="falling-leaves-link" target="_blank">Between Falling Leaves</a>
             </div>
         </div>
     </footer>
