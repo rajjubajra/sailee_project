@@ -51,7 +51,7 @@
             background-blend-mode: overlay;
         }
 
-        /* ---------- HEADER (unchanged) ---------- */
+        /* ---------- HEADER ---------- */
         .header {
             position: fixed;
             top: 0;
@@ -342,22 +342,24 @@
             display: block;
         }
 
-        /* ---------- DIVIDER (full width) with 1 line space before - FIXED ---------- */
+        /* ---------- DIVIDER (full width) with 1 line space before ---------- */
         .divider-wrapper {
             padding-top: 1rem;
         }
 
         .divider-full {
-            width: 100%;
+            width: 100vw;
             height: 1px;
             background: #000000;
-            opacity: 0.5;
+            opacity: 1;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
             margin: 0;
             padding: 0;
-            border: none;
         }
 
-        /* ---------- FOOTER (unchanged) ---------- */
+        /* ---------- FOOTER ---------- */
         .footer {
             width: 100%;
             padding: 2rem 3rem 2rem 3rem;
@@ -774,7 +776,7 @@
     </style>
 </head>
 <body>
-    <!-- HEADER (unchanged) -->
+    <!-- HEADER -->
     <header class="header" id="header">
         <div class="header-content">
             <div class="header-col header-col-1">
@@ -844,12 +846,12 @@ In this exhibition, paintings, ceramics, and poetry all come together to initiat
         </section>
     </main>
 
-    <!-- DIVIDER with 1 line space before - FIXED -->
+    <!-- DIVIDER with 1 line space before (wrapper) -->
     <div class="divider-wrapper">
         <div class="divider-full"></div>
     </div>
 
-    <!-- FOOTER (unchanged) -->
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-column-1">
