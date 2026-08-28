@@ -395,92 +395,13 @@
             opacity: 0.5;
         }
 
-        /* ============================================ */
-        /* DIVIDER STYLES - Choose your favorite */
-        /* ============================================ */
-
-        /* Option 1: Full width black divider - 1px */
+        /* Full divider - 1px black line */
         .divider-full {
             width: 100%;
             height: 1px;
             background: #000000;
             margin: 0;
             opacity: 1;
-        }
-
-        /* Option 2: Thick divider */
-        .divider-thick {
-            width: 100%;
-            height: 3px;
-            background: #000000;
-            margin: 0;
-            opacity: 0.8;
-        }
-
-        /* Option 3: Double line divider */
-        .divider-double {
-            width: 100%;
-            height: 6px;
-            margin: 0;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            background: transparent;
-        }
-
-        .divider-double::before {
-            content: '';
-            width: 100%;
-            height: 1px;
-            background: #000000;
-            opacity: 0.6;
-        }
-
-        .divider-double::after {
-            content: '';
-            width: 100%;
-            height: 1px;
-            background: #000000;
-            opacity: 0.6;
-            margin-top: 2px;
-        }
-
-        /* Option 4: Dashed divider */
-        .divider-dashed {
-            width: 100%;
-            height: 0;
-            margin: 0;
-            border-top: 2px dashed #000000;
-            opacity: 0.5;
-        }
-
-        /* Option 5: Dotted divider */
-        .divider-dotted {
-            width: 100%;
-            height: 0;
-            margin: 0;
-            border-top: 2px dotted #000000;
-            opacity: 0.4;
-        }
-
-        /* Option 6: Gradient divider */
-        .divider-gradient {
-            width: 100%;
-            height: 2px;
-            margin: 0;
-            background: linear-gradient(to right, transparent, #000000, transparent);
-            opacity: 0.4;
-        }
-
-        /* Option 7: Pattern divider (subtle dots pattern) */
-        .divider-pattern {
-            width: 100%;
-            height: 8px;
-            margin: 0;
-            background-image: radial-gradient(circle, #000000 1px, transparent 1px);
-            background-size: 8px 8px;
-            opacity: 0.15;
         }
 
         /* Footer */
@@ -748,31 +669,8 @@
             </div>
         </section>
 
-        <!-- ============================================ -->
-        <!-- Choose your divider style below               -->
-        <!-- Replace the class name to change the divider  -->
-        <!-- ============================================ -->
-        
-        <!-- Option 1: Full width black divider - 1px -->
+        <!-- Full divider - 1px black line -->
         <div class="divider-full"></div>
-        
-        <!-- Option 2: Thick divider -->
-        <!-- <div class="divider-thick"></div> -->
-        
-        <!-- Option 3: Double line divider -->
-        <!-- <div class="divider-double"></div> -->
-        
-        <!-- Option 4: Dashed divider -->
-        <!-- <div class="divider-dashed"></div> -->
-        
-        <!-- Option 5: Dotted divider -->
-        <!-- <div class="divider-dotted"></div> -->
-        
-        <!-- Option 6: Gradient divider -->
-        <!-- <div class="divider-gradient"></div> -->
-        
-        <!-- Option 7: Pattern divider -->
-        <!-- <div class="divider-pattern"></div> -->
     </main>
 
     <!-- Footer -->
