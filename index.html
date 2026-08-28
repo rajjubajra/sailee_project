@@ -555,10 +555,10 @@
         }
 
         /* ============================================ */
-        /* MOBILE - One card per screen, larger size */
+        /* MOBILE - One card per screen, slightly smaller with padding */
         /* ============================================ */
         @media (max-width: 768px) {
-            /* Scale down header */
+            /* Header - scaled down */
             .header {
                 padding: 0.8rem 1rem;
             }
@@ -612,10 +612,10 @@
                 padding: 0.5rem 0 0.5rem 0;
             }
 
-            /* One card per screen - larger */
+            /* One card per screen - slightly smaller with padding */
             .slider-container {
                 gap: 0;
-                padding: 0;
+                padding: 0.5rem 0;
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
                 align-items: stretch;
@@ -625,8 +625,8 @@
                 flex: 0 0 100%;
                 scroll-snap-align: center;
                 transform: none !important;
-                padding: 0 1rem;
-                min-height: 70vh;
+                padding: 0 1.5rem;
+                min-height: 60vh;
             }
 
             .slider-card-wrapper:hover {
@@ -639,7 +639,7 @@
                 margin: 0 auto;
                 width: 100%;
                 height: auto;
-                min-height: 65vh;
+                min-height: 55vh;
             }
 
             .slider-card:hover {
@@ -647,7 +647,7 @@
             }
 
             .slider-card-image {
-                min-height: 55vh;
+                min-height: 45vh;
             }
 
             .slider-card-title {
@@ -763,16 +763,16 @@
             }
 
             .slider-card-wrapper {
-                padding: 0 0.6rem;
-                min-height: 60vh;
+                padding: 0 1rem;
+                min-height: 50vh;
             }
 
             .slider-card {
-                min-height: 55vh;
+                min-height: 45vh;
             }
 
             .slider-card-image {
-                min-height: 45vh;
+                min-height: 35vh;
             }
 
             .slider-card-title .collection-number {
