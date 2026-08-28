@@ -554,70 +554,228 @@
             opacity: 0.5;
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .footer-content {
-                grid-template-columns: 1fr 1fr;
-                gap: 1.5rem;
-            }
-            .footer-column:last-child {
-                grid-column: 1 / -1;
-            }
-        }
-
+        /* ============================================ */
+        /* MOBILE - Maintain same layout, just scaled down */
+        /* ============================================ */
         @media (max-width: 768px) {
-            .footer {
-                padding: 1.5rem 1.5rem 2rem 1.5rem;
-            }
-            
+            /* Scale down everything proportionally */
             .header {
-                padding: 1rem 1.5rem;
-            }
-            
-            .content {
-                padding-left: 1.5rem;
-                padding-right: 1.5rem;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-        }
-
-        @media (max-width: 500px) {
-            .footer {
-                padding: 1rem 1rem 2rem 1rem;
-            }
-            
-            .header {
-                padding: 1rem 1rem;
-            }
-            
-            .content {
-                padding-left: 1rem;
-                padding-right: 1rem;
-                padding-top: 6rem;
+                padding: 0.8rem 1rem;
             }
 
             .header-content {
-                flex-wrap: wrap;
-                gap: 0.3rem;
-                justify-content: center;
+                max-width: 100%;
             }
+
+            .header-col {
+                padding: 0.2rem 0;
+            }
+
             .header-col-1 {
-                flex-wrap: wrap;
-                gap: 0.3rem;
-                justify-content: center;
+                gap: 1rem;
             }
-            .header-col-2 {
-                align-items: center;
+
+            .logo-text {
+                font-size: 10px;
             }
-            .header-col-3 {
-                justify-content: center;
+
+            .enquiries {
+                font-size: 8px;
             }
-            .nav {
-                align-items: center;
+
+            .email {
+                font-size: 10px;
+            }
+
+            .nav li {
+                font-size: 10px;
+            }
+
+            .logo-image {
+                width: 30px;
+                height: 30px;
+            }
+
+            .logo-image img {
+                width: 30px;
+                height: 30px;
+            }
+
+            .content {
+                padding-top: 6rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                max-width: 100%;
+            }
+
+            .slider-section {
+                padding: 1rem 0 0.5rem 0;
+            }
+
+            .slider-container {
+                gap: 1.5rem;
+                padding: 1rem 0.3rem 1rem 0.3rem;
+            }
+
+            .slider-card-wrapper {
+                flex: 0 0 200px;
+            }
+
+            .slider-card-wrapper:nth-child(1) {
+                transform: rotate(-1.5deg) translateY(0px);
+            }
+
+            .slider-card-wrapper:hover {
+                transform: scale(1.02) rotate(0deg) translateY(0);
+            }
+
+            .slider-card-title {
+                padding: 0.5rem 0.1rem 0.1rem 0.1rem;
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .slider-card-title .collection-number {
+                font-size: 10px;
+            }
+
+            .slider-card-title .collection-link {
+                font-size: 10px;
+            }
+
+            .slider-card-title .collection-date {
+                font-size: 10px;
+            }
+
+            .slider-dots {
+                padding: 0.8rem 0 0.3rem 0;
+                gap: 0.5rem;
+            }
+
+            .slider-dots .dot {
+                width: 5px;
+                height: 5px;
+                border-width: 1px;
+            }
+
+            /* Divider stays full width */
+            .divider-full {
+                width: 100vw;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .footer {
+                padding: 1.5rem 1rem 2rem 1rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1.5fr 2fr 1.5fr;
+                gap: 1rem;
+                max-width: 100%;
+            }
+
+            .footer-column .label {
+                font-size: 8px;
+            }
+
+            .footer-column .value {
+                font-size: 10px;
+            }
+
+            .footer-column-1 .value {
+                font-size: 10px;
+            }
+
+            .footer-column-1 .copyright {
+                font-size: 10px;
+            }
+
+            .footer-column-3 .newsletter-label {
+                font-size: 8px;
+            }
+
+            .falling-leaves-link {
+                font-size: 10px;
+            }
+        }
+
+        /* Extra small phones - scale down even more */
+        @media (max-width: 400px) {
+            .header {
+                padding: 0.5rem 0.6rem;
+            }
+
+            .header-col-1 {
+                gap: 0.6rem;
+            }
+
+            .logo-text {
+                font-size: 9px;
+            }
+
+            .email {
+                font-size: 8px;
+            }
+
+            .nav li {
+                font-size: 9px;
+            }
+
+            .logo-image {
+                width: 24px;
+                height: 24px;
+            }
+
+            .logo-image img {
+                width: 24px;
+                height: 24px;
+            }
+
+            .content {
+                padding-top: 5rem;
+                padding-left: 0.6rem;
+                padding-right: 0.6rem;
+            }
+
+            .slider-card-wrapper {
+                flex: 0 0 160px;
+            }
+
+            .slider-card-title .collection-number {
+                font-size: 9px;
+            }
+
+            .slider-card-title .collection-link {
+                font-size: 9px;
+            }
+
+            .slider-card-title .collection-date {
+                font-size: 9px;
+            }
+
+            .footer {
+                padding: 1rem 0.6rem 1.5rem 0.6rem;
+            }
+
+            .footer-content {
+                gap: 0.6rem;
+            }
+
+            .footer-column .value {
+                font-size: 9px;
+            }
+
+            .footer-column-1 .value {
+                font-size: 9px;
+            }
+
+            .footer-column-1 .copyright {
+                font-size: 9px;
+            }
+
+            .falling-leaves-link {
+                font-size: 9px;
             }
         }
     </style>
@@ -736,7 +894,18 @@
         const container = document.getElementById('sliderContainer');
         const dots = document.querySelectorAll('.dot');
         let currentIndex = 0;
-        const cardWidth = 280 + 40;
+        let cardWidth = 280 + 40;
+
+        function getCardWidth() {
+            const wrapper = document.querySelector('.slider-card-wrapper');
+            if (wrapper) {
+                const style = window.getComputedStyle(wrapper);
+                const flexBasis = parseFloat(style.flexBasis);
+                const gap = 40; // gap from CSS
+                return flexBasis + gap;
+            }
+            return 280 + 40;
+        }
 
         function updateDots(index) {
             dots.forEach((dot, i) => {
@@ -746,7 +915,8 @@
 
         container.addEventListener('scroll', function() {
             const scrollLeft = this.scrollLeft;
-            const index = Math.round(scrollLeft / cardWidth);
+            const width = getCardWidth();
+            const index = Math.round(scrollLeft / width);
             const clampedIndex = Math.max(0, Math.min(index, dots.length - 1));
             if (clampedIndex !== currentIndex) {
                 currentIndex = clampedIndex;
@@ -758,8 +928,9 @@
             dot.addEventListener('click', function() {
                 const index = parseInt(this.getAttribute('data-index'));
                 currentIndex = index;
+                const width = getCardWidth();
                 container.scrollTo({
-                    left: index * cardWidth,
+                    left: index * width,
                     behavior: 'smooth'
                 });
                 updateDots(index);
@@ -771,7 +942,8 @@
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
                 const scrollLeft = container.scrollLeft;
-                const index = Math.round(scrollLeft / cardWidth);
+                const width = getCardWidth();
+                const index = Math.round(scrollLeft / width);
                 const clampedIndex = Math.max(0, Math.min(index, dots.length - 1));
                 if (clampedIndex !== currentIndex) {
                     currentIndex = clampedIndex;
@@ -782,7 +954,8 @@
 
         window.addEventListener('load', function() {
             const scrollLeft = container.scrollLeft;
-            const index = Math.round(scrollLeft / cardWidth);
+            const width = getCardWidth();
+            const index = Math.round(scrollLeft / width);
             const clampedIndex = Math.max(0, Math.min(index, dots.length - 1));
             currentIndex = clampedIndex;
             updateDots(clampedIndex);
