@@ -396,7 +396,7 @@
             opacity: 0.5;
         }
 
-        /* Full divider - completely full width */
+        /* Full divider - thin 1px line */
         .divider-full {
             width: 100vw;
             height: 1px;
@@ -407,6 +407,7 @@
             transform: translateX(-50%);
             margin: 0;
             padding: 0;
+            border: none;
         }
 
         /* Footer */
@@ -713,12 +714,14 @@
                 border-width: 1.5px;
             }
 
-            /* Divider with space after */
+            /* Divider with space after - thin line */
             .divider-full {
                 width: 100vw;
+                height: 1px;
                 left: 50%;
                 transform: translateX(-50%);
                 margin-bottom: 0.6rem;
+                border: none;
             }
 
             /* Footer - 3 columns with column 3 below column 1 */
@@ -870,9 +873,11 @@
                 border-width: 1.5px;
             }
 
-            /* Divider with more space after */
+            /* Divider with more space after - thin line */
             .divider-full {
+                height: 1px;
                 margin-bottom: 0.4rem;
+                border: none;
             }
 
             .footer {
@@ -965,7 +970,7 @@
         </section>
     </main>
 
-    <!-- Full divider - placed outside content for full width -->
+    <!-- Full divider - thin 1px line -->
     <div class="divider-full"></div>
 
     <!-- Footer -->
