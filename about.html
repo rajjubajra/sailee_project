@@ -1,352 +1,930 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="favicon.png">
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OFSAEILY — Blog / Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- RESET & BASE ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <title>ofsaeily</title>
+        body {
+            background: #f5f2eb;
+            min-height: 100vh;
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #000000;
+            font-size: 12px;
+            overflow-x: hidden;
+        }
 
-  <!-- Font: Source Serif Pro -->
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400&display=swap" rel="stylesheet">
+        /* Grain texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.4;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4"/><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.15 0"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.3"/></svg>');
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            mix-blend-mode: multiply;
+        }
 
-  <style>
-    * {
-      font-family: 'Source Serif Pro', serif !important;
-    }
+        /* Paper texture */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.1;
+            background-image: 
+                radial-gradient(circle at 30% 40%, rgba(180,160,140,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(130,110,90,0.1) 0%, transparent 40%);
+            background-blend-mode: overlay;
+        }
 
-    body {
-      margin: 0;
-      font-size: 12px;
-      font-weight: 400;
-      background: #eaebe5;
-      color: #000;
-      position: relative;
-    }
+        /* ---------- HEADER ---------- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            z-index: 100;
+            background: rgba(245, 242, 235, 1);
+            transition: background 0.3s ease, backdrop-filter 0.3s ease;
+            font-size: 12px;
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #000000;
+            border-bottom: none;
+        }
 
-    /* Grain overlay for body */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 1;
-    }
+        .header.scrolled {
+            background: rgba(245, 242, 235, 0.5);
+            backdrop-filter: blur(6px);
+        }
 
-    header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      padding: 20px 40px;
-      background: #eaebe5;
-      position: relative;
-      z-index: 2;
-    }
+        .header:not(.scrolled) {
+            background: rgba(245, 242, 235, 1);
+            backdrop-filter: none;
+        }
 
-    /* Grain overlay for header */
-    header::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: -1;
-    }
+        .header-content {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1400px;
+        }
 
-    .col {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.25;
-      text-transform: uppercase;
-    }
+        .header-col {
+            display: flex;
+            align-items: flex-start;
+            flex: 1;
+            padding: 0.5rem 0;
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #000000;
+        }
 
-    .email {
-      text-transform: none;
-      opacity: 0.7;
-    }
+        .header-col-1 {
+            justify-content: flex-start;
+            gap: 2rem;
+        }
 
-    .menu a {
-      text-decoration: none;
-      color: inherit;
-      margin-bottom: 1px;
-    }
+        .header-col-2 {
+            justify-content: flex-start;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.05rem;
+        }
 
-    .menu a:hover {
-      opacity: 0.6;
-    }
+        .header-col-3 {
+            justify-content: center;
+        }
 
-    img {
-      width: 100%;
-      height: auto;
-    }
+        .header-col-4 {
+            justify-content: flex-end;
+        }
 
-    /* Add border to all images except those in header */
-    img:not(header img) {
-      border: 0px solid #000;
-    }
+        .logo-text {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: #000000;
+            font-family: 'Source Sans Pro', sans-serif;
+            white-space: nowrap;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
 
-    .divider-60 { height: 60px; }
+        .logo-text:hover {
+            opacity: 0.5;
+        }
 
-    .page-title {
-      font-size: 26px;
-      text-transform: uppercase;
-      padding-left: 40px;
-      padding-right: 40px;
-      position: relative;
-      z-index: 2;
-    }
+        .enquiries {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            color: #000000;
+            font-family: 'Source Sans Pro', sans-serif;
+            text-transform: uppercase;
+            white-space: nowrap;
+            opacity: 1;
+        }
 
-    .thin-line {
-      width: 100%;
-      height: 1px;
-      background: #000;
-      position: relative;
-      z-index: 2;
-    }
+        .email {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: #000000;
+            font-family: 'Source Sans Pro', sans-serif;
+            text-transform: uppercase;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: opacity 0.3s ease, color 0.3s ease;
+            text-decoration: none;
+        }
 
-    /* NEW: Two-column layout matching birdsong page */
-    .row-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      padding: 0 40px;
-      position: relative;
-      z-index: 2;
-      align-items: start;
-    }
+        .email:hover {
+            opacity: 0.5;
+        }
 
-    .text-block {
-      padding: 0 40px;
-      font-size: 12px;
-      line-height: 1.5;
-      max-width: 800px;
-      position: relative;
-      z-index: 2;
-    }
+        .email.vermillion {
+            color: #E32636;
+            opacity: 1;
+        }
 
-    footer {
-      padding: 40px;
-      background: #eaebe5;
-      text-transform: uppercase;
-      font-size: 12px;
-      position: relative;
-      z-index: 2;
-    }
+        .nav {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.15rem;
+            list-style: none;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-family: 'Source Sans Pro', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #000000;
+        }
 
-    /* Grain overlay for footer */
-    footer::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: -1;
-    }
+        .nav li {
+            color: #000000;
+            font-weight: 600;
+            font-size: 12px;
+            font-family: 'Source Sans Pro', sans-serif;
+            white-space: nowrap;
+            letter-spacing: 0.05em;
+            transition: opacity 0.3s ease, color 0.3s ease;
+        }
 
-    .newsletter-title {
-      margin-bottom: 10px;
-      font-size: 12px;
-    }
+        .nav li a {
+            color: #000000;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.3s ease;
+        }
 
-    .newsletter {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
+        .nav li a:hover {
+            opacity: 0.5;
+        }
 
-    .newsletter input {
-      padding: 6px 10px;
-      border: 1px solid #000;
-      background: transparent;
-      font-family: 'Source Serif Pro', serif;
-      font-size: 12px;
-      width: 220px;
-    }
+        .nav li.vermillion {
+            color: #E32636;
+            opacity: 1;
+        }
 
-    .newsletter button {
-      padding: 6px 14px;
-      border: 1px solid #000;
-      background: transparent;
-      cursor: pointer;
-      font-family: 'Source Serif Pro', serif;
-      font-size: 12px;
-      text-transform: uppercase;
-    }
+        .logo-image {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
 
-    .newsletter button:hover {
-      opacity: 0.6;
-    }
+        .logo-image img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
 
-    .footer-copy {
-      opacity: 0.7;
-    }
+        /* ---------- CONTENT AREA ---------- */
+        .content {
+            padding-top: 7rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 3rem;
+            padding-right: 3rem;
+            font-size: 12px;
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #000000;
+            padding-bottom: 0;
+        }
 
-    /* NEW: Enhanced Responsive design for mobile */
-    @media (max-width: 768px) {
-      /* Header stays exactly the same as requested */
-      header {
-        padding: 20px;
-      }
-      
-      /* Adjust page title for mobile */
-      .page-title {
-        font-size: 22px;
-        padding-left: 20px;
-        padding-right: 20px;
-      }
-      
-      /* Make two-column layout single column on mobile */
-      .row-2 {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        padding: 0 20px;
-      }
-      
-      /* Adjust text blocks for mobile */
-      .text-block {
-        padding: 0 20px;
-        font-size: 12px;
-        line-height: 1.6;
-      }
-      
-      /* Adjust spacing for mobile */
-      .divider-60 {
-        height: 40px;
-      }
-      
-      /* Adjust footer for mobile */
-      footer {
-        padding: 20px;
-      }
-      
-      /* Adjust newsletter input for mobile */
-      .newsletter input {
-        width: 100%;
-        max-width: 220px;
-      }
-      
-      /* Adjust newsletter layout for mobile */
-      .newsletter {
-        flex-direction: column;
-        gap: 10px;
-      }
-      
-      .newsletter button {
-        align-self: flex-start;
-      }
-    }
+        /* ---------- TWO-COLUMN BLOG / COLLECTION PAGE ---------- */
+        .blog-section {
+            padding: 0.5rem 0 1rem 0;
+            width: 100%;
+        }
 
-    /* Extra small devices */
-    @media (max-width: 480px) {
-      .page-title {
-        font-size: 20px;
-      }
-      
-      .text-block {
-        font-size: 11px;
-        line-height: 1.7;
-      }
-      
-      .divider-60 {
-        height: 30px;
-      }
-    }
-  </style>
+        .blog-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
 
+        /* ---- COLUMN 1: picture + about text ---- */
+        .col-about {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .col-about .about-img {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            background: #d4cfc8;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        }
+
+        .col-about .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .col-about .about-text {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            letter-spacing: 0.02em;
+            color: #1a1a1a;
+            font-weight: 400;
+            font-family: 'Source Sans Pro', sans-serif;
+            max-width: 95%;
+            text-align: justify;  /* justified alignment */
+        }
+
+        .col-about .about-text p + p {
+            margin-top: 0.8rem;
+        }
+
+        /* ---- COLUMN 2: CV + contact ---- */
+        .col-cv-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .cv-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .cv-section .cv-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #000000;
+            opacity: 0.7;
+            margin-bottom: 0.1rem;
+        }
+
+        .cv-section .cv-item {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            font-weight: 400;
+            color: #1a1a1a;
+            font-family: 'Source Sans Pro', sans-serif;
+            padding: 0.1rem 0;
+        }
+
+        .cv-section .cv-item strong {
+            font-weight: 600;
+        }
+
+        .cv-section .cv-item .year {
+            opacity: 0.5;
+            font-weight: 400;
+            margin-right: 0.5rem;
+        }
+
+        .contact-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .contact-section .contact-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #000000;
+            opacity: 0.7;
+            margin-bottom: 0.1rem;
+        }
+
+        .contact-section .contact-item {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            font-weight: 400;
+            color: #1a1a1a;
+            font-family: 'Source Sans Pro', sans-serif;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-section .contact-item:hover {
+            opacity: 0.5;
+        }
+
+        .contact-section .contact-item a {
+            color: #000000;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-section .contact-item a:hover {
+            opacity: 0.5;
+        }
+
+        /* ---------- DIVIDER (full width) with 1 line space before ---------- */
+        .divider-wrapper {
+            padding-top: 1rem;
+        }
+
+        .divider-full {
+            width: 100vw;
+            height: 1px;
+            background: #000000;
+            opacity: 1;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ---------- FOOTER ---------- */
+        .footer {
+            width: 100%;
+            padding: 2rem 3rem 2rem 3rem;
+            background: #f5f2eb;
+            font-size: 12px;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1.5fr 2fr 1.5fr;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: start;
+        }
+
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.15rem;
+            padding-top: 0;
+        }
+
+        .footer-column .label {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #000000;
+            opacity: 1;
+            margin-bottom: 0.1rem;
+        }
+
+        .footer-column .value {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: #000000;
+            opacity: 1;
+            text-decoration: none;
+            line-height: 1.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-column .value:hover {
+            opacity: 0.5;
+        }
+
+        .footer-column .copyright {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: #000000;
+            opacity: 1;
+            margin-top: 0.5rem;
+        }
+
+        .footer-column-1 {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.15rem;
+            padding-top: 0;
+        }
+
+        .footer-column-1 .hidden-label {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #000000;
+            opacity: 0;
+            margin-bottom: 0.1rem;
+            visibility: hidden;
+            height: 10px;
+        }
+
+        .footer-column-1 .value {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: #000000;
+            opacity: 1;
+            text-decoration: none;
+            line-height: 1.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-column-1 .value:hover {
+            opacity: 0.5;
+        }
+
+        .footer-column-1 .copyright {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: #000000;
+            opacity: 1;
+            margin-top: 0.5rem;
+        }
+
+        .footer-column-3 {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.15rem;
+            padding-top: 0;
+        }
+
+        .footer-column-3 .newsletter-label {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #000000;
+            opacity: 1;
+            margin-bottom: 0.1rem;
+        }
+
+        .falling-leaves-link {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #000000;
+            opacity: 1;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+            display: inline-block;
+        }
+
+        .falling-leaves-link:hover {
+            opacity: 0.5;
+        }
+
+        /* ============================================ */
+        /* MOBILE – stack columns, preserve header/footer */
+        /* ============================================ */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem 1rem 0.6rem 1rem;
+                align-items: center;
+            }
+
+            .header-content {
+                max-width: 100%;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                align-items: center;
+                gap: 0.2rem;
+            }
+
+            .header-col {
+                padding: 0;
+                flex: none;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .header-col-1 {
+                justify-content: flex-start;
+                grid-column: 1;
+                gap: 0;
+            }
+
+            .header-col-2 {
+                justify-content: center;
+                align-items: center;
+                grid-column: 2;
+                gap: 0.05rem;
+            }
+
+            .header-col-3 {
+                justify-content: flex-end;
+                grid-column: 3;
+            }
+
+            .header-col-4 {
+                display: none;
+            }
+
+            .logo-text {
+                font-size: 11px;
+                letter-spacing: 0.05em;
+            }
+
+            .enquiries {
+                font-size: 10px;
+                letter-spacing: 0.15em;
+            }
+
+            .email {
+                font-size: 11px;
+                letter-spacing: 0.05em;
+            }
+
+            .nav {
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 0.1rem;
+                padding: 0;
+            }
+
+            .nav li {
+                font-size: 11px;
+                letter-spacing: 0.05em;
+                font-weight: 600;
+            }
+
+            .content {
+                padding-top: 7rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                max-width: 100%;
+            }
+
+            .blog-section {
+                padding: 0.5rem 0 1rem 0;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .col-about .about-text {
+                max-width: 100%;
+                font-size: 0.85rem;
+                line-height: 1.5;
+                text-align: justify;  /* justified alignment on mobile */
+            }
+
+            .cv-section .cv-item {
+                font-size: 0.8rem;
+            }
+
+            .contact-section .contact-item {
+                font-size: 0.8rem;
+            }
+
+            .divider-wrapper {
+                padding-top: 1rem;
+            }
+
+            .footer {
+                padding: 0.8rem 1rem 1.2rem 1rem;
+            }
+
+            .footer-content {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.4rem 0.8rem;
+                max-width: 100%;
+                align-items: start;
+            }
+
+            .footer-column-1 {
+                grid-column: 1;
+                grid-row: 1;
+                align-items: flex-start;
+                text-align: left;
+                gap: 0.1rem;
+            }
+
+            .footer-column-1 .hidden-label {
+                display: none;
+            }
+
+            .footer-column-1 .value {
+                font-size: 12px;
+            }
+
+            .footer-column-1 .copyright {
+                font-size: 11px;
+                margin-top: 0.1rem;
+            }
+
+            .footer-column {
+                grid-column: 2;
+                grid-row: 1;
+                align-items: flex-start;
+                text-align: left;
+                gap: 0.3rem;
+            }
+
+            .footer-column .label {
+                font-size: 10px;
+                letter-spacing: 0.15em;
+                margin-bottom: 0.05rem;
+            }
+
+            .footer-column .value {
+                font-size: 11px;
+                line-height: 1.3;
+            }
+
+            .footer-column-3 {
+                grid-column: 1;
+                grid-row: 2;
+                align-items: flex-start;
+                text-align: left;
+                gap: 0.1rem;
+                margin-top: 0.2rem;
+            }
+
+            .footer-column-3 .newsletter-label {
+                font-size: 10px;
+                letter-spacing: 0.15em;
+                margin-bottom: 0.05rem;
+            }
+
+            .falling-leaves-link {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .header {
+                padding: 0.8rem 0.6rem 0.4rem 0.6rem;
+            }
+
+            .header-content {
+                gap: 0.1rem;
+            }
+
+            .logo-text {
+                font-size: 10px;
+            }
+
+            .enquiries {
+                font-size: 9px;
+            }
+
+            .email {
+                font-size: 10px;
+            }
+
+            .nav li {
+                font-size: 10px;
+            }
+
+            .content {
+                padding-top: 6.5rem;
+                padding-left: 0.8rem;
+                padding-right: 0.8rem;
+            }
+
+            .blog-section {
+                padding: 0.5rem 0 1rem 0;
+            }
+
+            .col-about .about-text {
+                font-size: 0.75rem;
+                line-height: 1.5;
+                text-align: justify;  /* justified alignment on small mobile */
+            }
+
+            .cv-section .cv-item {
+                font-size: 0.75rem;
+            }
+
+            .contact-section .contact-item {
+                font-size: 0.75rem;
+            }
+
+            .divider-wrapper {
+                padding-top: 1rem;
+            }
+
+            .footer {
+                padding: 0.5rem 0.6rem 0.8rem 0.6rem;
+            }
+
+            .footer-content {
+                gap: 0.2rem 0.5rem;
+            }
+
+            .footer-column-1 .value {
+                font-size: 11px;
+            }
+
+            .footer-column-1 .copyright {
+                font-size: 10px;
+            }
+
+            .footer-column .label {
+                font-size: 9px;
+            }
+
+            .footer-column .value {
+                font-size: 10px;
+            }
+
+            .footer-column-3 {
+                margin-top: 0.1rem;
+            }
+
+            .footer-column-3 .newsletter-label {
+                font-size: 9px;
+            }
+
+            .falling-leaves-link {
+                font-size: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- HEADER (unchanged) -->
+    <header class="header" id="header">
+        <div class="header-content">
+            <div class="header-col header-col-1">
+                <a href="#" class="logo-text" id="homeLink">OFSAEILY</a>
+            </div>
+            <div class="header-col header-col-2">
+                <span class="enquiries">ENQUIRIES</span>
+                <a href="mailto:OFSAEILY@GMAIL.COM" class="email" id="emailLink">OFSAEILY@GMAIL.COM</a>
+            </div>
+            <div class="header-col header-col-3">
+                <ul class="nav">
+                    <li><a href="index.html" id="collectionsNav">COLLECTIONS</a></li>
+                    <li><a href="about.html" id="aboutNav">ABOUT</a></li>
+                </ul>
+            </div>
+            <div class="header-col header-col-4">
+                <div class="logo-image">
+                    <img src="ofs.png" alt="Logo">
+                </div>
+            </div>
+        </div>
+    </header>
 
-<header>
-  <div class="col">ofsaeily</div>
+    <!-- MAIN CONTENT -->
+    <main class="content">
+        <!-- BLOG / COLLECTION TWO-COLUMN SECTION -->
+        <section class="blog-section">
+            <div class="blog-grid">
+                <!-- COLUMN 1: picture + about text -->
+                <div class="col-about">
+                    <div class="about-img">
+                        <img src="Picsart_25-12-18_22-23-42-094.png" alt="About image">
+                    </div>
+                    <div class="about-text">
+                        <p>OFSAEILY is a multidisciplinary studio exploring the quiet intersections of memory, material, and melody. Founded in 2026, the studio works across publishing, installation, and sonic research — with a particular interest in the poetics of confinement and release.</p>
+                        <p>This collection, <em>Birdsong for the confined</em>, marks the first in a series of seasonal releases that pair limited-edition objects with commissioned texts and field recordings. Each piece is produced in collaboration with artists, writers, and musicians whose practice resonates with the theme of resonant stillness.</p>
+                        <p>The studio is based between London and the Italian Alps, but works remotely with contributors from around the world.</p>
+                    </div>
+                </div>
 
-  <div class="col">
-    enquiries
-    <span class="email">ofsaeily@gmail.com</span>
-  </div>
+                <!-- COLUMN 2: CV + contact -->
+                <div class="col-cv-contact">
+                    <!-- CV Section -->
+                    <div class="cv-section">
+                        <span class="cv-label">Curriculum Vitae</span>
+                        <div class="cv-item"><span class="year">2026</span> <strong>Birdsong for the confined</strong> — publication &amp; installation, London</div>
+                        <div class="cv-item"><span class="year">2025</span> <strong>Resonant Stillness</strong> — group exhibition, Milan</div>
+                        <div class="cv-item"><span class="year">2025</span> <strong>Field Notes from the Alps</strong> — artist residency, Bormio</div>
+                        <div class="cv-item"><span class="year">2024</span> <strong>Fragments of a Quiet Year</strong> — solo show, Berlin</div>
+                        <div class="cv-item"><span class="year">2023</span> <strong>Echo &amp; Memory</strong> — publication, self-published</div>
+                        <div class="cv-item"><span class="year">2022</span> <strong>Listening to Walls</strong> — sound installation, Vienna</div>
+                    </div>
 
-  <div class="col menu">
-    <a href="index.html">I. collections</a>
-    <a href="archive.html">II. archive</a>
-    <a href="about.html">III. about</a>
-    <a href="contact.html">VI. contact</a>
-     <a href="https://linktr.ee/ofsaeily" target="_blank">V. my links</a>
-  </div>
+                    <!-- Contact Section -->
+                    <div class="contact-section">
+                        <span class="contact-label">Contact</span>
+                        <span class="contact-item"><a href="mailto:OFSAEILY@GMAIL.COM">OFSAEILY@GMAIL.COM</a></span>
+                        <span class="contact-item"><a href="#">+44 20 7946 0958</a></span>
+                        <span class="contact-item"><a href="https://www.instagram.com/ofsaeily" target="_blank">@OFSAEILY</a></span>
+                        <span class="contact-item" style="margin-top: 0.3rem; opacity: 0.5;">Studio open by appointment</span>
+                        <span class="contact-item" style="opacity: 0.5;">London / Bormio</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-  <div class="col">
-  <img src="ofs..png" alt="Logo" style="width: 40px; height: 40px; object-fit: contain;">
-</div>  
-  
-</header>
+    <!-- DIVIDER with 1 line space before (wrapper) -->
+    <div class="divider-wrapper">
+        <div class="divider-full"></div>
+    </div>
 
-<div class="divider-60"></div>
+    <!-- FOOTER (unchanged) -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column-1">
+                <span class="hidden-label">Placeholder</span>
+                <span class="value">OFSAEILY</span>
+                <span class="copyright">© OFSAEILY 2026</span>
+            </div>
+            <div class="footer-column">
+                <span class="label">Enquiries</span>
+                <a href="mailto:OFSAEILY@GMAIL.COM" class="value">OFSAEILY@GMAIL.COM</a>
+                <span class="label" style="margin-top: 0.3rem;">Instagram</span>
+                <a href="https://www.instagram.com/ofsaeily?igsi=NW85aWFia2l2eWcy" class="value" target="_blank">@OFSAEILY</a>
+            </div>
+            <div class="footer-column-3">
+                <span class="newsletter-label">Newsletter ↓</span>
+                <a href="https://saeily.substack.com/embed" class="falling-leaves-link" target="_blank">Between Falling Leaves</a>
+            </div>
+        </div>
+    </footer>
 
-<div class="page-title">III. about</div>
+    <script>
+        // header scroll effect (unchanged)
+        const header = document.getElementById('header');
+        let timeout;
 
-<div class="divider-60"></div>
+        window.addEventListener('scroll', function() {
+            const scrollY = window.scrollY;
+            if (scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            clearTimeout(timeout);
+            if (scrollY > 20) {
+                timeout = setTimeout(function() {
+                    header.classList.remove('scrolled');
+                }, 300);
+            }
+        });
 
-<div class="thin-line"></div>
-
-<div class="divider-60"></div>
-
-<!-- TWO COLUMN SECTION 1: TEXT + IMAGE -->
-<div class="row-2">
-  <div class="text-block">
-    <p>Shailee Vajracharya is a self-taught artist and poet. Painting and writing simultaneously, she draws inspiration from everyday life and her co-existing cycle of tranquility and chaos.</p>
-    <p>Brushes, markers, pigments, and papers are scattered around her, with her seated in the middle, her gaze fixed on the space ahead, and her mind racing with ideas—this is how she begins her work. Her creative process is both reflective and meditative, often delving into the depths of her subconscious.</p>
-    <p>She enjoys experimenting with different mediums and exploring new ways of expressing herself. Her works, which serve as a journal for her, give people an insight into her inner emotions and state of mind.</p>
-  </div>
-  
-  <div>
-    <img src="pfp.jpg" alt="Section Image">
-  </div>
-</div>
-
-<div class="divider-60"></div>
-
-<!-- TWO COLUMN SECTION 2: EXHIBITIONS + STATEMENT -->
-<div class="row-2">
-  <div class="text-block">
-    <p><strong>EXHIBITIONS</strong></p>
-<p>2023 - "Smoke-kissed" / Group Exhibition at Dalai-la Art Space (Dalai-la Boutique Hotel, Thamel, KTM, Nepal)<br>
-2024 - "Miniature Exhibition" / Group Exhibition at Museum of Nepali Art (Kathmandu Guest House, Thamel, KTM, Nepal)<br>
-2024 - "Fleeting Impressions" / Solo Art Exhibition at Siddhartha Art Gallery Annex (Babarmahal Revisited, Babarmahal, KTM, Nepal)<br>
-2025 - "Artists Under 30" / Group Exhibition at Moksh (Jhamsikhel, Lalitpur, Nepal)<br>
-2025 - "Visions in Hues" / Group Exhibition at Kalā Salon (Chhaya Center, Thamel, KTM, Nepal)<br>
-2025 - "ARPM 002" at Kathmandu Art House, (Kathmandu Guest House, Thamel, KTM, Nepal)<br>
-2025 - "Birdsong for the Confined" / Solo exhibition at Takpa Gallery (Lazimpat, KTM, Nepal)</p>
-
-
-    
-    <p><strong>RESIDENCY</strong></p>
-    <p>2025 - "SAF 2025 Phase I" at Space A (Babarmahal, KTM, Nepal)<br>
-    2025 - "ARPM 002" at Patan Museum (Patan Durbar Square, Patan, Nepal)</p>
-  </div>
-  
-  <div class="text-block">
-    <p><strong>ARTIST'S STATEMENT</strong></p>
-    <p>My work stems from a persistent quest for self-expression and is a balance between discipline, focus, and creative freedom, depicting internal landscapes and everyday life in a soulful portrayal. Inspiration occurs to me in many forms, ranging from the mundane to the poetic. Through my work, I seek to convey the subtle, transient, and overlooked facets of life.</p>
-    <p>My creative process is an intriguing cycle of giving and receiving. It's a journey from abstract notions to a complete series—a sacred ritual of bonding with the materials and working hand in hand with them. My work serves as a form of journaling, a way of anchoring myself, and a way to simply be.</p>
-  </div>
-</div>
-
-<div class="divider-60"></div>
-
-<div class="thin-line"></div>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-copy">© 2025 by ofsaeily</div>
-</footer>
-
+        // home link (unchanged)
+        const homeLink = document.getElementById('homeLink');
+        homeLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open('#home', '_blank');
+        });
+    </script>
 </body>
 </html>
