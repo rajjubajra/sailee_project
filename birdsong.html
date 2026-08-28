@@ -342,21 +342,19 @@
             display: block;
         }
 
-        /* ---------- DIVIDER (full width) with 1 line space before ---------- */
+        /* ---------- DIVIDER (full width) with 1 line space before - FIXED ---------- */
         .divider-wrapper {
             padding-top: 1rem;
         }
 
         .divider-full {
-            width: 100vw;
+            width: 100%;
             height: 1px;
             background: #000000;
-            opacity: 1;
-            position: relative;
-            left: 50%;
-            transform: translateX(-50%);
+            opacity: 0.5;
             margin: 0;
             padding: 0;
+            border: none;
         }
 
         /* ---------- FOOTER (unchanged) ---------- */
@@ -601,7 +599,7 @@
 
             .col-text .long-desc {
                 max-width: 100%;
-                font-size: 0.8rem;  /* reduced from 0.95rem */
+                font-size: 0.8rem;
                 line-height: 1.5;
             }
 
@@ -725,7 +723,7 @@
             }
 
             .col-text .long-desc {
-                font-size: 0.75rem;  /* reduced from 0.9rem */
+                font-size: 0.75rem;
                 line-height: 1.5;
             }
 
@@ -846,7 +844,7 @@ In this exhibition, paintings, ceramics, and poetry all come together to initiat
         </section>
     </main>
 
-    <!-- DIVIDER with 1 line space before (wrapper) -->
+    <!-- DIVIDER with 1 line space before - FIXED -->
     <div class="divider-wrapper">
         <div class="divider-full"></div>
     </div>
