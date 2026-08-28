@@ -1,704 +1,900 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <link rel="icon" type="image/x-icon" href="favicon.png">
-  <title>ofsaeily — Birdsong for the Confined</title>
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OFSAEILY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- RESET & BASE ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <!-- Font: Source Serif Pro -->
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;600;700;900&display=swap" rel="stylesheet">
+        body {
+            background: #f5f2eb;
+            min-height: 100vh;
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #000000;
+            font-size: 12px;
+            overflow-x: hidden;
+        }
 
-  <style>
-    * {
-      font-family: 'Source Serif Pro', serif !important;
-      font-weight: 400;
-    }
+        /* Grain texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.4;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4"/><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.15 0"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.3"/></svg>');
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            mix-blend-mode: multiply;
+        }
 
-    body {
-      margin: 0;
-      font-size: 12px;
-      font-weight: 400;
-      background: #eaebe5;
-      color: #1a1a1a;
-      position: relative;
-    }
+        /* Paper texture */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.1;
+            background-image: 
+                radial-gradient(circle at 30% 40%, rgba(180,160,140,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(130,110,90,0.1) 0%, transparent 40%);
+            background-blend-mode: overlay;
+        }
 
-    /* Grain overlay for body */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 1;
-    }
+        /* ---------- HEADER (unchanged) ---------- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            z-index: 100;
+            background: rgba(245, 242, 235, 1);
+            transition: background 0.3s ease, backdrop-filter 0.3s ease;
+            font-size: 12px;
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #000000;
+            border-bottom: none;
+        }
 
-    /* EXACT HEADER FROM EXAMPLE 1 */
-    header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      padding: 20px 40px;
-      background: #eaebe5;
-      position: relative;
-      z-index: 2;
-    }
+        .header.scrolled {
+            background: rgba(245, 242, 235, 0.5);
+            backdrop-filter: blur(6px);
+        }
 
-    /* Grain overlay for header */
-    header::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: -1;
-    }
+        .header:not(.scrolled) {
+            background: rgba(245, 242, 235, 1);
+            backdrop-filter: none;
+        }
 
-    .col {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.25;
-      text-transform: uppercase;
-    }
+        .header-content {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1400px;
+        }
 
-    .email {
-      text-transform: none;
-      opacity: 0.7;
-    }
+        .header-col {
+            display: flex;
+            align-items: flex-start;
+            flex: 1;
+            padding: 0.5rem 0;
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #000000;
+        }
 
-    .menu a {
-      text-decoration: none;
-      color: inherit;
-      margin-bottom: 1px;
-    }
+        .header-col-1 {
+            justify-content: flex-start;
+            gap: 2rem;
+        }
 
-    .menu a:hover {
-      opacity: 0.6;
-    }
+        .header-col-2 {
+            justify-content: flex-start;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.05rem;
+        }
 
-    /* END OF EXACT HEADER FROM EXAMPLE 1 */
+        .header-col-3 {
+            justify-content: center;
+        }
 
-    /* CAROUSEL WRAPPER - 50px spacing from header */
-    .carousel-wrapper {
-      width: 100%;
-      margin-top: 50px;
-      background: #eaebe5;
-    }
+        .header-col-4 {
+            justify-content: flex-end;
+        }
 
-    .carousel-container {
-      width: 100%;
-      max-width: 100%;
-      overflow: visible;
-      position: relative;
-      padding: 0 60px;
-      box-sizing: border-box;
-    }
+        .logo-text {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: #000000;
+            font-family: 'Source Sans Pro', sans-serif;
+            white-space: nowrap;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
 
-    /* Main carousel frame */
-    .carousel-frame {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-      background: #eaebe5;
-    }
+        .logo-text:hover {
+            opacity: 0.5;
+        }
 
-    .carousel-viewport {
-      overflow-x: auto;
-      overflow-y: hidden;
-      scroll-behavior: smooth;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      cursor: grab;
-      scroll-snap-type: x mandatory;
-    }
-    .carousel-viewport:active {
-      cursor: grabbing;
-    }
-    .carousel-viewport::-webkit-scrollbar {
-      display: none;
-    }
+        .enquiries {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            color: #000000;
+            font-family: 'Source Sans Pro', sans-serif;
+            text-transform: uppercase;
+            white-space: nowrap;
+            opacity: 1;
+        }
 
-    /* Track - flex row with variable width items */
-    .carousel-track {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 20px;
-      padding: 20px 0;
-    }
+        .email {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: #000000;
+            font-family: 'Source Sans Pro', sans-serif;
+            text-transform: uppercase;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: opacity 0.3s ease, color 0.3s ease;
+            text-decoration: none;
+        }
 
-    /* Each image item - variable width based on natural aspect ratio */
-    .carousel-item {
-      flex-shrink: 0;
-      scroll-snap-align: start;
-      background: #eaebe5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
+        .email:hover {
+            opacity: 0.5;
+        }
 
-    .carousel-img {
-      height: 55vh;
-      width: auto;
-      max-width: none;
-      display: block;
-      object-fit: contain;
-      background: #eaebe5;
-    }
+        .email.vermillion {
+            color: #E32636;
+            opacity: 1;
+        }
 
-    /* Video items */
-    .carousel-video {
-      height: 55vh;
-      width: auto;
-      display: block;
-      object-fit: contain;
-      background: #1a1a1a;
-    }
+        .nav {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.15rem;
+            list-style: none;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-family: 'Source Sans Pro', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #000000;
+        }
 
-    /* Text slide - SAME SIZE AS IMAGES */
-    .carousel-text-item {
-      height: 55vh;
-      width: auto;
-      min-width: 400px;
-      max-width: 600px;
-      flex-shrink: 0;
-      scroll-snap-align: start;
-      background: #eaebe5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 40px;
-      box-sizing: border-box;
-    }
-    .text-card {
-      max-width: 100%;
-      width: 100%;
-      height: auto;
-    }
-    .text-card .text-title {
-      font-size: 20px;
-      font-weight: 400;
-      letter-spacing: 0.3px;
-      margin-bottom: 1.5rem;
-      color: #111;
-      text-transform: uppercase;
-      text-align: center;
-    }
-    .text-card .text-paragraph {
-      font-size: 12px;
-      line-height: 1.5;
-      color: #2a2a2a;
-      margin-bottom: 1rem;
-      font-weight: 400;
-      text-align: justify;
-    }
-    .text-card .text-paragraph:last-of-type {
-      margin-bottom: 0;
-    }
-    /* Style for line breaks in text */
-    .text-card .text-paragraph br {
-      display: block;
-      margin: 4px 0;
-      content: "";
-    }
+        .nav li {
+            color: #000000;
+            font-weight: 600;
+            font-size: 12px;
+            font-family: 'Source Sans Pro', sans-serif;
+            white-space: nowrap;
+            letter-spacing: 0.05em;
+            transition: opacity 0.3s ease, color 0.3s ease;
+        }
 
-    /* Navigation arrows */
-    .carousel-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: transparent;
-      border: 1px solid #111;
-      border-radius: 50%;
-      width: 44px;
-      height: 44px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      font-weight: 400;
-      color: #111;
-      transition: all 0.2s ease;
-      z-index: 20;
-      background: rgba(234, 235, 229, 0.85);
-      backdrop-filter: blur(3px);
-    }
-    .carousel-arrow:hover {
-      background: #111;
-      color: #fff;
-      border-color: #111;
-    }
-    .arrow-prev {
-      left: 15px;
-    }
-    .arrow-next {
-      right: 15px;
-    }
+        .nav li a {
+            color: #000000;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.3s ease;
+        }
 
-    /* Dot navigation */
-    .dots {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin: 0;
-      padding: 20px 0 8px 0;
-    }
-    .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: transparent;
-      border: 1px solid #aaa;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .dot.active {
-      background: #333;
-      border: 1px solid #333;
-      width: 18px;
-      border-radius: 10px;
-    }
-    .dot:hover {
-      border-color: #111;
-    }
+        .nav li a:hover {
+            opacity: 0.5;
+        }
 
-    /* FOOTER */
-    footer {
-      padding: 20px;
-      text-align: center;
-      font-size: 12px;
-      color: #888;
-      background: #eaebe5;
-      border-top: none;
-      font-weight: 400;
-      letter-spacing: 0.5px;
-      margin-top: 0;
-      text-transform: uppercase;
-    }
+        .nav li.vermillion {
+            color: #E32636;
+            opacity: 1;
+        }
 
-    /* Responsive */
-    @media (max-width: 900px) {
-      .carousel-container {
-        padding: 0 50px;
-      }
-      .carousel-img, .carousel-video, .carousel-text-item {
-        height: 45vh;
-      }
-      .carousel-text-item {
-        min-width: 350px;
-        max-width: 500px;
-        padding: 0 30px;
-      }
-      .carousel-arrow {
-        width: 38px;
-        height: 38px;
-        font-size: 1.3rem;
-      }
-    }
+        .logo-image {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
 
-    @media (max-width: 700px) {
-      .carousel-container {
-        padding: 0 40px;
-      }
-      .carousel-img, .carousel-video, .carousel-text-item {
-        height: 35vh;
-      }
-      .carousel-text-item {
-        min-width: 300px;
-        max-width: 400px;
-        padding: 0 25px;
-      }
-      .carousel-arrow {
-        width: 34px;
-        height: 34px;
-        font-size: 1.1rem;
-      }
-      header {
-        padding: 16px 20px;
-        flex-wrap: wrap;
-        gap: 12px;
-      }
-      .carousel-wrapper {
-        margin-top: 40px;
-      }
-      .dots {
-        padding: 16px 0 8px 0;
-      }
-      .text-card .text-title {
-        font-size: 18px;
-        margin-bottom: 1rem;
-      }
-    }
+        .logo-image img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
 
-    @media (max-width: 500px) {
-      .carousel-container {
-        padding: 0 30px;
-      }
-      .carousel-img, .carousel-video, .carousel-text-item {
-        height: 30vh;
-      }
-      .carousel-text-item {
-        min-width: 260px;
-        max-width: 320px;
-        padding: 0 20px;
-      }
-      .carousel-arrow {
-        width: 30px;
-        height: 30px;
-        font-size: 1rem;
-      }
-      .carousel-wrapper {
-        margin-top: 30px;
-      }
-      .text-card .text-title {
-        font-size: 16px;
-      }
-    }
-  </style>
+        /* ---------- CONTENT AREA ---------- */
+        .content {
+            padding-top: 7rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 3rem;
+            padding-right: 3rem;
+            font-size: 12px;
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #000000;
+            padding-bottom: 0;
+        }
+
+        /* ---------- NEW TWO-COLUMN SLIDE ---------- */
+        .two-col-section {
+            padding: 0.5rem 0 1rem 0;
+            width: 100%;
+        }
+
+        .two-col-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        /* ---- COLUMN 1: text + picture + long description ---- */
+        .col-text {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .col-text .title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+
+        .col-text .sub {
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: #333;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+
+        .col-text .feature-img {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            background: #d4cfc8;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        }
+
+        .col-text .feature-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .col-text .long-desc {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            letter-spacing: 0.02em;
+            color: #1a1a1a;
+            font-weight: 400;
+            font-family: 'Source Sans Pro', sans-serif;
+            max-width: 95%;
+        }
+
+        /* ---- COLUMN 2: full‑column picture + two pictures stacked ---- */
+        .col-pictures {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .col-pictures .full-img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background: #d4cfc8;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        }
+
+        .col-pictures .full-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .col-pictures .two-stack {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+        }
+
+        .col-pictures .two-stack .stack-item {
+            aspect-ratio: 1 / 1.2;
+            background: #d4cfc8;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        }
+
+        .col-pictures .two-stack .stack-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ---------- DIVIDER (full width) with 1 line space before ---------- */
+        .divider-wrapper {
+            padding-top: 1rem;
+        }
+
+        .divider-full {
+            width: 100vw;
+            height: 1px;
+            background: #000000;
+            opacity: 1;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ---------- FOOTER (unchanged) ---------- */
+        .footer {
+            width: 100%;
+            padding: 2rem 3rem 2rem 3rem;
+            background: #f5f2eb;
+            font-size: 12px;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1.5fr 2fr 1.5fr;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: start;
+        }
+
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.15rem;
+            padding-top: 0;
+        }
+
+        .footer-column .label {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #000000;
+            opacity: 1;
+            margin-bottom: 0.1rem;
+        }
+
+        .footer-column .value {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: #000000;
+            opacity: 1;
+            text-decoration: none;
+            line-height: 1.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-column .value:hover {
+            opacity: 0.5;
+        }
+
+        .footer-column .copyright {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: #000000;
+            opacity: 1;
+            margin-top: 0.5rem;
+        }
+
+        .footer-column-1 {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.15rem;
+            padding-top: 0;
+        }
+
+        .footer-column-1 .hidden-label {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #000000;
+            opacity: 0;
+            margin-bottom: 0.1rem;
+            visibility: hidden;
+            height: 10px;
+        }
+
+        .footer-column-1 .value {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: #000000;
+            opacity: 1;
+            text-decoration: none;
+            line-height: 1.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-column-1 .value:hover {
+            opacity: 0.5;
+        }
+
+        .footer-column-1 .copyright {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: #000000;
+            opacity: 1;
+            margin-top: 0.5rem;
+        }
+
+        .footer-column-3 {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.15rem;
+            padding-top: 0;
+        }
+
+        .footer-column-3 .newsletter-label {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #000000;
+            opacity: 1;
+            margin-bottom: 0.1rem;
+        }
+
+        .falling-leaves-link {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #000000;
+            opacity: 1;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+            display: inline-block;
+        }
+
+        .falling-leaves-link:hover {
+            opacity: 0.5;
+        }
+
+        /* ============================================ */
+        /* MOBILE – stack columns, preserve header/footer */
+        /* ============================================ */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem 1rem 0.6rem 1rem;
+                align-items: center;
+            }
+
+            .header-content {
+                max-width: 100%;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                align-items: center;
+                gap: 0.2rem;
+            }
+
+            .header-col {
+                padding: 0;
+                flex: none;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .header-col-1 {
+                justify-content: flex-start;
+                grid-column: 1;
+                gap: 0;
+            }
+
+            .header-col-2 {
+                justify-content: center;
+                align-items: center;
+                grid-column: 2;
+                gap: 0.05rem;
+            }
+
+            .header-col-3 {
+                justify-content: flex-end;
+                grid-column: 3;
+            }
+
+            .header-col-4 {
+                display: none;
+            }
+
+            .logo-text {
+                font-size: 11px;
+                letter-spacing: 0.05em;
+            }
+
+            .enquiries {
+                font-size: 10px;
+                letter-spacing: 0.15em;
+            }
+
+            .email {
+                font-size: 11px;
+                letter-spacing: 0.05em;
+            }
+
+            .nav {
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 0.1rem;
+                padding: 0;
+            }
+
+            .nav li {
+                font-size: 11px;
+                letter-spacing: 0.05em;
+                font-weight: 600;
+            }
+
+            .content {
+                padding-top: 7rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                max-width: 100%;
+            }
+
+            .two-col-section {
+                padding: 0.5rem 0 1rem 0;
+            }
+
+            .two-col-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .col-text .title {
+                font-size: 1.6rem;
+            }
+
+            .col-text .long-desc {
+                max-width: 100%;
+                font-size: 0.8rem;  /* reduced from 0.95rem */
+                line-height: 1.5;
+            }
+
+            .col-pictures .two-stack {
+                gap: 1rem;
+            }
+
+            .divider-wrapper {
+                padding-top: 1rem;
+            }
+
+            .footer {
+                padding: 0.8rem 1rem 1.2rem 1rem;
+            }
+
+            .footer-content {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.4rem 0.8rem;
+                max-width: 100%;
+                align-items: start;
+            }
+
+            .footer-column-1 {
+                grid-column: 1;
+                grid-row: 1;
+                align-items: flex-start;
+                text-align: left;
+                gap: 0.1rem;
+            }
+
+            .footer-column-1 .hidden-label {
+                display: none;
+            }
+
+            .footer-column-1 .value {
+                font-size: 12px;
+            }
+
+            .footer-column-1 .copyright {
+                font-size: 11px;
+                margin-top: 0.1rem;
+            }
+
+            .footer-column {
+                grid-column: 2;
+                grid-row: 1;
+                align-items: flex-start;
+                text-align: left;
+                gap: 0.3rem;
+            }
+
+            .footer-column .label {
+                font-size: 10px;
+                letter-spacing: 0.15em;
+                margin-bottom: 0.05rem;
+            }
+
+            .footer-column .value {
+                font-size: 11px;
+                line-height: 1.3;
+            }
+
+            .footer-column-3 {
+                grid-column: 1;
+                grid-row: 2;
+                align-items: flex-start;
+                text-align: left;
+                gap: 0.1rem;
+                margin-top: 0.2rem;
+            }
+
+            .footer-column-3 .newsletter-label {
+                font-size: 10px;
+                letter-spacing: 0.15em;
+                margin-bottom: 0.05rem;
+            }
+
+            .falling-leaves-link {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .header {
+                padding: 0.8rem 0.6rem 0.4rem 0.6rem;
+            }
+
+            .header-content {
+                gap: 0.1rem;
+            }
+
+            .logo-text {
+                font-size: 10px;
+            }
+
+            .enquiries {
+                font-size: 9px;
+            }
+
+            .email {
+                font-size: 10px;
+            }
+
+            .nav li {
+                font-size: 10px;
+            }
+
+            .content {
+                padding-top: 6.5rem;
+                padding-left: 0.8rem;
+                padding-right: 0.8rem;
+            }
+
+            .two-col-section {
+                padding: 0.5rem 0 1rem 0;
+            }
+
+            .col-text .title {
+                font-size: 1.4rem;
+            }
+
+            .col-text .long-desc {
+                font-size: 0.75rem;  /* reduced from 0.9rem */
+                line-height: 1.5;
+            }
+
+            .col-pictures .two-stack {
+                gap: 0.8rem;
+            }
+
+            .divider-wrapper {
+                padding-top: 1rem;
+            }
+
+            .footer {
+                padding: 0.5rem 0.6rem 0.8rem 0.6rem;
+            }
+
+            .footer-content {
+                gap: 0.2rem 0.5rem;
+            }
+
+            .footer-column-1 .value {
+                font-size: 11px;
+            }
+
+            .footer-column-1 .copyright {
+                font-size: 10px;
+            }
+
+            .footer-column .label {
+                font-size: 9px;
+            }
+
+            .footer-column .value {
+                font-size: 10px;
+            }
+
+            .footer-column-3 {
+                margin-top: 0.1rem;
+            }
+
+            .footer-column-3 .newsletter-label {
+                font-size: 9px;
+            }
+
+            .falling-leaves-link {
+                font-size: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<!-- EXACT HEADER FROM EXAMPLE 1 -->
-<header>
-  <div class="col">ofsaeily</div>
-
-  <div class="col">
-    enquiries
-    <span class="email">ofsaeily@gmail.com</span>
-  </div>
-
-  <div class="col menu">
-    <a href="index.html">I. collections</a>
-    <a href="archive.html">II. archive</a>
-    <a href="about.html">III. about</a>
-    <a href="contact.html">VI. contact</a>
-    <a href="https://linktr.ee/ofsaeily" target="_blank">V. my links</a>
-  </div>
-
-  <div class="col">
-    <img src="ofs..png" alt="Logo" style="width: 40px; height: 40px; object-fit: contain;">
-  </div>
-</header>
-
-<!-- VARIABLE WIDTH CAROUSEL SECTION -->
-<div class="carousel-wrapper">
-  <div class="carousel-container">
-    <div class="carousel-frame">
-      <button class="carousel-arrow arrow-prev" id="prevBtn" aria-label="Previous">‹</button>
-      <button class="carousel-arrow arrow-next" id="nextBtn" aria-label="Next">›</button>
-
-      <div class="carousel-viewport" id="viewport">
-        <div class="carousel-track" id="track">
-          <!-- Items injected dynamically -->
+    <!-- HEADER (unchanged) -->
+    <header class="header" id="header">
+        <div class="header-content">
+            <div class="header-col header-col-1">
+                <a href="#" class="logo-text" id="homeLink">OFSAEILY</a>
+            </div>
+            <div class="header-col header-col-2">
+                <span class="enquiries">ENQUIRIES</span>
+                <a href="mailto:OFSAEILY@GMAIL.COM" class="email" id="emailLink">OFSAEILY@GMAIL.COM</a>
+            </div>
+            <div class="header-col header-col-3">
+                <ul class="nav">
+                    <li><a href="index.html" id="collectionsNav">COLLECTIONS</a></li>
+                    <li><a href="about.html" id="aboutNav">ABOUT</a></li>
+                </ul>
+            </div>
+            <div class="header-col header-col-4">
+                <div class="logo-image">
+                    <img src="ofs.png" alt="Logo">
+                </div>
+            </div>
         </div>
-      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+        <!-- NEW TWO-COLUMN SLIDE (replaces old slider) -->
+        <section class="two-col-section">
+            <div class="two-col-grid">
+                <!-- COLUMN 1: text + picture + long descriptive text -->
+                <div class="col-text">
+                    <h1 class="title">Birdsong for the confined</h1>
+                    <div class="sub">Collection 001 · 12.08.2026</div>
+                    <div class="feature-img">
+                        <img src="Picsart_25-12-18_22-23-42-094.png" alt="Birdsong for the confined">
+                    </div>
+                    <div class="long-desc">
+                        <p>This collection explores the delicate tension between confinement and freedom, 
+                        using avian motifs as a quiet rebellion against stillness. Each piece is a 
+                        meditation on the spaces we inhabit — both physical and emotional — and the 
+                        songs we carry within them. The textures, muted tones, and fragmented silhouettes 
+                        speak to a world that is at once restrained and fiercely alive.</p>
+                        <p style="margin-top: 0.8rem;">The work draws from archival field recordings, 
+                        vintage ornithological illustrations, and the subtle geometry of cage bars. 
+                        It is an invitation to listen closely, to find melody in the mundane, and to 
+                        remember that even in confinement, there is a way to sing.</p>
+                    </div>
+                </div>
+
+                <!-- COLUMN 2: full-column picture + two pictures stacked -->
+                <div class="col-pictures">
+                    <div class="full-img">
+                        <img src="Picsart_25-12-18_22-23-42-094.png" alt="Full column image">
+                    </div>
+                    <div class="two-stack">
+                        <div class="stack-item">
+                            <img src="Picsart_25-12-18_22-23-42-094.png" alt="Stack image 1">
+                        </div>
+                        <div class="stack-item">
+                            <img src="Picsart_25-12-18_22-23-42-094.png" alt="Stack image 2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- DIVIDER with 1 line space before (wrapper) -->
+    <div class="divider-wrapper">
+        <div class="divider-full"></div>
     </div>
 
-    <div class="dots" id="dotsContainer"></div>
-  </div>
-</div>
+    <!-- FOOTER (unchanged) -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column-1">
+                <span class="hidden-label">Placeholder</span>
+                <span class="value">OFSAEILY</span>
+                <span class="copyright">© OFSAEILY 2026</span>
+            </div>
+            <div class="footer-column">
+                <span class="label">Enquiries</span>
+                <a href="mailto:OFSAEILY@GMAIL.COM" class="value">OFSAEILY@GMAIL.COM</a>
+                <span class="label" style="margin-top: 0.3rem;">Instagram</span>
+                <a href="https://www.instagram.com/ofsaeily?igsi=NW85aWFia2l2eWcy" class="value" target="_blank">@OFSAEILY</a>
+            </div>
+            <div class="footer-column-3">
+                <span class="newsletter-label">Newsletter ↓</span>
+                <a href="https://saeily.substack.com/embed" class="falling-leaves-link" target="_blank">Between Falling Leaves</a>
+            </div>
+        </div>
+    </footer>
 
-<footer>
-  © 2025 by ofsaeily
-</footer>
+    <script>
+        // header scroll effect (unchanged)
+        const header = document.getElementById('header');
+        let timeout;
 
-<script>
-  // ALL IMAGES + text slide with your complete text
-  const items = [
-    { type: 'image', src: 'Picsart_25-12-19_20-32-55-278.jpg', alt: 'birdsongfortheconfined' },
-    { type: 'image', src: 'lily 2.jpg', alt: 'A-portrait-of-lilies' },
-    { type: 'image', src: 'lily 1.jpg', alt: 'A-portrait-of-lilies' },
-    { type: 'image', src: 'bird 2.jpg', alt: 'Birdsong-for-the-confined' },
-    { type: 'image', src: 'aa.jpg', alt: 'birdsongfortheconfined' },
-    { type: 'image', src: 'b2.jpg', alt: 'Reminiscence-of-a-Memory' },
-    { type: 'image', src: 'reminsce 1.jpg', alt: 'Reminiscence-of-a-Memory' },
-    { type: 'image', src: 'aaa.jpg', alt: 'birdsongfortheconfined' },
-    { type: 'image', src: 'rest.jpg', alt: 'This-Is-The-Rest-Needed-For-Living' },
-    { type: 'image', src: 'ab.jpg', alt: 'Reminiscence-of-a-Memory' },
-    { type: 'image', src: 'day.jpg', alt: 'THe-day-has-passed' },
-    { type: 'image', src: 'aa1.jpg', alt: 'birdsongfortheconfined' },
-    { type: 'image', src: 'aa3.jpg', alt: 'birdsongfortheconfined' },
-    { type: 'image', src: 'ad.jpg', alt: 'Birdsong-for-the-confined' },
-    { type: 'image', src: 'flow of.jpg', alt: 'The-flow-of-a-river' },
-    { type: 'image', src: 'Translucent light 1.jpg', alt: 'Translucent-Light' },
-    { type: 'image', src: 'quiet.jpg', alt: 'A-sense-of-quiet' },
-    { type: 'image', src: 'fig a.jpg', alt: 'Fig' },
-    { type: 'image', src: 'evening.jpg', alt: 'Late-Evening-Afternoon' },
-    { type: 'image', src: 'dawn.jpg', alt: 'dawn' },
-    { type: 'image', src: 'Escapism1.jpg', alt: 'Escapism' },
-    { type: 'image', src: 'afloat.jpg', alt: 'afloat' },
-    { type: 'image', src: 'aa4.jpg', alt: 'birdsongfortheconfined' },
-    { type: 'image', src: 'ae.jpg', alt: 'birdsongfortheconfined' },
-    { type: 'text', 
-      title: 'BIRDSONG FOR THE CONFINED', 
-      paragraphs: [
-        'A year ago, I learned of the term "escapism" and realized how much it applied to my everyday life. The epiphany led to a five-part poem and later, a series of photographs, videos, poems, and paintings collectively titled "Birdsong for the Confined," birthed from a phase of drowsy eyes and daydreaming, when my way of living became a cage, and I became the "confined."',
-        'Acrylic and Ink on Canvas.<br>Underglaze on Rakuware.',
-        'Solo Exhibition at Takpa Gallery<br>Lazimpat, Kathmandu<br>(2026)'
-      ] }
-  ];
-
-  const track = document.getElementById('track');
-  const dotsContainer = document.getElementById('dotsContainer');
-  const viewport = document.getElementById('viewport');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-
-  let currentPage = 0;
-  let itemsPerPage = 0;
-  let totalPages = 0;
-
-  // Calculate how many items fit per page based on viewport width
-  function calculateItemsPerPage() {
-    if (!viewport) return 2;
-    const viewportWidth = viewport.clientWidth;
-    const avgItemWidth = 320;
-    let count = Math.floor(viewportWidth / avgItemWidth);
-    return Math.max(1, Math.min(count, 4));
-  }
-
-  // Build the carousel
-  function buildCarousel() {
-    track.innerHTML = '';
-    dotsContainer.innerHTML = '';
-
-    items.forEach((item, idx) => {
-      const itemDiv = document.createElement('div');
-      itemDiv.className = 'carousel-item';
-
-      if (item.type === 'image') {
-        const img = document.createElement('img');
-        img.src = item.src;
-        img.alt = item.alt || `Work ${idx+1}`;
-        img.className = 'carousel-img';
-        img.loading = idx < 10 ? 'eager' : 'lazy';
-        img.style.height = '55vh';
-        img.style.width = 'auto';
-        itemDiv.appendChild(img);
-      } 
-      else if (item.type === 'video') {
-        const video = document.createElement('video');
-        video.src = item.src;
-        video.className = 'carousel-video';
-        video.loop = true;
-        video.muted = true;
-        video.playsInline = true;
-        video.preload = 'metadata';
-        video.style.height = '55vh';
-        video.style.width = 'auto';
-        itemDiv.appendChild(video);
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              video.play().catch(e => console.log(''));
+        window.addEventListener('scroll', function() {
+            const scrollY = window.scrollY;
+            if (scrollY > 20) {
+                header.classList.add('scrolled');
             } else {
-              video.pause();
+                header.classList.remove('scrolled');
             }
-          });
-        }, { threshold: 0.5 });
-        observer.observe(itemDiv);
-      }
-      else if (item.type === 'text') {
-        itemDiv.classList.add('carousel-text-item');
-        const textCard = document.createElement('div');
-        textCard.className = 'text-card';
-        let html = `<div class="text-title">${escapeText(item.title)}</div>`;
-        if (item.paragraphs && Array.isArray(item.paragraphs)) {
-          item.paragraphs.forEach((para) => {
-            // Allow HTML line breaks to render properly
-            html += `<div class="text-paragraph">${para}</div>`;
-          });
-        }
-        textCard.innerHTML = html;
-        itemDiv.appendChild(textCard);
-      }
-      track.appendChild(itemDiv);
-    });
+            clearTimeout(timeout);
+            if (scrollY > 20) {
+                timeout = setTimeout(function() {
+                    header.classList.remove('scrolled');
+                }, 300);
+            }
+        });
 
-    updatePages();
-    createDots();
-    scrollToPage(0);
-  }
-
-  function escapeText(str) {
-    if (!str) return '';
-    // For text that contains HTML like <br>, we don't escape it
-    if (str.includes('<br>')) {
-      return str;
-    }
-    return str.replace(/[&<>]/g, function(m) {
-      if (m === '&') return '&amp;';
-      if (m === '<') return '&lt;';
-      if (m === '>') return '&gt;';
-      return m;
-    });
-  }
-
-  function updatePages() {
-    itemsPerPage = calculateItemsPerPage();
-    totalPages = Math.ceil(items.length / itemsPerPage);
-  }
-
-  function createDots() {
-    dotsContainer.innerHTML = '';
-    for (let i = 0; i < totalPages; i++) {
-      const dot = document.createElement('div');
-      dot.classList.add('dot');
-      if (i === currentPage) dot.classList.add('active');
-      dot.setAttribute('data-page', i);
-      dot.addEventListener('click', () => {
-        scrollToPage(i);
-      });
-      dotsContainer.appendChild(dot);
-    }
-  }
-
-  function scrollToPage(page) {
-    if (page < 0) page = 0;
-    if (page >= totalPages) page = totalPages - 1;
-    if (currentPage === page) return;
-    
-    currentPage = page;
-    
-    const itemsArray = Array.from(track.children);
-    const startIndex = currentPage * itemsPerPage;
-    
-    if (startIndex < itemsArray.length) {
-      const targetItem = itemsArray[startIndex];
-      const scrollLeft = targetItem.offsetLeft - 20;
-      viewport.scrollTo({ left: scrollLeft, behavior: 'smooth' });
-    }
-    
-    updateDots();
-  }
-
-  function updateDots() {
-    const dots = document.querySelectorAll('.dot');
-    dots.forEach((dot, i) => {
-      if (i === currentPage) dot.classList.add('active');
-      else dot.classList.remove('active');
-    });
-  }
-
-  function nextPage() {
-    if (currentPage < totalPages - 1) {
-      scrollToPage(currentPage + 1);
-    }
-  }
-
-  function prevPage() {
-    if (currentPage > 0) {
-      scrollToPage(currentPage - 1);
-    }
-  }
-
-  function updateCurrentPageFromScroll() {
-    const scrollLeft = viewport.scrollLeft;
-    const itemsArray = Array.from(track.children);
-    
-    for (let i = 0; i < itemsArray.length; i++) {
-      const item = itemsArray[i];
-      const itemLeft = item.offsetLeft;
-      const itemRight = itemLeft + item.offsetWidth;
-      const viewportCenter = scrollLeft + viewport.clientWidth / 2;
-      
-      if (viewportCenter >= itemLeft && viewportCenter <= itemRight) {
-        const newPage = Math.floor(i / itemsPerPage);
-        if (newPage !== currentPage && newPage < totalPages) {
-          currentPage = newPage;
-          updateDots();
-        }
-        break;
-      }
-    }
-  }
-
-  function onScroll() {
-    updateCurrentPageFromScroll();
-  }
-
-  function onResize() {
-    updatePages();
-    createDots();
-    scrollToPage(currentPage);
-  }
-
-  // Drag to scroll
-  let isDragging = false;
-  let startX = 0;
-  let scrollStart = 0;
-
-  function onDragStart(e) {
-    if (e.target.closest('.carousel-arrow') || e.target.closest('.dot')) return;
-    isDragging = true;
-    startX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
-    scrollStart = viewport.scrollLeft;
-    viewport.style.cursor = 'grabbing';
-    e.preventDefault();
-  }
-
-  function onDragMove(e) {
-    if (!isDragging) return;
-    const x = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
-    const walk = (x - startX) * 1.5;
-    viewport.scrollLeft = scrollStart - walk;
-  }
-
-  function onDragEnd() {
-    isDragging = false;
-    viewport.style.cursor = 'grab';
-    updateCurrentPageFromScroll();
-  }
-
-  function initDrag() {
-    viewport.addEventListener('mousedown', onDragStart);
-    viewport.addEventListener('touchstart', onDragStart, { passive: false });
-    window.addEventListener('mousemove', onDragMove);
-    window.addEventListener('touchmove', onDragMove, { passive: false });
-    window.addEventListener('mouseup', onDragEnd);
-    window.addEventListener('touchend', onDragEnd);
-    
-    const imgs = document.querySelectorAll('.carousel-img');
-    imgs.forEach(img => img.addEventListener('dragstart', (e) => e.preventDefault()));
-  }
-
-  function onKey(e) {
-    if (e.key === 'ArrowLeft') {
-      prevPage();
-      e.preventDefault();
-    } else if (e.key === 'ArrowRight') {
-      nextPage();
-      e.preventDefault();
-    }
-  }
-
-  function init() {
-    buildCarousel();
-    setTimeout(() => {
-      viewport.style.cursor = 'grab';
-    }, 100);
-    
-    initDrag();
-    window.addEventListener('resize', onResize);
-    viewport.addEventListener('scroll', onScroll);
-    prevBtn.addEventListener('click', (e) => { e.preventDefault(); prevPage(); });
-    nextBtn.addEventListener('click', (e) => { e.preventDefault(); nextPage(); });
-    window.addEventListener('keydown', onKey);
-    
-    const allImgs = document.querySelectorAll('.carousel-img');
-    allImgs.forEach(img => img.addEventListener('contextmenu', (e) => e.preventDefault()));
-  }
-
-  init();
-</script>
+        // home link (unchanged)
+        const homeLink = document.getElementById('homeLink');
+        homeLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open('#home', '_blank');
+        });
+    </script>
 </body>
 </html>
