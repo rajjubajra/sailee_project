@@ -50,70 +50,23 @@
             background-blend-mode: overlay;
         }
 
-        /* ============================================ */
-        /* HEADER & FOOTER SHARED STRUCTURE */
-        /* Both use the same .row-container and .row classes */
-        /* ============================================ */
-
-        .row-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            padding-left: 3rem;
-            padding-right: 3rem;
-        }
-
-        .row {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 1400px;
-        }
-
-        .row-col {
-            display: flex;
-            align-items: flex-start;
-            flex: 1;
-            padding: 0.5rem 0;
-            font-family: 'Source Sans Pro', sans-serif;
-            color: #000000;
-        }
-
-        .row-col-1 {
-            justify-content: flex-start;
-            gap: 2rem;
-        }
-
-        .row-col-2 {
-            justify-content: flex-start;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.05rem;
-        }
-
-        .row-col-3 {
-            justify-content: center;
-        }
-
-        .row-col-4 {
-            justify-content: flex-end;
-        }
-
         /* Header - fixed */
         .header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 1.5rem 0;
+            padding: 1.5rem 3rem;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            z-index: 100;
             background: rgba(245, 242, 235, 1);
             transition: background 0.3s ease, backdrop-filter 0.3s ease;
             font-size: 12px;
             font-family: 'Source Sans Pro', sans-serif;
             color: #000000;
             border-bottom: none;
-            z-index: 100;
         }
 
         .header.scrolled {
@@ -126,16 +79,43 @@
             backdrop-filter: none;
         }
 
-        /* Footer - not fixed */
-        .footer {
+        .header-content {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
             width: 100%;
-            padding: 2rem 0 3rem 0;
-            background: #f5f2eb;
-            font-size: 12px;
-            font-family: 'Source Sans Pro', sans-serif;
+            max-width: 1400px;
         }
 
-        /* Header specific elements */
+        .header-col {
+            display: flex;
+            align-items: flex-start;
+            flex: 1;
+            padding: 0.5rem 0;
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #000000;
+        }
+
+        .header-col-1 {
+            justify-content: flex-start;
+            gap: 2rem;
+        }
+
+        .header-col-2 {
+            justify-content: flex-start;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.05rem;
+        }
+
+        .header-col-3 {
+            justify-content: center;
+        }
+
+        .header-col-4 {
+            justify-content: flex-end;
+        }
+
         .logo-text {
             font-size: 12px;
             font-weight: 400;
@@ -240,72 +220,6 @@
             width: 40px;
             height: 40px;
             object-fit: contain;
-        }
-
-        /* Footer specific elements */
-        .footer-label {
-            font-family: 'Source Sans Pro', sans-serif;
-            font-size: 10px;
-            font-weight: 400;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: #000000;
-            opacity: 1;
-            margin-bottom: 0.1rem;
-        }
-
-        .footer-value {
-            font-family: 'Source Sans Pro', sans-serif;
-            font-size: 12px;
-            font-weight: 400;
-            letter-spacing: 0.05em;
-            color: #000000;
-            opacity: 1;
-            text-decoration: none;
-            line-height: 1.5;
-            transition: opacity 0.3s ease;
-        }
-
-        .footer-value:hover {
-            opacity: 0.5;
-        }
-
-        .footer-copyright {
-            font-family: 'Source Sans Pro', sans-serif;
-            font-size: 12px;
-            font-weight: 400;
-            letter-spacing: 0.05em;
-            color: #000000;
-            opacity: 1;
-            margin-top: 0.5rem;
-        }
-
-        .footer-newsletter-label {
-            font-family: 'Source Sans Pro', sans-serif;
-            font-size: 10px;
-            font-weight: 400;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: #000000;
-            opacity: 1;
-            margin-bottom: 0.1rem;
-        }
-
-        .falling-leaves-link {
-            font-family: 'Source Sans Pro', sans-serif;
-            font-size: 12px;
-            font-weight: 400;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            color: #000000;
-            opacity: 1;
-            text-decoration: none;
-            transition: opacity 0.3s ease;
-            display: inline-block;
-        }
-
-        .falling-leaves-link:hover {
-            opacity: 0.5;
         }
 
         /* Content area */
@@ -490,19 +404,172 @@
             opacity: 1;
         }
 
+        /* Footer */
+        .footer {
+            width: 100%;
+            padding: 2rem 3rem 3rem 3rem;
+            background: #f5f2eb;
+            font-size: 12px;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1.5fr 2fr 1.5fr;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: start;
+        }
+
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.15rem;
+            padding-top: 0;
+        }
+
+        .footer-column .label {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #000000;
+            opacity: 1;
+            margin-bottom: 0.1rem;
+        }
+
+        .footer-column .value {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: #000000;
+            opacity: 1;
+            text-decoration: none;
+            line-height: 1.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-column .value:hover {
+            opacity: 0.5;
+        }
+
+        .footer-column .copyright {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: #000000;
+            opacity: 1;
+            margin-top: 0.5rem;
+        }
+
+        /* Column 1 - OFSAEILY + Copyright with hidden label for alignment */
+        .footer-column-1 {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.15rem;
+            padding-top: 0;
+        }
+
+        .footer-column-1 .hidden-label {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #000000;
+            opacity: 0;
+            margin-bottom: 0.1rem;
+            visibility: hidden;
+            height: 10px;
+        }
+
+        .footer-column-1 .value {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: #000000;
+            opacity: 1;
+            text-decoration: none;
+            line-height: 1.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-column-1 .value:hover {
+            opacity: 0.5;
+        }
+
+        .footer-column-1 .copyright {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: #000000;
+            opacity: 1;
+            margin-top: 0.5rem;
+        }
+
+        /* Column 3 - Newsletter + Between Falling Leaves */
+        .footer-column-3 {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.15rem;
+            padding-top: 0;
+        }
+
+        .footer-column-3 .newsletter-label {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #000000;
+            opacity: 1;
+            margin-bottom: 0.1rem;
+        }
+
+        .footer-column-3 .falling-leaves-link {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #000000;
+            opacity: 1;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-column-3 .falling-leaves-link:hover {
+            opacity: 0.5;
+        }
+
         /* Responsive */
-        @media (max-width: 768px) {
-            .row-container {
-                padding-left: 1.5rem;
-                padding-right: 1.5rem;
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
             }
-            
+            .footer-column:last-child {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 768px) {
             .footer {
-                padding: 1.5rem 0 2rem 0;
+                padding: 1.5rem 1.5rem 2rem 1.5rem;
             }
             
             .header {
-                padding: 1rem 0;
+                padding: 1rem 1.5rem;
             }
             
             .content {
@@ -510,42 +577,19 @@
                 padding-right: 1.5rem;
             }
 
-            .row {
-                flex-wrap: wrap;
-                gap: 0.5rem;
-                justify-content: center;
-            }
-            .row-col-1 {
-                flex-wrap: wrap;
-                gap: 0.5rem;
-                justify-content: center;
-            }
-            .row-col-2 {
-                align-items: center;
-            }
-            .row-col-3 {
-                justify-content: center;
-            }
-            .row-col-4 {
-                justify-content: center;
-            }
-            .nav {
-                align-items: center;
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
             }
         }
 
         @media (max-width: 500px) {
-            .row-container {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-            
             .footer {
-                padding: 1rem 0 2rem 0;
+                padding: 1rem 1rem 2rem 1rem;
             }
             
             .header {
-                padding: 1rem 0;
+                padding: 1rem 1rem;
             }
             
             .content {
@@ -553,31 +597,49 @@
                 padding-right: 1rem;
                 padding-top: 6rem;
             }
+
+            .header-content {
+                flex-wrap: wrap;
+                gap: 0.3rem;
+                justify-content: center;
+            }
+            .header-col-1 {
+                flex-wrap: wrap;
+                gap: 0.3rem;
+                justify-content: center;
+            }
+            .header-col-2 {
+                align-items: center;
+            }
+            .header-col-3 {
+                justify-content: center;
+            }
+            .nav {
+                align-items: center;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header - uses shared .row-container and .row -->
+    <!-- Header - fixed -->
     <header class="header" id="header">
-        <div class="row-container">
-            <div class="row">
-                <div class="row-col row-col-1">
-                    <a href="#" class="logo-text" id="homeLink">OFSAEILY</a>
-                </div>
-                <div class="row-col row-col-2">
-                    <span class="enquiries">ENQUIRIES</span>
-                    <a href="mailto:OFSAEILY@GMAIL.COM" class="email" id="emailLink">OFSAEILY@GMAIL.COM</a>
-                </div>
-                <div class="row-col row-col-3">
-                    <ul class="nav">
-                        <li><a href="index.html" id="collectionsNav">COLLECTIONS</a></li>
-                        <li><a href="about.html" id="aboutNav">ABOUT</a></li>
-                    </ul>
-                </div>
-                <div class="row-col row-col-4">
-                    <div class="logo-image">
-                        <img src="ofs.png" alt="Logo">
-                    </div>
+        <div class="header-content">
+            <div class="header-col header-col-1">
+                <a href="#" class="logo-text" id="homeLink">OFSAEILY</a>
+            </div>
+            <div class="header-col header-col-2">
+                <span class="enquiries">ENQUIRIES</span>
+                <a href="mailto:OFSAEILY@GMAIL.COM" class="email" id="emailLink">OFSAEILY@GMAIL.COM</a>
+            </div>
+            <div class="header-col header-col-3">
+                <ul class="nav">
+                    <li><a href="index.html" id="collectionsNav">COLLECTIONS</a></li>
+                    <li><a href="about.html" id="aboutNav">ABOUT</a></li>
+                </ul>
+            </div>
+            <div class="header-col header-col-4">
+                <div class="logo-image">
+                    <img src="ofs.png" alt="Logo">
                 </div>
             </div>
         </div>
@@ -613,25 +675,28 @@
         <div class="divider-full"></div>
     </main>
 
-    <!-- Footer - uses the same .row-container and .row as header -->
+    <!-- Footer -->
     <footer class="footer">
-        <div class="row-container">
-            <div class="row">
-                <div class="row-col row-col-1" style="flex-direction: column; align-items: flex-start; gap: 0.15rem;">
-                    <span class="footer-value">OFSAEILY</span>
-                    <span class="footer-copyright">© OFSAEILY 2026</span>
-                </div>
-                <div class="row-col row-col-2" style="flex-direction: column; align-items: flex-start; gap: 0.15rem;">
-                    <span class="footer-label">Enquiries</span>
-                    <a href="mailto:OFSAEILY@GMAIL.COM" class="footer-value">OFSAEILY@GMAIL.COM</a>
-                    <span class="footer-label" style="margin-top: 0.5rem;">Instagram</span>
-                    <a href="https://www.instagram.com/ofsaeily?igsi=NW85aWFia2l2eWcy" class="footer-value" target="_blank">@OFSAEILY</a>
-                </div>
-                <div class="row-col row-col-3" style="flex-direction: column; align-items: flex-start; gap: 0.15rem;">
-                    <span class="footer-newsletter-label">Newsletter ↓</span>
-                    <a href="https://saeily.substack.com/embed" class="falling-leaves-link" target="_blank">Between Falling Leaves</a>
-                </div>
-                <div class="row-col row-col-4"></div>
+        <div class="footer-content">
+            <!-- Column 1: OFSAEILY + Copyright with hidden label for alignment -->
+            <div class="footer-column-1">
+                <span class="hidden-label">Placeholder</span>
+                <span class="value">OFSAEILY</span>
+                <span class="copyright">© OFSAEILY 2026</span>
+            </div>
+
+            <!-- Column 2: Enquiries + Instagram -->
+            <div class="footer-column">
+                <span class="label">Enquiries</span>
+                <a href="mailto:OFSAEILY@GMAIL.COM" class="value">OFSAEILY@GMAIL.COM</a>
+                <span class="label" style="margin-top: 0.5rem;">Instagram</span>
+                <a href="https://www.instagram.com/ofsaeily?igsi=NW85aWFia2l2eWcy" class="value" target="_blank">@OFSAEILY</a>
+            </div>
+
+            <!-- Column 3: Newsletter + Between Falling Leaves -->
+            <div class="footer-column-3">
+                <span class="newsletter-label">Newsletter ↓</span>
+                <a href="https://saeily.substack.com/embed" class="falling-leaves-link" target="_blank">Between Falling Leaves</a>
             </div>
         </div>
     </footer>
