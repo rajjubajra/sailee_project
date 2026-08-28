@@ -395,13 +395,17 @@
             opacity: 0.5;
         }
 
-        /* Full divider - 1px black line */
+        /* Full divider - completely full width */
         .divider-full {
-            width: 100%;
+            width: 100vw;
             height: 1px;
             background: #000000;
-            margin: 0;
             opacity: 1;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 0;
+            padding: 0;
         }
 
         /* Footer */
@@ -668,10 +672,10 @@
                 <span class="dot active" data-index="0"></span>
             </div>
         </section>
-
-        <!-- Full divider - 1px black line -->
-        <div class="divider-full"></div>
     </main>
+
+    <!-- Full divider - placed outside content for full width -->
+    <div class="divider-full"></div>
 
     <!-- Footer -->
     <footer class="footer">
